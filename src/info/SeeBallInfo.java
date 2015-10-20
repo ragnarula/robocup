@@ -1,15 +1,9 @@
-package info.flag;
-
-import com.github.robocup_atan.atan.model.enums.Flag;
+package info;
 
 /**
- * Created by raghavnarula on 19/10/15.
+ * Created by raghavnarula on 20/10/15.
  */
-public class FlagInfo {
-
-    private FlagLine line;
-    private FlagSide side;
-    private Flag flag;
+public class SeeBallInfo {
     private double distance;
     private double direction;
     private double distChange;
@@ -17,26 +11,13 @@ public class FlagInfo {
     private double bodyFacingDirection;
     private double headFacingDirection;
 
-    public FlagInfo(FlagLine line, FlagSide side, Flag flag, double distance,
-                    double direction, double distChange, double dirChange,
-                    double bodyFacingDirection, double headFacingDirection) {
-        this.line = line;
-        this.side = side;
-        this.flag = flag;
+    public SeeBallInfo(double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
         this.distance = distance;
         this.direction = direction;
         this.distChange = distChange;
         this.dirChange = dirChange;
         this.bodyFacingDirection = bodyFacingDirection;
         this.headFacingDirection = headFacingDirection;
-    }
-
-    public FlagLine getLine() {
-        return line;
-    }
-
-    public FlagSide getSide() {
-        return side;
     }
 
     public double getDistance() {
