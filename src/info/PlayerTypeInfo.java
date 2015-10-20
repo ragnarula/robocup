@@ -4,7 +4,7 @@ package info;
  * Created by raghavnarula on 20/10/15.
  */
 public class PlayerTypeInfo {
-    private int id;
+    private int    id;
     private double playerSpeedMax;
     private double staminaIncMax;
     private double playerDecay;

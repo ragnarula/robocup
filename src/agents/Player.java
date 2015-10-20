@@ -14,11 +14,11 @@ import java.util.HashMap;
 public class Player implements ControllerPlayer {
 
     private int timestep = 0;
-    private ActionsPlayer player;
-    private Percept percept;
+    private ActionsPlayer  player;
+    private Percept        percept;
     private PerceptHistory perceptHistory;
 
-    public Player(){
+    public Player() {
         this.perceptHistory = new PerceptHistory();
     }
 
@@ -216,14 +216,14 @@ public class Player implements ControllerPlayer {
                                 double ptMax, double randomSeed, double staminaIncMaxDeltaFactor, double subsMax) {
 
         PlayerParamInfo i = new PlayerParamInfo(allowMultDefaultType, dashPowerRateDeltaMax,
-                                                dashPowerRateDeltaMin, effortMaxDeltaFactor,
-                                                effortMinDeltaFactor, extraStaminaDeltaMax,
-                                                extraStaminaDeltaMin, inertiaMomentDeltaFactor,
-                                                kickRandDeltaFactor, kickableMarginDeltaMax,
-                                                kickableMarginDeltaMin, newDashPowerRateDeltaMax,
-                                                newDashPowerRateDeltaMin, newStaminaIncMaxDeltaFactor,
-                                                playerDecayDeltaMax, playerDecayDeltaMin, playerTypes,
-                                                ptMax, randomSeed, staminaIncMaxDeltaFactor, subsMax);
+                dashPowerRateDeltaMin, effortMaxDeltaFactor,
+                effortMinDeltaFactor, extraStaminaDeltaMax,
+                extraStaminaDeltaMin, inertiaMomentDeltaFactor,
+                kickRandDeltaFactor, kickableMarginDeltaMax,
+                kickableMarginDeltaMin, newDashPowerRateDeltaMax,
+                newDashPowerRateDeltaMin, newStaminaIncMaxDeltaFactor,
+                playerDecayDeltaMax, playerDecayDeltaMin, playerTypes,
+                ptMax, randomSeed, staminaIncMaxDeltaFactor, subsMax);
 
         percept.addPlayerParam(i);
 

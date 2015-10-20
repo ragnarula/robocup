@@ -12,21 +12,21 @@ import java.util.List;
 public class Percept {
 
     private int timestep;
-    private List<SeeFlagInfo> seenFlags = new ArrayList<>();
-    private List<SeeLineInfo> seenLines = new ArrayList<>();
-    private List<SeePlayerInfo> seenPlayers = new ArrayList<>();
-    private List<SeeBallInfo> seenBalls = new ArrayList<>();
-    private List<RefereeMessage> refereeMessages = new ArrayList<>();
-    private List<PlayMode> playModeMessages = new ArrayList<>();
-    private List<HearPlayerInfo> heardPlayers = new ArrayList<>();
-    private List<Errors> errors = new ArrayList<>();
-    private List<Ok> oks = new ArrayList<>();
-    private List<Warning> warnings = new ArrayList<>();
-    private List<SenseBodyInfo> sensedBodies = new ArrayList<>();
-    private List<CPTInfo> cptInfo = new ArrayList<>();
-    private List<PlayerTypeInfo> playerTypes = new ArrayList<>();
-    private List<PlayerParamInfo> playerParams = new ArrayList<>();
-    private List<HashMap<ServerParams, Object> > serverParams = new ArrayList<>();
+    private List<SeeFlagInfo>                   seenFlags        = new ArrayList<>();
+    private List<SeeLineInfo>                   seenLines        = new ArrayList<>();
+    private List<SeePlayerInfo>                 seenPlayers      = new ArrayList<>();
+    private List<SeeBallInfo>                   seenBalls        = new ArrayList<>();
+    private List<RefereeMessage>                refereeMessages  = new ArrayList<>();
+    private List<PlayMode>                      playModeMessages = new ArrayList<>();
+    private List<HearPlayerInfo>                heardPlayers     = new ArrayList<>();
+    private List<Errors>                        errors           = new ArrayList<>();
+    private List<Ok>                            oks              = new ArrayList<>();
+    private List<Warning>                       warnings         = new ArrayList<>();
+    private List<SenseBodyInfo>                 sensedBodies     = new ArrayList<>();
+    private List<CPTInfo>                       cptInfo          = new ArrayList<>();
+    private List<PlayerTypeInfo>                playerTypes      = new ArrayList<>();
+    private List<PlayerParamInfo>               playerParams     = new ArrayList<>();
+    private List<HashMap<ServerParams, Object>> serverParams     = new ArrayList<>();
 
     public Percept(int timestep) {
         this.timestep = timestep;
@@ -36,11 +36,11 @@ public class Percept {
         return timestep;
     }
 
-    public void addSeenFlagInfo(final SeeFlagInfo flag){
+    public void addSeenFlagInfo(final SeeFlagInfo flag) {
         seenFlags.add(flag);
     }
 
-    public void addSeenLineInfo(final SeeLineInfo line){
+    public void addSeenLineInfo(final SeeLineInfo line) {
         seenLines.add(line);
     }
 
