@@ -3,9 +3,10 @@ package info.flag;
 /**
  * Created by raghavnarula on 19/10/15.
  */
-public enum FlagType {
+public enum FlagLine {
     BOUNDRY,
     PERIMITER,
-    PITCH,
-    GOAL
+    PENALTY,
+    GOAL,
+    CENTER
 }

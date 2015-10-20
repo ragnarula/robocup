@@ -7,7 +7,7 @@ import com.github.robocup_atan.atan.model.enums.Flag;
  */
 public class FlagInfo {
 
-    private FlagType type;
+    private FlagLine line;
     private FlagSide side;
     private Flag flag;
     private double distance;
@@ -17,10 +17,10 @@ public class FlagInfo {
     private double bodyFacingDirection;
     private double headFacingDirection;
 
-    public FlagInfo(FlagType type, FlagSide side, Flag flag, double distance,
+    public FlagInfo(FlagLine line, FlagSide side, Flag flag, double distance,
                     double direction, double distChange, double dirChange,
                     double bodyFacingDirection, double headFacingDirection) {
-        this.type = type;
+        this.line = line;
         this.side = side;
         this.flag = flag;
         this.distance = distance;
@@ -31,8 +31,8 @@ public class FlagInfo {
         this.headFacingDirection = headFacingDirection;
     }
 
-    public FlagType getType() {
-        return type;
+    public FlagLine getLine() {
+        return line;
     }
 
     public FlagSide getSide() {

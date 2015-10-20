@@ -7,7 +7,7 @@ import brain.PerceptHistory;
 import info.Percept;
 import info.flag.FlagInfo;
 import info.flag.FlagSide;
-import info.flag.FlagType;
+import info.flag.FlagLine;
 
 import java.util.HashMap;
 
@@ -60,67 +60,67 @@ public class Player implements ControllerPlayer {
 
     @Override
     public void infoSeeFlagRight(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.BOUNDRY, FlagSide.LEFT, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.BOUNDRY, FlagSide.RIGHT, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
     @Override
     public void infoSeeFlagLeft(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.BOUNDRY, FlagSide.RIGHT, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.BOUNDRY, FlagSide.LEFT, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
     @Override
     public void infoSeeFlagOwn(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.BOUNDRY, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.BOUNDRY, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
     @Override
     public void infoSeeFlagOther(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.BOUNDRY, FlagSide.OTHER, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.BOUNDRY, FlagSide.OTHER, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
     @Override
     public void infoSeeFlagCenter(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.PITCH, FlagSide.CENTER, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.CENTER, FlagSide.CENTER, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
     @Override
     public void infoSeeFlagCornerOwn(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.PERIMITER, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.PERIMITER, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
     @Override
     public void infoSeeFlagCornerOther(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.PERIMITER, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.PERIMITER, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
     @Override
     public void infoSeeFlagPenaltyOwn(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.PITCH, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.PENALTY, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
     @Override
     public void infoSeeFlagPenaltyOther(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.PITCH, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.PENALTY, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
     @Override
     public void infoSeeFlagGoalOwn(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.GOAL, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.GOAL, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
     @Override
     public void infoSeeFlagGoalOther(Flag flag, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        FlagInfo f = new FlagInfo(FlagType.GOAL, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        FlagInfo f = new FlagInfo(FlagLine.GOAL, FlagSide.OWN, flag, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addFlag(f);
     }
 
