@@ -21,13 +21,14 @@ public class AgentAI extends AbstractAsyncAIComponent {
         agentAction = new AgentActionAIComponent(this.player);
 
         //attach components together in correct order
+        this.setNext(agentLocation);
         agentLocation.setNext(goalLocation);
         goalLocation.setNext(agentAction);
     }
 
     @Override
-    void processModel(EnvironmentModel model) {
+    EnvironmentModel processModel(EnvironmentModel model) {
         //feed model into first component
-        agentLocation.put(model);
+        return model;
     }
 }

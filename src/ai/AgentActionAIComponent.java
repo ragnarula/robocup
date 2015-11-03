@@ -14,12 +14,12 @@ public class AgentActionAIComponent extends AbstractSimpleAIComponent{
         this.player = player;
     }
     @Override
-    void processModel(EnvironmentModel model) {
-        //todo generate an action from the model that arrives. This should be the last component in the chain so no
-        //need to send to the next one.
+    EnvironmentModel processModel(EnvironmentModel model) {
+        //todo - generate an action from the model that arrives. This should be the last component in the chain. Probably.
         if(hasPlayer()){
             player.dash(100);
         }
+        return null;
     }
 
     private boolean hasPlayer() {

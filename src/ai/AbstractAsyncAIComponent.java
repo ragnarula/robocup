@@ -28,12 +28,19 @@ public abstract class AbstractAsyncAIComponent implements Runnable, IChainable {
             try {
                 // take blocks until something is available in the queue
                 EnvironmentModel model = modelQueue.take();
-                processModel(model);
+                EnvironmentModel nextModel = processModel(model);
+                if(shouldContinue(nextModel)){
+                    getNext().put(nextModel);
+                }
             } catch (InterruptedException e) {
-                return;
+                e.printStackTrace();
+                break;
             }
         }
+    }
 
+    private boolean shouldContinue(EnvironmentModel m){
+        return hasNext() && m != null;
     }
 
     public void put(EnvironmentModel model){
@@ -59,5 +66,5 @@ public abstract class AbstractAsyncAIComponent implements Runnable, IChainable {
         return next != null;
     }
 
-    abstract void processModel(EnvironmentModel model);
+    abstract EnvironmentModel processModel(EnvironmentModel model);
 }

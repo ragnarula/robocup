@@ -8,10 +8,8 @@ import ai.model.EnvironmentModel;
 public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
 
     @Override
-    void processModel(EnvironmentModel model) {
-        //todo - calculate agent location and add to model, then give model to next component in chain
-        if(hasNext()){
-            getNext().put(model);
-        }
+    EnvironmentModel processModel(EnvironmentModel model) {
+        //todo - calculate agent location and add to model, then return model to next component in chain
+        return model;
     }
 }

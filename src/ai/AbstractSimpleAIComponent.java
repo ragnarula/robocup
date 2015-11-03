@@ -9,7 +9,7 @@ public abstract class AbstractSimpleAIComponent implements IChainable{
 
     private IChainable next;
 
-    public AbstractSimpleAIComponent(){};
+    public AbstractSimpleAIComponent(){}
 
     public AbstractSimpleAIComponent(IChainable next){
         this.next = next;
@@ -17,7 +17,14 @@ public abstract class AbstractSimpleAIComponent implements IChainable{
 
     @Override
     public void put(EnvironmentModel model) {
-        processModel(model);
+        EnvironmentModel nextModel = processModel(model);
+        if(shouldContinue(nextModel)){
+            getNext().put(nextModel);
+        }
+    }
+
+    private boolean shouldContinue(EnvironmentModel m){
+        return hasNext() && m != null;
     }
 
     @Override
@@ -35,5 +42,5 @@ public abstract class AbstractSimpleAIComponent implements IChainable{
         return next != null;
     }
 
-    abstract void processModel(EnvironmentModel model);
+    abstract EnvironmentModel processModel(EnvironmentModel model);
 }

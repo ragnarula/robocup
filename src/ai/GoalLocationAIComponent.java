@@ -7,7 +7,8 @@ import ai.model.EnvironmentModel;
  */
 public class GoalLocationAIComponent extends AbstractSimpleAIComponent{
     @Override
-    void processModel(EnvironmentModel model) {
+    EnvironmentModel processModel(EnvironmentModel model) {
         //todo - calculate best approximation of the relative location of the goal and add to model.
+        return model;
     }
 }
