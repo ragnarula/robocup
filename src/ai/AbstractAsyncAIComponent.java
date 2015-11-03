@@ -13,10 +13,13 @@ public abstract class AbstractAsyncAIComponent implements Runnable, IChainable {
     private Thread thread = new Thread(this);
     private ArrayBlockingQueue<EnvironmentModel> modelQueue = new ArrayBlockingQueue<EnvironmentModel>(100);
 
-    public AbstractAsyncAIComponent(){};
+    public AbstractAsyncAIComponent(){
+        thread.start();
+    }
 
     public AbstractAsyncAIComponent(IChainable next){
         this.next = next;
+        thread.start();
     }
 
     @Override
