@@ -29,5 +29,6 @@ public class Simple2Run {
             AbstractTeam team     = new SimplySillyTeam("Simple2", port, hostname, true);
             team.connectAll();
         }
+        System.out.println("END OF MAIN");
     }
 }

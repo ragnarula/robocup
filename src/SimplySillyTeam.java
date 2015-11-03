@@ -1,6 +1,7 @@
 
 //~--- non-JDK imports --------------------------------------------------------
 
+import agent.Coach;
 import com.github.robocup_atan.atan.model.AbstractTeam;
 import com.github.robocup_atan.atan.model.ControllerCoach;
 import com.github.robocup_atan.atan.model.ControllerPlayer;
