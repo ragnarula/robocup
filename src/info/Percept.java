@@ -12,6 +12,7 @@ import java.util.List;
 public class Percept {
 
     private int timestep;
+    private int playerId;
     private List<SeeFlagInfo>                   seenFlags        = new ArrayList<>();
     private List<SeeLineInfo>                   seenLines        = new ArrayList<>();
     private List<SeePlayerInfo>                 seenPlayers      = new ArrayList<>();
@@ -28,8 +29,13 @@ public class Percept {
     private List<PlayerParamInfo>               playerParams     = new ArrayList<>();
     private List<HashMap<ServerParams, Object>> serverParams     = new ArrayList<>();
 
-    public Percept(int timestep) {
+    public Percept(int timestep, int playerId) {
         this.timestep = timestep;
+        this.playerId = playerId;
+    }
+
+    public int getPlayerId() {
+        return playerId;
     }
 
     public int getTimestep() {

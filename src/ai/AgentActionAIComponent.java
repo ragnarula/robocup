@@ -1,6 +1,8 @@
 package ai;
 
+import agent.Player;
 import ai.model.EnvironmentModel;
+import ai.stateMachine.StateMachine;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
 
 /**
@@ -9,16 +11,16 @@ import com.github.robocup_atan.atan.model.ActionsPlayer;
 public class AgentActionAIComponent extends AbstractSimpleAIComponent{
 
     private ActionsPlayer player;
+    private StateMachine stateMachine;
 
     public AgentActionAIComponent(ActionsPlayer player){
         this.player = player;
+        stateMachine = new StateMachine(this.player);
     }
+
     @Override
     EnvironmentModel processModel(EnvironmentModel model) {
-        //todo - generate an action from the model that arrives. This should be the last component in the chain. Probably.
-        if(hasPlayer()){
-            player.dash(100);
-        }
+        stateMachine.processModel(model);
         return null;
     }
 

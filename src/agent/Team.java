@@ -16,7 +16,7 @@ public class Team extends AbstractTeam {
 
     @Override
     public ControllerPlayer getNewControllerPlayer(int i) {
-        return new Player();
+        return new Player(i);
     }
 
     @Override

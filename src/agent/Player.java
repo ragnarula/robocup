@@ -17,14 +17,19 @@ import java.util.HashMap;
 public class Player implements ControllerPlayer {
 
     private int timestep = 0;
+    private int playerNumber;
     private ActionsPlayer  player;
     private Percept        percept;
     private PerceptHistory perceptHistory = new PerceptHistory();
-    private AbstractAsyncAIComponent agentAI = new AgentAI(player);
+    private AbstractAsyncAIComponent agentAI;
+
+    public Player(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
 
     @Override
     public void preInfo() {
-        percept = new Percept(timestep);
+        percept = new Percept(timestep, playerNumber);
         timestep += 1;
     }
 
@@ -43,6 +48,7 @@ public class Player implements ControllerPlayer {
     @Override
     public void setPlayer(ActionsPlayer c) {
         player = c;
+        agentAI = new AgentAI(c);
     }
 
     @Override
@@ -153,6 +159,47 @@ public class Player implements ControllerPlayer {
 
     @Override
     public void infoHearPlayMode(PlayMode playMode) {
+        if (playMode == PlayMode.BEFORE_KICK_OFF) {
+            this.pause(1000);
+            switch (this.getPlayer().getNumber()) {
+                case 1 :
+                    this.getPlayer().move(-10, 0);
+                    break;
+                case 2 :
+                    this.getPlayer().move(-10, 10);
+                    break;
+                case 3 :
+                    this.getPlayer().move(-10, -10);
+                    break;
+                case 4 :
+                    this.getPlayer().move(-20, 0);
+                    break;
+                case 5 :
+                    this.getPlayer().move(-20, 10);
+                    break;
+                case 6 :
+                    this.getPlayer().move(-20, -10);
+                    break;
+                case 7 :
+                    this.getPlayer().move(-20, 20);
+                    break;
+                case 8 :
+                    this.getPlayer().move(-20, -20);
+                    break;
+                case 9 :
+                    this.getPlayer().move(-30, 0);
+                    break;
+                case 10 :
+                    this.getPlayer().move(-40, 10);
+                    break;
+                case 11 :
+                    this.getPlayer().move(-40, -10);
+                    break;
+                default :
+                    throw new Error("number must be initialized before move");
+            }
+        }
+
         percept.addPlayModeMessage(playMode);
     }
 
@@ -233,5 +280,13 @@ public class Player implements ControllerPlayer {
     @Override
     public void infoServerParam(HashMap<ServerParams, Object> info) {
         percept.addServerParam(info);
+    }
+
+    private synchronized void pause(int ms) {
+        try {
+            this.wait(ms);
+        } catch (InterruptedException ex) {
+//            log.warn("Interrupted Exception ", ex);
+        }
     }
 }

@@ -22,4 +22,8 @@ public class PerceptHistory {
         }
         return clone;
     }
+
+    public List<Percept> getPercepts() {
+        return percepts;
+    }
 }
