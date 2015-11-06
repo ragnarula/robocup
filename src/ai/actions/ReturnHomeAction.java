@@ -3,7 +3,7 @@ package ai.actions;
 import ai.model.EnvironmentModel;
 import ai.model.HomeArea;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
-import jdk.nashorn.internal.runtime.Logging;
+//import jdk.nashorn.internal.runtime.Logging;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 
@@ -32,7 +32,7 @@ public class ReturnHomeAction implements Action {
             player.turn(5);
         }
         else {
-            player.dash(10);
+            player.dash(20);
         }
 
         log.debug(player.getNumber() + " " + homeCenter + " " + agentLocation + " " + agentToHome + " " + agentBodyFacing + " " + angleToHomeRadians);
