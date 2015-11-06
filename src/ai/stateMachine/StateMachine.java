@@ -19,13 +19,17 @@ public class StateMachine {
         this.currentState = passiveState;
     }
 
-    public void changeState(State nextState) {
+    public void changeState(State nextState, EnvironmentModel model) {
         currentState.exitState(context);
         currentState = nextState;
         currentState.enterState(context);
+        currentState.updateState(this, model);
     }
 
     public void processModel(EnvironmentModel model) {
+//        changeState will never be called before processModel -
+//        changeState is only ever called by updateState
+        this.currentState.updateState(this, model);
         this.currentState.processModel(context, model);
     }
 

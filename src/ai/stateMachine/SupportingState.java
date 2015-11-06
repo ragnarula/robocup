@@ -25,4 +25,9 @@ public class SupportingState implements State {
     public void processModel(ActionsPlayer context, EnvironmentModel model) {
         supportAction.takeAction(context, model);
     }
+
+    @Override
+    public void updateState(StateMachine stateMachine, EnvironmentModel model) {
+        //        TODO: Implement state change logic
+    }
 }

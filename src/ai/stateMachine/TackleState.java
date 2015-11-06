@@ -25,4 +25,9 @@ public class TackleState implements State {
     public void processModel(ActionsPlayer context, EnvironmentModel model) {
         tackleAction.takeAction(context, model);
     }
+
+    @Override
+    public void updateState(StateMachine stateMachine, EnvironmentModel model) {
+//        TODO: Implement state change logic
+    }
 }
