@@ -7,7 +7,6 @@ import org.apache.commons.math3.analysis.function.Sin;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by raghavnarula on 03/11/2015.

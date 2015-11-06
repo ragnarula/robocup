@@ -1,5 +1,6 @@
 package ai.stateMachine;
 
+import ai.actions.FindBallAction;
 import ai.actions.ReturnHomeAction;
 import ai.model.EnvironmentModel;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
@@ -12,6 +13,7 @@ import org.apache.commons.math3.util.Pair;
 public class PassiveState implements State {
 
     private ReturnHomeAction returnHomeAction = new ReturnHomeAction();
+    private FindBallAction findBallAction = new FindBallAction();
 
     @Override
     public void enterState(ActionsPlayer context) {
