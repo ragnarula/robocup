@@ -38,9 +38,7 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
             return model;
         }
         
-        currentLocation = getLocationFromFlag(flag);
-        model.setHeadFacingRadians(FastMath.toRadians(flag.getHeadFacingDirection()));
-        model.setBodyFacingRadians(FastMath.toRadians(flag.getBodyFacingDirection()));
+        currentLocation = getLocationFromFlag(flag, model);
         model.setAgentLocation(currentLocation);
 
         return model;
@@ -54,9 +52,9 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
         return currentLocation == null && flag == null;
     }
 
-    private Vector2D getLocationFromFlag(SeeFlagInfo flag) {
+    private Vector2D getLocationFromFlag(SeeFlagInfo flag, EnvironmentModel model) {
 
-        double absDirection = flag.getFlagAbsAngleRadians();
+        double absDirection = model.getAgentAbsAngleRadians();
 
         double x = (FastMath.sin(absDirection) * flag.getDistance());
         double y = (FastMath.cos(absDirection) * flag.getDistance());

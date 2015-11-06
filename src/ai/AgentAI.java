@@ -12,16 +12,19 @@ public class AgentAI extends AbstractAsyncAIComponent {
     private AgentLocationAIComponent agentLocation;
     private AgentActionAIComponent agentAction;
     private HomeAreaAIComponent homeAreaAgent;
+    private AgentAngleAIComponent agentAngle;
 
     public AgentAI(ActionsPlayer player) {
         this.player = player;
         //initialize components
+        agentAngle = new AgentAngleAIComponent();
         agentLocation = new AgentLocationAIComponent();
         homeAreaAgent = new HomeAreaAIComponent();
         agentAction = new AgentActionAIComponent(this.player);
 
         //attach components together in correct order
-        this.setNext(agentLocation);
+        this.setNext(agentAngle);
+        agentAngle.setNext(agentLocation);
         agentLocation.setNext(homeAreaAgent);
         homeAreaAgent.setNext(agentAction);
     }
