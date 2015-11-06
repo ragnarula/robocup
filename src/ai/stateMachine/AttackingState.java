@@ -29,4 +29,9 @@ public class AttackingState implements State {
     public void processModel(ActionsPlayer context, EnvironmentModel model) {
         // TODO: Write decision tree
     }
+
+    @Override
+    public void updateState(StateMachine stateMachine, EnvironmentModel model) {
+        //        TODO: Implement state change logic
+    }
 }

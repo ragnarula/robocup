@@ -30,11 +30,32 @@ public class PassiveState implements State {
         if (!model.hasAgentLocation()){
             return;
         }
+
         if( !isInHomeArea(model) )
             returnHomeAction.takeAction(context, model);
 
-//        if( cantSeeBall(model) )
-//            findBallAction.takeAction(context, model);
+        if( cantSeeBall(model) )
+            findBallAction.takeAction(context, model);
+    }
+
+    private boolean cantSeeBall(EnvironmentModel model) {
+//        TODO: Implement logic
+        return false;
+    }
+
+    @Override
+    public void updateState(StateMachine stateMachine, EnvironmentModel model) {
+
+        //  TODO: Account for team behavioural state
+        //  TODO: Change to tackle/block state
+
+        if(ballInMovementRange())
+            stateMachine.changeState(new SupportingState(), model);
+    }
+
+    private boolean ballInMovementRange() {
+//        TODO: Write logic
+        return false;
     }
 
     private boolean isInHomeArea(EnvironmentModel model) {
