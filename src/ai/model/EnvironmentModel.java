@@ -1,9 +1,7 @@
 package ai.model;
 
-import com.sun.javafx.geom.Vec2d;
 import info.Percept;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
-import org.apache.commons.math3.util.Pair;
 
 import java.util.List;
 
@@ -75,4 +73,6 @@ public class EnvironmentModel {
     public Percept getLastPercept(){
         return percepts.get(percepts.size()-1);
     }
+
+
 }

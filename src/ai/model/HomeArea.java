@@ -1,7 +1,6 @@
 package ai.model;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
-import org.apache.commons.math3.util.Pair;
 
 /**
  * Created by raghavnarula on 06/11/2015.
@@ -28,6 +27,11 @@ public class HomeArea {
 
         return new Vector2D(newX, newY);
     }
+
+    public boolean isNearCenter(Vector2D anotherPosition, double margin) {
+        return getMidpoint().subtract(anotherPosition).getNorm() <= margin;
+    }
+
 
     public boolean contains(Vector2D other) {
 

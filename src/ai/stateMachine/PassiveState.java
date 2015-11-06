@@ -2,10 +2,7 @@ package ai.stateMachine;
 
 import ai.actions.ReturnHomeAction;
 import ai.model.EnvironmentModel;
-import ai.model.HomeArea;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
-import org.apache.commons.math3.util.Pair;
 
 /**
  * Created by raghavnarula on 05/11/2015.
@@ -30,7 +27,8 @@ public class PassiveState implements State {
             return;
         }
 
-        if(!model.getHomeArea().contains(model.getAgentLocation()))
+//        if(!model.getHomeArea().contains(model.getAgentLocation()))
+           if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0))
             returnHomeAction.takeAction(context, model);
 
 //        if( cantSeeBall(model) )
