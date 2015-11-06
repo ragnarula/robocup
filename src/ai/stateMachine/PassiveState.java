@@ -29,7 +29,7 @@ public class PassiveState implements State {
             return;
         }
 
-           if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0))
+        if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0))
             returnHomeAction.takeAction(context, model);
 
         if( cantSeeBall(model) )
@@ -47,11 +47,11 @@ public class PassiveState implements State {
         //  TODO: Account for team behavioural state
         //  TODO: Change to tackle/block state
 
-        if(ballInMovementRange())
+        if(ballInMovementRange(model))
             stateMachine.changeState(new SupportingState(), model);
     }
 
-    private boolean ballInMovementRange() {
+    private boolean ballInMovementRange(EnvironmentModel model) {
 //        TODO: Write logic
         return false;
     }

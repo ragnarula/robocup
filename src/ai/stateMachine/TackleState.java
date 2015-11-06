@@ -28,6 +28,18 @@ public class TackleState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-//        TODO: Implement state change logic
+        if( !ballInTackleRange(model) && !playerAheadOfBall(model) ) {
+            stateMachine.changeState(new InterceptState(), model);
+        }
+    }
+
+    private boolean playerAheadOfBall(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
+    }
+
+    private boolean ballInTackleRange(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
     }
 }

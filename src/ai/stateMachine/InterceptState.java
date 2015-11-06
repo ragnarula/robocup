@@ -28,6 +28,21 @@ public class InterceptState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-        //        TODO: Implement state change logic
+        if( !ballInInterceptRange(model) ) {
+            stateMachine.changeState(new BlockState(), model);
+        }
+        else if( ballInTackleRange(model) ) {
+            stateMachine.changeState(new TackleState(), model);
+        }
+    }
+
+    private boolean ballInTackleRange(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
+    }
+
+    private boolean ballInInterceptRange(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
     }
 }

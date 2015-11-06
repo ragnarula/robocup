@@ -28,6 +28,21 @@ public class BlockState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-        //        TODO: Implement state change logic
+        if( !ballInMovementRange(model) ) {
+            stateMachine.changeState(new PassiveState(), model);
+        }
+        else if( ballInInterceptRange(model) ) {
+            stateMachine.changeState(new InterceptState(), model);
+        }
+    }
+
+    private boolean ballInInterceptRange(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
+    }
+
+    private boolean ballInMovementRange(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
     }
 }
