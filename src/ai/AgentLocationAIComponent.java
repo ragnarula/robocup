@@ -17,7 +17,7 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
     @Override
     EnvironmentModel processModel(EnvironmentModel model) {
 
-        List<SeeFlagInfo> seenFlags = model.getPercepts().get(0).getSeenFlags();
+        List<SeeFlagInfo> seenFlags = model.getLastPercept().getSeenFlags();
         SeeFlagInfo flag = seenFlags.stream()
                                     .filter(SeeFlagInfo::isBoundryFlag)
                                     .findFirst()
@@ -52,8 +52,8 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
 
         double absDirection = flag.getFlagAbsAngleRadians();
 
-        double x = (FastMath.cos(absDirection) * flag.getDistance());
-        double y = (FastMath.sin(absDirection) * flag.getDistance());
+        double x = (FastMath.sin(absDirection) * flag.getDistance());
+        double y = (FastMath.cos(absDirection) * flag.getDistance());
 
         Vector2D agentToFlag = new Vector2D(x,y);
         Vector2D flagLoc = flag.getBoundryFlagLocation();

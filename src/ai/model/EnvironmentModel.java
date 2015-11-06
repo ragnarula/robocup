@@ -71,4 +71,8 @@ public class EnvironmentModel {
     public void setHeadFacingRadians(double headFacingRadians) {
         this.headFacingRadians = headFacingRadians;
     }
+
+    public Percept getLastPercept(){
+        return percepts.get(percepts.size()-1);
+    }
 }
