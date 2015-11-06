@@ -1,6 +1,7 @@
 package ai;
 
 import ai.model.EnvironmentModel;
+import ai.model.HomeArea;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.Pair;
 
@@ -13,23 +14,20 @@ import java.util.Map;
  */
 public class HomeAreaAIComponent extends AbstractSimpleAIComponent {
 
-    private Map<Integer, Pair<Vector2D, Vector2D>> HOME_AREAS = new HashMap<>();
+    private Map<Integer, HomeArea> HOME_AREAS = new HashMap<>();
 
     public HomeAreaAIComponent() {
-        buildPair(0, -20.0, 40.0, 0.0, 20.0);
-        buildPair(1, 0.0, 40.0, 20.0, 20.0);
-        buildPair(2, -20.0, 20.0, 0.0, 0.0);
-        buildPair(3, 0.0, 20.0, 20.0, 0.0);
-        buildPair(4, -20.0, 0.0, 0.0, -20.0);
-        buildPair(5, 0.0, 0.0, 20.0, -20.0);
-        buildPair(6,-34.0, -20.0, -20.0, -40.0 );
-        buildPair(7, -20.0, -20.0, 0.0, -40.0);
-        buildPair(8, 0.0, -20.0, 20.0, -40.0);
-        buildPair(9, 20.0, -20.0, 34.0, -40.0);
-    }
 
-    private void buildPair(int id, double x1, double y1, double x2, double y2) {
-        HOME_AREAS.put(id, new Pair<Vector2D, Vector2D>(new Vector2D(x1, y1), new Vector2D(x2, y2)));
+        HOME_AREAS.put(0, new HomeArea(-20.0, 40.0, 0.0, 20.0));
+        HOME_AREAS.put(0, new HomeArea(0.0, 40.0, 20.0, 20.0));
+        HOME_AREAS.put(2, new HomeArea(-20.0, 20.0, 0.0, 0.0));
+        HOME_AREAS.put(3, new HomeArea(0.0, 20.0, 20.0, 0.0));
+        HOME_AREAS.put(4, new HomeArea(-20.0, 0.0, 0.0, -20.0));
+        HOME_AREAS.put(5, new HomeArea(0.0, 0.0, 20.0, -20.0));
+        HOME_AREAS.put(6, new HomeArea(-34.0, -20.0, -20.0, -40.0));
+        HOME_AREAS.put(7, new HomeArea(-20.0, -20.0, 0.0, -40.0));
+        HOME_AREAS.put(8, new HomeArea(0.0, -20.0, 20.0, -40.0));
+        HOME_AREAS.put(9, new HomeArea(20.0, -20.0, 34.0, -40.0));
     }
 
     @Override

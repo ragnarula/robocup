@@ -1,46 +1,41 @@
 package ai.actions;
 
 import ai.model.EnvironmentModel;
+import ai.model.HomeArea;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
+import jdk.nashorn.internal.runtime.Logging;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
-import org.apache.commons.math3.util.Pair;
+import org.apache.commons.math3.util.FastMath;
+
+import org.apache.log4j.Logger;
 
 /**
  * Created by raghavnarula on 05/11/2015.
  */
 public class ReturnHomeAction implements Action {
+
+    private static Logger log = Logger.getLogger(ReturnHomeAction.class);
+
     @Override
     public void takeAction(ActionsPlayer player, EnvironmentModel model) {
-        Pair<Vector2D, Vector2D> homeArea = model.getHomeArea();
+        HomeArea homeArea = model.getHomeArea();
+
+        double agentBodyFacing = model.getBodyFacingRadians();
+
+        Vector2D homeCenter = homeArea.getMidpoint();
         Vector2D agentLocation = model.getAgentLocation();
+        Vector2D agentToHome = homeCenter.subtract(agentLocation);
 
-        Vector2D homeCenter = getCenterOfArea(homeArea);
+        double angleToHomeRadians = Vector2D.angle(agentToHome, new Vector2D(0,1));
 
-        double angle = Math.toDegrees(Vector2D.angle(homeCenter, agentLocation) - model.getAgentAbsAngel());
-        if (angle > 180){
-            angle = 360 - angle;
-        }
+        log.debug(player.getNumber() + " " + homeCenter + " " + agentLocation + " " + agentToHome + " " + agentBodyFacing + " " + angleToHomeRadians);
 
-        if(angle < 3 && angle > -3)
-            player.dash(10);
-        else
-            if (angle > 90){
-                player.turn(90);
-            }
-        else if (angle < -90){
-                player.turn(-90);
-            }
-        else {
-                player.turn(angle);
-            }
 
     }
 
-    private Vector2D getCenterOfArea(Pair<Vector2D, Vector2D> homeArea) {
-
-        double newX = ((homeArea.getSecond().getX() + homeArea.getFirst().getX()) / 2);
-        double newY = ((homeArea.getSecond().getY() + homeArea.getFirst().getY()) / 2);
-
-        return new Vector2D(newX, newY);
+    private boolean almostFacing(double angle1, double angle2) {
+        return FastMath.abs(angle1 - angle2) <= 0.4;
     }
+
+
 }

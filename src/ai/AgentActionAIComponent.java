@@ -1,6 +1,5 @@
 package ai;
 
-import agent.Player;
 import ai.model.EnvironmentModel;
 import ai.stateMachine.StateMachine;
 import com.github.robocup_atan.atan.model.ActionsPlayer;

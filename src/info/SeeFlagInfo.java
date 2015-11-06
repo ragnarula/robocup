@@ -1,6 +1,8 @@
 package info;
 
 import com.github.robocup_atan.atan.model.enums.Flag;
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import org.apache.commons.math3.util.FastMath;
 
 /**
  * Created by raghavnarula on 19/10/15.
@@ -80,47 +82,16 @@ public class SeeFlagInfo {
         return headFacingDirection;
     }
 
-    public boolean isLeftBoundry() {
-        return line == FlagLine.BOUNDRY && side == FlagSide.LEFT;
+    public Vector2D getBoundryFlagLocation(){
+        return new Vector2D(getX(),getY());
     }
 
-    public boolean isRightBoundry() {
-        return line == FlagLine.BOUNDRY && side == FlagSide.RIGHT;
+    public boolean isBoundryFlag(){
+        return line == FlagLine.BOUNDRY;
     }
 
-    public boolean isOwnBoundry() {
-        return line == FlagLine.BOUNDRY && side == FlagSide.OWN;
-    }
 
-    public boolean isOtherBoundry() {
-        return line == FlagLine.BOUNDRY && side == FlagSide.OTHER;
-    }
-
-    private double getAbsDirectionOfFlagInDegrees() {
-        return headFacingDirection + bodyFacingDirection + direction;
-    }
-
-    public boolean isFlagUpField() {
-        double absDir = getAbsDirectionOfFlagInDegrees();
-        return absDir > -90 || absDir < 90;
-    }
-
-    public boolean isFlagDownField() {
-        double absDir = getAbsDirectionOfFlagInDegrees();
-        return absDir > 90 || absDir < -90;
-    }
-
-    public boolean isFlagLeftField() {
-        double absDir = getAbsDirectionOfFlagInDegrees();
-        return absDir > 0;
-    }
-
-    public boolean isFlagRightField() {
-        double absDir = getAbsDirectionOfFlagInDegrees();
-        return absDir < 0;
-    }
-
-    public double getY() {
+    private double getY() {
         if(side == FlagSide.OWN) {
             return  -57.5;
         }
@@ -155,8 +126,7 @@ public class SeeFlagInfo {
         return 0;
     }
 
-
-    public double getX() {
+    private double getX() {
         if(side == FlagSide.LEFT) {
             return  -39.0;
         }
@@ -181,5 +151,9 @@ public class SeeFlagInfo {
             }
         }
         return 0;
+    }
+
+    public double getFlagAbsAngleRadians(){
+        return FastMath.toRadians(bodyFacingDirection + headFacingDirection + direction);
     }
 }
