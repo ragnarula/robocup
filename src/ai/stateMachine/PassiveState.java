@@ -1,6 +1,5 @@
 package ai.stateMachine;
 
-import ai.actions.FindBallAction;
 import ai.actions.ReturnHomeAction;
 import ai.model.EnvironmentModel;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
