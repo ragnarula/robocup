@@ -2,9 +2,8 @@ package ai;
 
 import ai.model.EnvironmentModel;
 import info.SeeFlagInfo;
-import org.apache.commons.math3.analysis.function.Cos;
-import org.apache.commons.math3.analysis.function.Sin;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import org.apache.commons.math3.util.FastMath;
 
 import java.util.List;
 
@@ -13,18 +12,21 @@ import java.util.List;
  */
 public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
 
-    private static Sin sine = new Sin();
-    private static Cos cosine = new Cos();
-
     private Vector2D currentLocation;
 
     @Override
     EnvironmentModel processModel(EnvironmentModel model) {
 
-        List<SeeFlagInfo> seenFlags = model.getPercepts().get(0).getSeenFlags();
+        List<SeeFlagInfo> seenFlags = model.getLastPercept().getSeenFlags();
         SeeFlagInfo flag = seenFlags.stream()
-                                    .filter(f -> f.getLine() == SeeFlagInfo.FlagLine.BOUNDRY)
-                                    .findFirst()
+                                    .filter(SeeFlagInfo::isBoundryFlag)
+                                    .min((l, r) -> {
+                                        if (l.getDistance() > r.getDistance())
+                                            return 1;
+                                        if (l.getDistance() < r.getDistance())
+                                            return -1;
+                                        else return 0;
+                                    })
                                     .orElseGet(null);
 
         if(noLocationAvailable(flag)){
@@ -35,10 +37,11 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
             model.setAgentLocation(currentLocation);
             return model;
         }
-
-        Vector2D agentLocation = getLocationFromFlag(flag);
-        model.setAgentAbsAngel(Math.toRadians(flag.getBodyFacingDirection() + flag.getHeadFacingDirection()));
-        model.setAgentLocation(agentLocation);
+        
+        currentLocation = getLocationFromFlag(flag);
+        model.setHeadFacingRadians(FastMath.toRadians(flag.getHeadFacingDirection()));
+        model.setBodyFacingRadians(FastMath.toRadians(flag.getBodyFacingDirection()));
+        model.setAgentLocation(currentLocation);
 
         return model;
     }
@@ -51,38 +54,16 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
         return currentLocation == null && flag == null;
     }
 
-    public Vector2D getLocationFromFlag(SeeFlagInfo flag) {
-        double absDirection = Math.toRadians((flag.getBodyFacingDirection() + flag.getHeadFacingDirection() + flag.getDirection()));
-        double x = (sine.value(absDirection) * flag.getDistance());
-        double y = (cosine.value(absDirection) * flag.getDistance());
+    private Vector2D getLocationFromFlag(SeeFlagInfo flag) {
 
-        x = getX(flag, x);
-        y = getY(flag, y);
+        double absDirection = flag.getFlagAbsAngleRadians();
 
-        return new Vector2D(x, y);
-    }
+        double x = (FastMath.sin(absDirection) * flag.getDistance());
+        double y = (FastMath.cos(absDirection) * flag.getDistance());
 
-    private double getX(SeeFlagInfo flag, double x) {
-        if(flag.isFlagLeftField()) {
-            return x - flag.getX();
-        }
+        Vector2D agentToFlag = new Vector2D(x,y);
+        Vector2D flagLoc = flag.getBoundryFlagLocation();
 
-        if(flag.isFlagRightField()) {
-            return flag.getX() - x;
-        }
-
-        return flag.getX();
-    }
-
-    private double getY(SeeFlagInfo flag, double y) {
-        if(flag.isFlagUpField()){
-            return flag.getY() - y;
-        }
-
-        if(flag.isFlagDownField()) {
-            return y - flag.getY();
-        }
-
-        return flag.getY();
+        return flagLoc.subtract(agentToFlag);
     }
 }

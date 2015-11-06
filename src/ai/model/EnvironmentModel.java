@@ -1,9 +1,7 @@
 package ai.model;
 
-import com.sun.javafx.geom.Vec2d;
 import info.Percept;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
-import org.apache.commons.math3.util.Pair;
 
 import java.util.List;
 
@@ -14,8 +12,10 @@ public class EnvironmentModel {
 
     private List<Percept> percepts;
     private Vector2D agentLocation;
-    private Pair<Vector2D, Vector2D> homeArea;
+    private HomeArea homeArea;
     private double agentAbsAngel;
+    private double bodyFacingRadians;
+    private double headFacingRadians;
 
     public EnvironmentModel(List<Percept> percepts) {
         this.percepts = percepts;
@@ -34,23 +34,45 @@ public class EnvironmentModel {
         this.agentLocation = agentLocation;
     }
 
-    public void setHomeArea(Pair<Vector2D,Vector2D> homeArea) {
-        this.homeArea = homeArea;
+    public HomeArea getHomeArea() {
+        return homeArea;
     }
 
-    public Pair<Vector2D, Vector2D> getHomeArea() {
-        return homeArea;
+    public void setHomeArea(HomeArea homeArea) {
+        this.homeArea = homeArea;
     }
 
     public boolean hasAgentLocation() {
         return agentLocation != null;
     }
 
-    public double getAgentAbsAngel() {
+    public double getAgentAbsAngleRadians() {
         return agentAbsAngel;
     }
 
-    public void setAgentAbsAngel(double agentAbsAngel) {
+    public void setAgentAbsAngleRadians(double agentAbsAngel) {
         this.agentAbsAngel = agentAbsAngel;
     }
+
+    public double getBodyFacingRadians() {
+        return bodyFacingRadians;
+    }
+
+    public void setBodyFacingRadians(double bodyFacingRadians) {
+        this.bodyFacingRadians = bodyFacingRadians;
+    }
+
+    public double getHeadFacingRadians() {
+        return headFacingRadians;
+    }
+
+    public void setHeadFacingRadians(double headFacingRadians) {
+        this.headFacingRadians = headFacingRadians;
+    }
+
+    public Percept getLastPercept(){
+        return percepts.get(percepts.size()-1);
+    }
+
+
 }
