@@ -20,7 +20,7 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
         List<SeeFlagInfo> seenFlags = model.getLastPercept().getSeenFlags();
         SeeFlagInfo flag = seenFlags.stream()
                                     .filter(SeeFlagInfo::isBoundryFlag)
-                                    .min((l, r )-> {
+                                    .min((l, r) -> {
                                         if (l.getDistance() > r.getDistance())
                                             return 1;
                                         if (l.getDistance() < r.getDistance())
@@ -37,7 +37,7 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
             model.setAgentLocation(currentLocation);
             return model;
         }
-
+        
         currentLocation = getLocationFromFlag(flag);
         model.setHeadFacingRadians(FastMath.toRadians(flag.getHeadFacingDirection()));
         model.setBodyFacingRadians(FastMath.toRadians(flag.getBodyFacingDirection()));
