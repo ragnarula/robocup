@@ -1,6 +1,7 @@
 package ai.stateMachine;
 
 import ai.actions.TackleAction;
+import ai.model.BehaviourConfiguration;
 import ai.model.EnvironmentModel;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
 
@@ -39,7 +40,6 @@ public class TackleState implements State {
     }
 
     private boolean ballInTackleRange(EnvironmentModel model) {
-//        TODO: Write logic
-        return false;
+        return BehaviourConfiguration.TACKLE_RANGE > model.getLastPercept().getLastSeenBalls().getDistance();
     }
 }

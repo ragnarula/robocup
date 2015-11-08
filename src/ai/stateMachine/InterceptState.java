@@ -1,6 +1,7 @@
 package ai.stateMachine;
 
 import ai.actions.InterceptAction;
+import ai.model.BehaviourConfiguration;
 import ai.model.EnvironmentModel;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
 
@@ -37,12 +38,10 @@ public class InterceptState implements State {
     }
 
     private boolean ballInTackleRange(EnvironmentModel model) {
-//        TODO: Write logic
-        return false;
+        return BehaviourConfiguration.TACKLE_RANGE > model.getLastPercept().getLastSeenBalls().getDistance();
     }
 
     private boolean ballInInterceptRange(EnvironmentModel model) {
-//        TODO: Write logic
-        return false;
+        return BehaviourConfiguration.INTERCEPT_RANGE > model.getLastPercept().getLastSeenBalls().getDistance();
     }
 }

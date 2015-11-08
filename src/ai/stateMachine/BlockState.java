@@ -1,6 +1,7 @@
 package ai.stateMachine;
 
 import ai.actions.BlockPlayersAction;
+import ai.model.BehaviourConfiguration;
 import ai.model.EnvironmentModel;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
 
@@ -37,8 +38,7 @@ public class BlockState implements State {
     }
 
     private boolean ballInInterceptRange(EnvironmentModel model) {
-//        TODO: Write logic
-        return false;
+        return BehaviourConfiguration.INTERCEPT_RANGE > model.getLastPercept().getLastSeenBalls().getDistance();
     }
 
     private boolean ballInMovementRange(EnvironmentModel model) {

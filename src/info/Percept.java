@@ -118,6 +118,10 @@ public class Percept {
         return seenBalls;
     }
 
+    public SeeBallInfo getLastSeenBalls() {
+        return seenBalls.get(seenBalls.size() - 1);
+    }
+
     public List<RefereeMessage> getRefereeMessages() {
         return refereeMessages;
     }
