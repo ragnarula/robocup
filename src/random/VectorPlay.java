@@ -15,7 +15,7 @@ public class VectorPlay {
         double angle1 = 0;
 
         double distance2 = FastMath.sqrt((37*37) + 100);
-        double angle2 = FastMath.toDegrees(FastMath.asin(10.0/37.0));
+        double angle2 = FastMath.toDegrees(FastMath.asin(-10.0/37.0));
 
         System.out.println(distance2);
         System.out.println(angle2);
@@ -23,7 +23,7 @@ public class VectorPlay {
         Vector2D toFirst = fromAngleDist(distance1,angle1);
         Vector2D toSecond = fromAngleDist(distance2,angle2);
 
-        Vector2D line = toFirst.subtract(toSecond);
+        Vector2D line = toSecond.subtract(toFirst);
         System.out.println(toFirst);
         System.out.println(toSecond);
         System.out.println(line);

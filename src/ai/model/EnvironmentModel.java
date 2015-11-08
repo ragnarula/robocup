@@ -14,8 +14,6 @@ public class EnvironmentModel {
     private Vector2D agentLocation;
     private HomeArea homeArea;
     private double agentAbsAngel;
-    private double bodyFacingRadians;
-    private double headFacingRadians;
 
     public EnvironmentModel(List<Percept> percepts) {
         this.percepts = percepts;
@@ -52,22 +50,6 @@ public class EnvironmentModel {
 
     public void setAgentAbsAngleRadians(double agentAbsAngel) {
         this.agentAbsAngel = agentAbsAngel;
-    }
-
-    public double getBodyFacingRadians() {
-        return bodyFacingRadians;
-    }
-
-    public void setBodyFacingRadians(double bodyFacingRadians) {
-        this.bodyFacingRadians = bodyFacingRadians;
-    }
-
-    public double getHeadFacingRadians() {
-        return headFacingRadians;
-    }
-
-    public void setHeadFacingRadians(double headFacingRadians) {
-        this.headFacingRadians = headFacingRadians;
     }
 
     public Percept getLastPercept(){

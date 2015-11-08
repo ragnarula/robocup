@@ -20,7 +20,7 @@ public class ReturnHomeAction implements Action {
     public void takeAction(ActionsPlayer player, EnvironmentModel model) {
         HomeArea homeArea = model.getHomeArea();
         //absolute angle agent is facing
-        double agentBodyFacing = model.getBodyFacingRadians();
+        double agentBodyFacing = model.getAgentAbsAngleRadians();
 
         Vector2D homeCenter = homeArea.getMidpoint();
         Vector2D agentLocation = model.getAgentLocation();
@@ -41,7 +41,7 @@ public class ReturnHomeAction implements Action {
     }
 
     private boolean almostFacing(double angle1, double angle2) {
-        return FastMath.abs(angle1 - angle2) <= 0.4;
+        return FastMath.abs(angle1 - angle2) <= 0.1;
     }
 
 
