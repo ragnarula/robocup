@@ -25,11 +25,12 @@ public class PassiveState implements State {
 
     @Override
     public void processModel(ActionsPlayer context, EnvironmentModel model) {
-
-        if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0)){
-            returnHomeAction.takeAction(context, model);
+        if (!model.hasAgentLocation()){
             return;
         }
+
+        if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0))
+            returnHomeAction.takeAction(context, model);
 
         if( cantSeeBall(model) )
             findBallAction.takeAction(context, model);
@@ -51,9 +52,9 @@ public class PassiveState implements State {
     }
 
     private boolean ballInMovementRange(EnvironmentModel model) {
-        if(model.getBallLocation() != null) {
-            return model.getMovementArea().contains(model.getBallLocation());
-        }
+//        if(model.getBallLocation() != null) {
+//            return model.getMovementArea().contains(model.getBallLocation());
+//        }
         return false;
     }
 }
