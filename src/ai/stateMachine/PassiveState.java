@@ -25,23 +25,19 @@ public class PassiveState implements State {
 
     @Override
     public void processModel(ActionsPlayer context, EnvironmentModel model) {
-
-        if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0)){
-            returnHomeAction.takeAction(context, model);
+        if (!model.hasAgentLocation()){
             return;
         }
 
+           if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0))
+            returnHomeAction.takeAction(context, model);
 
         if( cantSeeBall(model) )
             findBallAction.takeAction(context, model);
-
-        // ball was in model
-        // if ball in movement range
     }
 
     private boolean cantSeeBall(EnvironmentModel model) {
 //        TODO: Implement logic
-        // if ball not in model
         return false;
     }
 
@@ -51,16 +47,12 @@ public class PassiveState implements State {
         //  TODO: Account for team behavioural state
         //  TODO: Change to tackle/block state
 
-        if(ballInMovementRange(model))
+        if(ballInMovementRange())
             stateMachine.changeState(new SupportingState(), model);
     }
 
-    private boolean ballInMovementRange(EnvironmentModel model) {
+    private boolean ballInMovementRange() {
 //        TODO: Write logic
-        // get constant for movement range
-        // check less than distance to ball in model
-        // return true false
-        // if cant see ball return false
         return false;
     }
 }
