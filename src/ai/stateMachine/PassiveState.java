@@ -34,10 +34,14 @@ public class PassiveState implements State {
 
         if( cantSeeBall(model) )
             findBallAction.takeAction(context, model);
+
+        // ball was in model
+        // if ball in movement range
     }
 
     private boolean cantSeeBall(EnvironmentModel model) {
 //        TODO: Implement logic
+        // if ball not in model
         return false;
     }
 
@@ -53,6 +57,10 @@ public class PassiveState implements State {
 
     private boolean ballInMovementRange(EnvironmentModel model) {
 //        TODO: Write logic
+        // get constant for movement range
+        // check less than distance to ball in model
+        // return true false
+        // if cant see ball return false
         return false;
     }
 }
