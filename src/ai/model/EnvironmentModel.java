@@ -14,6 +14,15 @@ public class EnvironmentModel {
     private Vector2D agentLocation;
     private HomeArea homeArea;
     private double agentAbsAngel;
+    private boolean hasAgentAbsAngle = false;
+
+    public boolean hasAgentAbsAngle() {
+        return hasAgentAbsAngle;
+    }
+
+    public void setHasAgentAbsAngle() {
+        this.hasAgentAbsAngle = true;
+    }
 
     public EnvironmentModel(List<Percept> percepts) {
         this.percepts = percepts;

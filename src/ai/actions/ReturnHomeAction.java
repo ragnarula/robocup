@@ -18,25 +18,21 @@ public class ReturnHomeAction implements Action {
 
     @Override
     public void takeAction(ActionsPlayer player, EnvironmentModel model) {
-        HomeArea homeArea = model.getHomeArea();
-        //absolute angle agent is facing
-        double agentBodyFacing = model.getAgentAbsAngleRadians();
-
-        Vector2D homeCenter = homeArea.getMidpoint();
-        Vector2D agentLocation = model.getAgentLocation();
-        Vector2D agentToHome = homeCenter.subtract(agentLocation);
-
-        double angleToHomeRadians = Vector2D.angle(agentToHome, new Vector2D(0,1));
-
-        if(!almostFacing(agentBodyFacing, angleToHomeRadians)){
-            player.turn(5);
-        }
-        else {
-            player.dash(20);
-        }
-
-        log.debug(player.getNumber() + " " + homeCenter + " " + agentLocation + " " + agentToHome + " " + agentBodyFacing + " " + angleToHomeRadians);
-
+//        HomeArea homeArea = model.getHomeArea();
+//
+//
+//        Vector2D homeCenter = homeArea.getMidpoint();
+//        Vector2D agentLocation = model.getAgentLocation();
+//        Vector2D agentToHome = homeCenter.subtract(agentLocation);
+//
+//        double angleToHomeRadians = Vector2D.angle(agentToHome, new Vector2D(0,1));
+//
+//        if(!almostFacing(agentBodyFacing, angleToHomeRadians)){
+//            player.turn(5);
+//        }
+//        else {
+//            player.dash(20);
+//        }
 
     }
 
