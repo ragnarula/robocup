@@ -47,11 +47,11 @@ public class PassiveState implements State {
         //  TODO: Account for team behavioural state
         //  TODO: Change to tackle/block state
 
-        if(ballInMovementRange())
+        if(ballInMovementRange(model))
             stateMachine.changeState(new SupportingState(), model);
     }
 
-    private boolean ballInMovementRange() {
+    private boolean ballInMovementRange(EnvironmentModel model) {
 //        TODO: Write logic
         return false;
     }

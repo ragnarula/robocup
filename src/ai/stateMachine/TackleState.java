@@ -1,6 +1,7 @@
 package ai.stateMachine;
 
 import ai.actions.TackleAction;
+import ai.model.BehaviourConfiguration;
 import ai.model.EnvironmentModel;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
 
@@ -28,6 +29,17 @@ public class TackleState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-//        TODO: Implement state change logic
+        if( !ballInTackleRange(model) && !playerAheadOfBall(model) ) {
+            stateMachine.changeState(new InterceptState(), model);
+        }
+    }
+
+    private boolean playerAheadOfBall(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
+    }
+
+    private boolean ballInTackleRange(EnvironmentModel model) {
+        return BehaviourConfiguration.TACKLE_RANGE > model.getLastPercept().getLastSeenBalls().getDistance();
     }
 }

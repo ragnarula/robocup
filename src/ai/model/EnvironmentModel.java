@@ -32,7 +32,6 @@ public class EnvironmentModel {
         return percepts;
     }
 
-
     public Vector2D getAgentLocation() {
         return agentLocation;
     }

@@ -30,6 +30,13 @@ public class DribblingState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-        //        TODO: Implement state change logic
+        if( !hasBall(model) ) {
+            stateMachine.changeState(new SupportingState(), model);
+        }
+    }
+
+    private boolean hasBall(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
     }
 }

@@ -28,6 +28,29 @@ public class SupportingState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-        //        TODO: Implement state change logic
+        if( hasBall(model) ) {
+            if( rangeOfMovementExtendsToGoal(model) )
+                stateMachine.changeState(new AttackingState(), model);
+            else
+                stateMachine.changeState(new DribblingState(), model);
+        }
+        else if( !ballInMovementRange(model) ) {
+            stateMachine.changeState(new PassiveState(), model);
+        }
+    }
+
+    private boolean ballInMovementRange(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
+    }
+
+    private boolean rangeOfMovementExtendsToGoal(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
+    }
+
+    private boolean hasBall(EnvironmentModel model) {
+//        TODO: Write logic
+        return false;
     }
 }
