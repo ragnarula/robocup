@@ -52,9 +52,9 @@ public class PassiveState implements State {
     }
 
     private boolean ballInMovementRange(EnvironmentModel model) {
-//        if(model.getBallLocation() != null) {
-//            return model.getMovementArea().contains(model.getBallLocation());
-//        }
+        if(model.getBallLocation() != null) {
+            return model.getMovementArea().contains(model.getBallLocation());
+        }
         return false;
     }
 }

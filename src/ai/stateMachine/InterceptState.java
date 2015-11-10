@@ -8,7 +8,7 @@ import com.github.robocup_atan.atan.model.ActionsPlayer;
 /**
  * Created by James on 06/11/2015.
  */
-public class InterceptState implements State {
+public class InterceptState extends DefendStateGroup implements State {
 
     InterceptAction interceptAction = new InterceptAction();
 
@@ -29,6 +29,9 @@ public class InterceptState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
+        if(!isGroupStateValid(model))
+            stateMachine.changeState(new PassiveState(), model);
+
         if( !ballInInterceptRange(model) ) {
             stateMachine.changeState(new BlockState(), model);
         }

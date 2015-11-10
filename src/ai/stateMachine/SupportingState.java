@@ -7,7 +7,7 @@ import com.github.robocup_atan.atan.model.ActionsPlayer;
 /**
  * Created by James on 06/11/2015.
  */
-public class SupportingState implements State {
+public class SupportingState extends AttackStateGroup implements State {
 
     SupportAction supportAction = new SupportAction();
 
@@ -28,6 +28,9 @@ public class SupportingState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
+//        if(!isGroupStateValid(model))
+//            stateMachine.changeState(new PassiveState(), model);
+
         if( hasBall(model) ) {
             if( rangeOfMovementExtendsToGoal(model) )
                 stateMachine.changeState(new AttackingState(), model);
@@ -37,11 +40,6 @@ public class SupportingState implements State {
         else if( !ballInMovementRange(model) ) {
             stateMachine.changeState(new PassiveState(), model);
         }
-    }
-
-    private boolean ballInMovementRange(EnvironmentModel model) {
-//        TODO: Write logic
-        return false;
     }
 
     private boolean rangeOfMovementExtendsToGoal(EnvironmentModel model) {

@@ -8,7 +8,7 @@ import com.github.robocup_atan.atan.model.ActionsPlayer;
 /**
  * Created by James on 06/11/2015.
  */
-public class TackleState implements State {
+public class TackleState extends AttackStateGroup implements State {
 
     TackleAction tackleAction = new TackleAction();
 
@@ -29,6 +29,9 @@ public class TackleState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
+        if(!isGroupStateValid(model))
+            stateMachine.changeState(new PassiveState(), model);
+
         if( !ballInTackleRange(model) && !playerAheadOfBall(model) ) {
             stateMachine.changeState(new InterceptState(), model);
         }

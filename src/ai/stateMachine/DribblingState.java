@@ -8,7 +8,7 @@ import com.github.robocup_atan.atan.model.ActionsPlayer;
 /**
  * Created by James on 06/11/2015.
  */
-public class DribblingState implements State {
+public class DribblingState extends AttackStateGroup implements State {
 
     MoveBallAction moveBallAction = new MoveBallAction();
     PassBallAction passBallAction = new PassBallAction();
@@ -30,6 +30,9 @@ public class DribblingState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
+        if(!isGroupStateValid(model))
+            stateMachine.changeState(new PassiveState(), model);
+
         if( !hasBall(model) ) {
             stateMachine.changeState(new SupportingState(), model);
         }
