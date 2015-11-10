@@ -25,12 +25,11 @@ public class PassiveState implements State {
 
     @Override
     public void processModel(ActionsPlayer context, EnvironmentModel model) {
-        if (!model.hasAgentLocation()){
+
+        if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0)){
+            returnHomeAction.takeAction(context, model);
             return;
         }
-
-        if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0))
-            returnHomeAction.takeAction(context, model);
 
         if( cantSeeBall(model) )
             findBallAction.takeAction(context, model);
