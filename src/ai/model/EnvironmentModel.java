@@ -13,8 +13,10 @@ public class EnvironmentModel {
     private List<Percept> percepts;
     private Vector2D agentLocation;
     private HomeArea homeArea;
+    private MovementArea movementArea;
     private double agentAbsAngel;
     private boolean hasAgentAbsAngle = false;
+    private Vector2D ballLocation;
 
     public boolean hasAgentAbsAngle() {
         return hasAgentAbsAngle;
@@ -64,5 +66,19 @@ public class EnvironmentModel {
         return percepts.get(percepts.size()-1);
     }
 
+    public void setMovementArea(MovementArea movementArea) {
+        this.movementArea = movementArea;
+    }
 
+    public MovementArea getMovementArea() {
+        return movementArea;
+    }
+
+    public void setBallLocation(Vector2D ballLocation) {
+        this.ballLocation = ballLocation;
+    }
+
+    public Vector2D getBallLocation() {
+        return ballLocation;
+    }
 }
