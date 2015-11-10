@@ -118,5 +118,41 @@ public class BallLocationAIComponentTest {
         assertThat("Model contains correct Y location", location.getY(), is(closeTo(10,0.1)));
     }
 
+    @Test
+    public void testBall10Ahead10LeftPlayer10Behind10Right() throws Exception {
+        BallLocationAIComponent ballLocationAIComponent = new BallLocationAIComponent();
+
+        SeeBallInfo ball = new SeeBallInfo(28.2,
+                -45,
+                0,
+                0,
+                0,
+                0);
+
+        EnvironmentModel model = ballLocationAIComponent.processModel(getModel(ball, new Vector2D(10, -10)));
+        Vector2D location = model.getBallLocation();
+
+        assertThat("Model contains correct X location", location.getX(), is(closeTo(-10,0.1)));
+        assertThat("Model contains correct Y location", location.getY(), is(closeTo(10,0.1)));
+    }
+
+    @Test
+    public void testBall10Ahead10RightPlayer10Behind10Right() throws Exception {
+        BallLocationAIComponent ballLocationAIComponent = new BallLocationAIComponent();
+
+        SeeBallInfo ball = new SeeBallInfo(20,
+                0,
+                0,
+                0,
+                0,
+                0);
+
+        EnvironmentModel model = ballLocationAIComponent.processModel(getModel(ball, new Vector2D(10, -10)));
+        Vector2D location = model.getBallLocation();
+
+        assertThat("Model contains correct X location", location.getX(), is(closeTo(10,0.1)));
+        assertThat("Model contains correct Y location", location.getY(), is(closeTo(10,0.1)));
+    }
+
 
 }
