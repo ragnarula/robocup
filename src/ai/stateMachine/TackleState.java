@@ -43,6 +43,7 @@ public class TackleState extends AttackStateGroup implements State {
     }
 
     private boolean ballInTackleRange(EnvironmentModel model) {
-        return BehaviourConfiguration.TACKLE_RANGE > model.getLastPercept().getLastSeenBalls().getDistance();
+        double ballDistFromHomeArea = model.getBallLocation().distance(model.getHomeArea().getMidpoint());
+        return ballDistFromHomeArea < BehaviourConfiguration.TACKLE_RANGE;
     }
 }

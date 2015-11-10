@@ -41,6 +41,7 @@ public class BlockState extends DefendStateGroup implements State {
     }
 
     private boolean ballInInterceptRange(EnvironmentModel model) {
-        return BehaviourConfiguration.INTERCEPT_RANGE > model.getLastPercept().getLastSeenBalls().getDistance();
+        double ballDistFromHomeArea = model.getBallLocation().distance(model.getHomeArea().getMidpoint());
+        return ballDistFromHomeArea < BehaviourConfiguration.INTERCEPT_RANGE;
     }
 }

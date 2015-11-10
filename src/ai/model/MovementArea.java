@@ -34,4 +34,8 @@ public class MovementArea {
                 other.getY() >= botRight.getY() &&
                 other.getY() <= topLeft.getY();
     }
+
+    public boolean extendsToGoal() {
+        return topLeft.getY() == 52.5;
+    }
 }

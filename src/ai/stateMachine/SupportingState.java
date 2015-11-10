@@ -43,8 +43,7 @@ public class SupportingState extends AttackStateGroup implements State {
     }
 
     private boolean rangeOfMovementExtendsToGoal(EnvironmentModel model) {
-//        TODO: Write logic
-        return false;
+        return model.getMovementArea().extendsToGoal();
     }
 
     private boolean hasBall(EnvironmentModel model) {
