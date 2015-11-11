@@ -1,5 +1,6 @@
 package ai;
 
+import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
 import ai.stateMachine.StateMachine;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
@@ -9,10 +10,10 @@ import com.github.robocup_atan.atan.model.ActionsPlayer;
  */
 public class AgentActionAIComponent extends AbstractSimpleAIComponent{
 
-    private ActionsPlayer player;
+    private CommandPlayer player;
     private StateMachine stateMachine;
 
-    public AgentActionAIComponent(ActionsPlayer player){
+    public AgentActionAIComponent(CommandPlayer player){
         this.player = player;
         stateMachine = new StateMachine(this.player);
     }

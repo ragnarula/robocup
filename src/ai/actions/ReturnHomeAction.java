@@ -1,9 +1,9 @@
 package ai.actions;
 
+import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
-import ai.model.HomeArea;
-import com.github.robocup_atan.atan.model.ActionsPlayer;
 //import jdk.nashorn.internal.runtime.Logging;
+import ai.model.HomeArea;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 
@@ -17,27 +17,51 @@ public class ReturnHomeAction implements Action {
     private static Logger log = Logger.getLogger(ReturnHomeAction.class);
 
     @Override
-    public void takeAction(ActionsPlayer player, EnvironmentModel model) {
-//        HomeArea homeArea = model.getHomeArea();
-//
-//
-//        Vector2D homeCenter = homeArea.getMidpoint();
-//        Vector2D agentLocation = model.getAgentLocation();
-//        Vector2D agentToHome = homeCenter.subtract(agentLocation);
-//
-//        double angleToHomeRadians = Vector2D.angle(agentToHome, new Vector2D(0,1));
-//
-//        if(!almostFacing(agentBodyFacing, angleToHomeRadians)){
-//            player.turn(5);
-//        }
-//        else {
-//            player.dash(20);
-//        }
+    public void takeAction(CommandPlayer player, EnvironmentModel model) {
+        HomeArea homeArea = model.getHomeArea();
+
+
+        Vector2D homeCenter = homeArea.getMidpoint();
+        Vector2D agentLocation = model.getAgentLocation();
+        Vector2D agentToHome = homeCenter.subtract(agentLocation);
+
+        double unsignedAngleToHomeRadians = Vector2D.angle(agentToHome, new Vector2D(0,1));
+        double angleToHomeRadians = unsignedAngleToHomeRadians;
+        if(homeCenter.getX() < agentLocation.getX()){
+            angleToHomeRadians = ((2 * FastMath.PI) - unsignedAngleToHomeRadians);
+        }
+        double agentAngleRadians = model.getAgentAbsAngleRadians();
+
+        if(!almostFacing(agentAngleRadians, angleToHomeRadians)){
+            turn(player, angleToHomeRadians);
+        }
+        else {
+            player.dash(20);
+        }
 
     }
 
+    private void turn(CommandPlayer player, double angleToHomeRadians) {
+        double angleDegrees = FastMath.toDegrees(angleToHomeRadians);
+        if(angleDegrees > 180){
+            angleDegrees = angleToHomeRadians - 360;
+        }
+        if(angleDegrees < 90 && angleDegrees > -90){
+            player.turn(angleDegrees);
+            return;
+        }
+        if(angleDegrees > 90){
+            player.turn(90);
+            return;
+        }
+        if(angleDegrees < -90){
+            player.turn(-90);
+            return;
+        }
+    }
+
     private boolean almostFacing(double angle1, double angle2) {
-        return FastMath.abs(angle1 - angle2) <= 0.1;
+        return FastMath.abs(angle1 - angle2) <= 0.2;
     }
 
 

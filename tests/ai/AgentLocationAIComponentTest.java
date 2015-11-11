@@ -25,7 +25,7 @@ public class AgentLocationAIComponentTest {
         Percept p = new Percept(0,0);
         flags.forEach(p::addSeenFlagInfo);
         percepts.add(p);
-        EnvironmentModel m = new EnvironmentModel(percepts);
+        EnvironmentModel m = new EnvironmentModel(percepts, new ArrayList<>());
         m.setAgentAbsAngleRadians(angle);
         m.setHasAgentAbsAngle();
         return m;

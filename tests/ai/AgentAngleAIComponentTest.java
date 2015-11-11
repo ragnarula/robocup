@@ -24,7 +24,7 @@ public class AgentAngleAIComponentTest {
         Percept p = new Percept(0,0);
         flags.forEach(p::addSeenFlagInfo);
         percepts.add(p);
-        return new EnvironmentModel(percepts);
+        return new EnvironmentModel(percepts, new ArrayList<>());
     }
 
     @Test

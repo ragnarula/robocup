@@ -1,5 +1,6 @@
 package ai;
 
+import ai.model.Command;
 import ai.model.EnvironmentModel;
 import info.SeeFlagInfo;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
@@ -12,48 +13,78 @@ import java.util.List;
  */
 public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
 
-    private Vector2D currentLocation;
+    private EnvironmentModel prevModel;
 
     @Override
     EnvironmentModel processModel(EnvironmentModel model) {
 
-        if(!model.hasAgentAbsAngle()){
-            return model;
-        }
-
-        List<SeeFlagInfo> seenFlags = model.getLastPercept().getSeenFlags();
-        SeeFlagInfo flag = seenFlags.stream()
-                                    .filter(SeeFlagInfo::isBoundryFlag)
-                                    .min((l, r) -> {
-                                        if (l.getDistance() > r.getDistance())
-                                            return 1;
-                                        if (l.getDistance() < r.getDistance())
-                                            return -1;
-                                        else return 0;
-                                    })
-                                    .orElseGet(null);
-
-        if(noLocationAvailable(flag)){
-            return model;
-        }
-
-        if(noFlags(flag)){
+        //if agent has been moved, update location to move command
+        if(agentHasBeenMoved(model)){
+            Vector2D currentLocation = getLocationFromMove(model);
             model.setAgentLocation(currentLocation);
+            prevModel = model;
             return model;
         }
-        
-        currentLocation = getLocationFromFlag(flag, model);
-        model.setAgentLocation(currentLocation);
+
+        //try to get location from flags
+        if(modelContainsBoundryFlags(model)){
+            List<SeeFlagInfo> seenFlags = model.getLastPercept().getSeenFlags();
+            SeeFlagInfo flag = seenFlags.stream()
+                    .filter(SeeFlagInfo::isBoundryFlag)
+                    .min((l, r) -> {
+                        if (l.getDistance() > r.getDistance())
+                            return 1;
+                        if (l.getDistance() < r.getDistance())
+                            return -1;
+                        else return 0;
+                    })
+                    .get();
+            Vector2D currentLocation = getLocationFromFlag(flag, model);
+            model.setAgentLocation(currentLocation);
+            prevModel = model;
+            return model;
+        }
+
+        //final resort, estimate position from previous model and movement commands
+        Vector2D prevLocation = prevModel.getAgentLocation();
+        Vector2D prevVelocity = prevModel.getAgentVelocityVector();
+        int dashPower = model.getCommands().stream()
+                .filter(Command::isDashCommand)
+                .map(Command::getIntValue)
+                .reduce(0, (a,b)-> a+b);
+        double angle = model.getAgentAbsAngleRadians();
+        double powerRate = 0.006;
+        double x = FastMath.cos(angle) * dashPower * powerRate;
+        double y = FastMath.sin(angle) * dashPower * powerRate;
+        Vector2D accel = new Vector2D(x,y);
+        Vector2D newVelocity = prevVelocity.add(accel);
+
+        Vector2D estimatedLocation = prevLocation.add(newVelocity);
+
+        model.setAgentLocation(estimatedLocation);
+        prevModel = model;
 
         return model;
     }
 
-    private boolean noFlags(SeeFlagInfo flag) {
-        return flag == null;
+    private boolean modelContainsBoundryFlags(EnvironmentModel model) {
+        return model.getLastPercept().getSeenFlags()
+                .stream()
+                .filter(SeeFlagInfo::isBoundryFlag)
+                .count() > 0;
     }
 
-    private boolean noLocationAvailable(SeeFlagInfo flag) {
-        return currentLocation == null && flag == null;
+    private Vector2D getLocationFromMove(EnvironmentModel model) {
+        return model.getCommands()
+                .stream()
+                .filter(Command::isMoveCommand)
+                .reduce((prev, curr) -> curr)
+                .get()
+                .getVector2DValue();
+    }
+
+    private boolean agentHasBeenMoved(EnvironmentModel model) {
+        return model.getCommands().stream().filter(Command::isMoveCommand).count() != 0;
     }
 
     private Vector2D getLocationFromFlag(SeeFlagInfo flag, EnvironmentModel model) {

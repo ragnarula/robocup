@@ -2,6 +2,7 @@ package agent;
 
 import ai.AbstractAsyncAIComponent;
 import ai.AgentAI;
+import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
 import com.github.robocup_atan.atan.model.ControllerPlayer;
@@ -22,6 +23,7 @@ public class Player implements ControllerPlayer {
     private Percept        percept;
     private PerceptHistory perceptHistory = new PerceptHistory();
     private AbstractAsyncAIComponent agentAI;
+    private CommandPlayer commandPlayer;
 
     public Player(int playerNumber) {
         this.playerNumber = playerNumber;
@@ -37,7 +39,7 @@ public class Player implements ControllerPlayer {
     public void postInfo() {
         perceptHistory.addPercept(percept);
         percept = null;
-        agentAI.put(new EnvironmentModel(perceptHistory.getCopy()));
+        agentAI.put(new EnvironmentModel(perceptHistory.getCopy(), commandPlayer.getAndClearHistory()));
     }
 
     @Override
@@ -48,7 +50,8 @@ public class Player implements ControllerPlayer {
     @Override
     public void setPlayer(ActionsPlayer c) {
         player = c;
-        agentAI = new AgentAI(c);
+        commandPlayer = new CommandPlayer(c);
+        agentAI = new AgentAI(commandPlayer);
     }
 
     @Override
@@ -163,37 +166,37 @@ public class Player implements ControllerPlayer {
             this.pause(1000);
             switch (this.getPlayer().getNumber()) {
                 case 1 :
-                    this.getPlayer().move(-10, 0);
+                    this.commandPlayer.move(-10, 0);
                     break;
                 case 2 :
-                    this.getPlayer().move(-10, 10);
+                    this.commandPlayer.move(-10, 10);
                     break;
                 case 3 :
-                    this.getPlayer().move(-10, -10);
+                    this.commandPlayer.move(-10, -10);
                     break;
                 case 4 :
-                    this.getPlayer().move(-20, 0);
+                    this.commandPlayer.move(-20, 0);
                     break;
                 case 5 :
-                    this.getPlayer().move(-20, 10);
+                    this.commandPlayer.move(-20, 10);
                     break;
                 case 6 :
-                    this.getPlayer().move(-20, -10);
+                    this.commandPlayer.move(-20, -10);
                     break;
                 case 7 :
-                    this.getPlayer().move(-20, 20);
+                    this.commandPlayer.move(-20, 20);
                     break;
                 case 8 :
-                    this.getPlayer().move(-20, -20);
+                    this.commandPlayer.move(-20, -20);
                     break;
                 case 9 :
-                    this.getPlayer().move(-30, 0);
+                    this.commandPlayer.move(-30, 0);
                     break;
                 case 10 :
-                    this.getPlayer().move(-40, 10);
+                    this.commandPlayer.move(-40, 10);
                     break;
                 case 11 :
-                    this.getPlayer().move(-40, -10);
+                    this.commandPlayer.move(-40, -10);
                     break;
                 default :
                     throw new Error("number must be initialized before move");
