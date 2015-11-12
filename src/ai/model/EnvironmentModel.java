@@ -3,6 +3,7 @@ package ai.model;
 import info.Percept;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class EnvironmentModel {
     private boolean hasAgentAbsAngle = false;
     private Vector2D ballLocation;
     private Vector2D agentVelocityVector;
+    private HashMap<Integer, Vector2D> opposingPlayerLocations;
 
     public boolean hasAgentAbsAngle() {
         return hasAgentAbsAngle;
@@ -96,5 +98,13 @@ public class EnvironmentModel {
 
     public Vector2D getAgentVelocityVector() {
         return agentVelocityVector;
+    }
+
+    public void setOpposingPlayerLocations(HashMap<Integer, Vector2D> opposingPlayerLocations) {
+        this.opposingPlayerLocations = opposingPlayerLocations;
+    }
+
+    public HashMap<Integer, Vector2D> getOpposingPlayerLocations() {
+        return opposingPlayerLocations;
     }
 }
