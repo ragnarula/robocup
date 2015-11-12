@@ -23,6 +23,12 @@ public class PerceptHistory {
         return clone;
     }
 
+    public List<Percept> getCopyWithLastPercept(){
+        List<Percept> clone = new ArrayList<>();
+        clone.add(percepts.get(percepts.size() -1));
+        return clone;
+    }
+
     public List<Percept> getPercepts() {
         return percepts;
     }

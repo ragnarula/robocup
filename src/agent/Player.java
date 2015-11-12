@@ -39,7 +39,7 @@ public class Player implements ControllerPlayer {
     public void postInfo() {
         perceptHistory.addPercept(percept);
         percept = null;
-        agentAI.put(new EnvironmentModel(perceptHistory.getCopy(), commandPlayer.getAndClearHistory()));
+        agentAI.put(new EnvironmentModel(perceptHistory.getCopyWithLastPercept(), commandPlayer.getAndClearHistory()));
     }
 
     @Override
