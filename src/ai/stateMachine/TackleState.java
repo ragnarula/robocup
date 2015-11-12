@@ -2,8 +2,8 @@ package ai.stateMachine;
 
 import ai.actions.TackleAction;
 import ai.model.BehaviourConfiguration;
+import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
-import com.github.robocup_atan.atan.model.ActionsPlayer;
 
 /**
  * Created by James on 06/11/2015.
@@ -13,17 +13,17 @@ public class TackleState extends AttackStateGroup implements State {
     TackleAction tackleAction = new TackleAction();
 
     @Override
-    public void enterState(ActionsPlayer context) {
+    public void enterState(CommandPlayer context) {
 
     }
 
     @Override
-    public void exitState(ActionsPlayer context) {
+    public void exitState(CommandPlayer context) {
 
     }
 
     @Override
-    public void processModel(ActionsPlayer context, EnvironmentModel model) {
+    public void processModel(CommandPlayer context, EnvironmentModel model) {
         tackleAction.takeAction(context, model);
     }
 

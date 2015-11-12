@@ -23,7 +23,7 @@ public class BallLocationAIComponentTest {
         Percept p = new Percept(0,0);
         p.addSeenBallInfo(seeBallInfo);
         percepts.add(p);
-        EnvironmentModel model = new EnvironmentModel(percepts);
+        EnvironmentModel model = new EnvironmentModel(percepts, new ArrayList<>());
         model.setAgentLocation(agentLocation);
         return model;
     }

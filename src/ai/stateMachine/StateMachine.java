@@ -1,8 +1,8 @@
 package ai.stateMachine;
 
 
+import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
-import com.github.robocup_atan.atan.model.ActionsPlayer;
 
 /**
  * Created by raghavnarula on 05/11/2015.
@@ -11,10 +11,10 @@ import com.github.robocup_atan.atan.model.ActionsPlayer;
 public class StateMachine {
 
     private final PassiveState passiveState = new PassiveState();
-    private ActionsPlayer context;
+    private CommandPlayer context;
     private State currentState;
 
-    public StateMachine(ActionsPlayer context) {
+    public StateMachine(CommandPlayer context) {
         this.context = context;
         this.currentState = passiveState;
     }
@@ -33,7 +33,7 @@ public class StateMachine {
         this.currentState.processModel(context, model);
     }
 
-    public ActionsPlayer getContext() {
+    public CommandPlayer getContext() {
         return context;
     }
 }

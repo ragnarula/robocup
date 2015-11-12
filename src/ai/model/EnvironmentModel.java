@@ -11,12 +11,14 @@ import java.util.List;
 public class EnvironmentModel {
 
     private List<Percept> percepts;
+    private List<Command> commands;
     private Vector2D agentLocation;
     private HomeArea homeArea;
     private MovementArea movementArea;
     private double agentAbsAngel;
     private boolean hasAgentAbsAngle = false;
     private Vector2D ballLocation;
+    private Vector2D agentVelocityVector;
 
     public boolean hasAgentAbsAngle() {
         return hasAgentAbsAngle;
@@ -26,8 +28,10 @@ public class EnvironmentModel {
         this.hasAgentAbsAngle = true;
     }
 
-    public EnvironmentModel(List<Percept> percepts) {
+    public EnvironmentModel(List<Percept> percepts, List<Command> commands) {
         this.percepts = percepts;
+        this.commands = commands;
+
     }
 
     public List<Percept> getPercepts() {
@@ -80,5 +84,17 @@ public class EnvironmentModel {
 
     public Vector2D getBallLocation() {
         return ballLocation;
+    }
+
+    public List<Command> getCommands() {
+        return commands;
+    }
+
+    public void setAgentVelocityVector(Vector2D agentVelocityVector) {
+        this.agentVelocityVector = agentVelocityVector;
+    }
+
+    public Vector2D getAgentVelocityVector() {
+        return agentVelocityVector;
     }
 }

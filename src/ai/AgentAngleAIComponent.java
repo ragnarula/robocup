@@ -1,16 +1,27 @@
 package ai;
 
+import ai.model.Command;
 import ai.model.EnvironmentModel;
+import info.Percept;
 import info.SeeFlagInfo;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class AgentAngleAIComponent extends AbstractSimpleAIComponent {
+
+    private EnvironmentModel prevModel = AgentAngleAIComponent.getInitialModel();
+
+    public static EnvironmentModel getInitialModel() {
+        EnvironmentModel model = new EnvironmentModel(new ArrayList<>(), new ArrayList<>());
+        model.setAgentAbsAngleRadians(0);
+        return model;
+    }
 
     @Override
     EnvironmentModel processModel(EnvironmentModel model) {
@@ -31,8 +42,10 @@ public class AgentAngleAIComponent extends AbstractSimpleAIComponent {
                 .filter(e -> e.getValue().size() > 1)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        //if there are no such sides, return without finding angle
-        if(flagSidesAboveTwo.isEmpty()){
+        //if we don't have enough flags, use another method.
+        if (flagSidesAboveTwo.isEmpty()) {
+            model.setAgentAbsAngleRadians(getEstimatedAngle(model));
+            prevModel = model;
             return model;
         }
 
@@ -43,11 +56,26 @@ public class AgentAngleAIComponent extends AbstractSimpleAIComponent {
 
         model.setAgentAbsAngleRadians(agentAngleRadians);
         model.setHasAgentAbsAngle();
-
+        prevModel = model;
         return model;
     }
 
-    public double getAgentAngleFromFlags(List<SeeFlagInfo> nearestFlags) {
+    private double getEstimatedAngle(EnvironmentModel model) {
+        List<Command> commands = model.getCommands();
+        if(commands.isEmpty()){
+            return prevModel.getAgentAbsAngleRadians();
+        }
+
+        double totalTurnDegrees = 0;
+        totalTurnDegrees += commands.stream()
+                .filter(c -> c.getType() == Command.Type.TURN)
+                .map(Command::getDoubleValue)
+                .reduce(0.0, (a, b) -> a + b);
+
+        return prevModel.getAgentAbsAngleRadians() + FastMath.toRadians(totalTurnDegrees);
+    }
+
+    private double getAgentAngleFromFlags(List<SeeFlagInfo> nearestFlags) {
         //sort to use nearest flags
         List<SeeFlagInfo> flagsSorted = sortFlagsByDistance(nearestFlags);
 
