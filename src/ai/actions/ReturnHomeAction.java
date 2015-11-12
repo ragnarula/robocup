@@ -33,7 +33,7 @@ public class ReturnHomeAction implements Action {
         double agentAngleRadians = model.getAgentAbsAngleRadians();
 
         if(!almostFacing(agentAngleRadians, angleToHomeRadians)){
-            turn(player, angleToHomeRadians);
+            turn(player, angleToHomeRadians - agentAngleRadians);
         }
         else {
             player.dash(20);
@@ -44,7 +44,7 @@ public class ReturnHomeAction implements Action {
     private void turn(CommandPlayer player, double angleToHomeRadians) {
         double angleDegrees = FastMath.toDegrees(angleToHomeRadians);
         if(angleDegrees > 180){
-            angleDegrees = angleToHomeRadians - 360;
+            angleDegrees = angleDegrees - 360;
         }
         if(angleDegrees < 90 && angleDegrees > -90){
             player.turn(angleDegrees);
@@ -61,8 +61,7 @@ public class ReturnHomeAction implements Action {
     }
 
     private boolean almostFacing(double angle1, double angle2) {
-        return FastMath.abs(angle1 - angle2) <= 0.2;
+        return FastMath.abs(angle1 - angle2) <= 0.5;
     }
-
 
 }
