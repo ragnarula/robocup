@@ -43,7 +43,7 @@ public class PassiveState implements State {
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
         if( ballInMovementRange(model) ) {
-            if ( !teamHasBall(model) )
+            if ( !teamHasBall(model) && !agentHasBall(model) )
                 stateMachine.changeState(new DefendingState(), model);
 
             if ( agentHasBall(model) )

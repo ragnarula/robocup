@@ -9,6 +9,6 @@ import ai.model.EnvironmentModel;
 public class MoveBallAction implements Action {
     @Override
     public void takeAction(CommandPlayer player, EnvironmentModel model) {
-        player.kick(5, 0);
+        player.kick(50, 0);
     }
 }

@@ -36,7 +36,7 @@ public class AttackingState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-        if( !teamHasBall(model) || !agentHasBall(model) ) {
+        if( !agentHasBall(model) ) {
             stateMachine.changeState(new SupportingState(), model);
         }
     }

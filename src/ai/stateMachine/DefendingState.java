@@ -32,8 +32,14 @@ public class DefendingState extends DefendStateGroup implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-        if( !ballInMovementRange(model) || teamHasBall(model) )
+        if( !ballInMovementRange(model) || teamHasBall(model) || agentHasBall(model) )
             stateMachine.changeState(new PassiveState(), model);
+    }
+
+    private boolean agentHasBall(EnvironmentModel model) {
+        Vector2D ballPosition = model.getBallLocation();
+        Vector2D agentPosition = model.getAgentLocation();
+        return ballPosition.distance(agentPosition) < BehaviourConfiguration.BALL_POSSESSION_RANGE;
     }
 
     private boolean teamHasBall(EnvironmentModel model) {

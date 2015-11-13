@@ -27,7 +27,7 @@ public class DefendAction implements Action {
             turn(player, angleToBallRadians - agentAngleRadians);
         }
         else {
-            player.dash(30);
+            player.dash(50);
         }
 
     }
