@@ -37,9 +37,10 @@ public class DefendingState extends DefendStateGroup implements State {
     }
 
     private boolean agentHasBall(EnvironmentModel model) {
-        Vector2D ballPosition = model.getBallLocation();
-        Vector2D agentPosition = model.getAgentLocation();
-        return ballPosition.distance(agentPosition) < BehaviourConfiguration.BALL_POSSESSION_RANGE;
+//        Vector2D ballPosition = model.getBallLocation();
+//        Vector2D agentPosition = model.getAgentLocation();
+//        return ballPosition.distance(agentPosition) < BehaviourConfiguration.BALL_POSSESSION_RANGE;
+        return model.getLastPercept().getLastSeenBalls().getDistance() < BehaviourConfiguration.BALL_POSSESSION_RANGE;
     }
 
     private boolean teamHasBall(EnvironmentModel model) {
