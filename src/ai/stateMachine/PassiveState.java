@@ -52,9 +52,6 @@ public class PassiveState implements State {
     }
 
     private boolean agentHasBall(EnvironmentModel model) {
-//        Vector2D ballPosition = model.getBallLocation();
-//        Vector2D agentPosition = model.getAgentLocation();
-//        return ballPosition.distance(agentPosition) < BehaviourConfiguration.BALL_POSSESSION_RANGE;
           return model.getLastPercept().getLastSeenBalls().getDistance() < BehaviourConfiguration.BALL_POSSESSION_RANGE;
     }
 

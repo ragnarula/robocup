@@ -32,18 +32,41 @@ public class DefendingState extends DefendStateGroup implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-        if( !ballInMovementRange(model) || teamHasBall(model) || agentHasBall(model) )
+        if(!ballInMovementRange(model))
+            stateMachine.changeState(new PassiveState(), model);
+
+        if(teamHasBall(model))
+            stateMachine.changeState(new PassiveState(), model);
+
+        if(agentHasBall(model) && agentBehindBall(model))
             stateMachine.changeState(new PassiveState(), model);
     }
 
+    private boolean isValidDefendState(EnvironmentModel model) {
+        return ballInMovementRange(model) && !teamHasBall(model) && ( !agentHasBall(model) && !agentBehindBall(model) ) ;
+    }
+
+    private boolean agentBehindBall(EnvironmentModel model) {
+        if(model.getBallLocation() == null)
+            return false;
+
+        Vector2D ballLocation = model.getBallLocation();
+        Vector2D agentLocation = model.getAgentLocation();
+
+        return ballLocation.getY() > agentLocation.getY();
+    }
+
     private boolean agentHasBall(EnvironmentModel model) {
-//        Vector2D ballPosition = model.getBallLocation();
-//        Vector2D agentPosition = model.getAgentLocation();
-//        return ballPosition.distance(agentPosition) < BehaviourConfiguration.BALL_POSSESSION_RANGE;
+        if(model.getBallLocation() == null)
+            return false;
+
         return model.getLastPercept().getLastSeenBalls().getDistance() < BehaviourConfiguration.BALL_POSSESSION_RANGE;
     }
 
     private boolean teamHasBall(EnvironmentModel model) {
+        if(model.getBallLocation() == null)
+            return false;
+
         HashMap<Integer, Vector2D> friendlyPlayerLocations = model.getFriendlyPlayerLocations();
         Vector2D ballPosition = model.getBallLocation();
 

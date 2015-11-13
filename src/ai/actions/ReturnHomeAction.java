@@ -36,7 +36,7 @@ public class ReturnHomeAction implements Action {
             turn(player, angleToHomeRadians - agentAngleRadians);
         }
         else {
-            player.dash(20);
+            player.dash(30);
         }
 
     }
