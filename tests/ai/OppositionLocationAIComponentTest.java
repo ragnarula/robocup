@@ -30,7 +30,7 @@ public class OppositionLocationAIComponentTest {
 
     @Test
     public void testPlayerCenterOpposing10Ahead() throws Exception {
-        OppositionLocationAIComponent oppositionLocationAIComponent = new OppositionLocationAIComponent();
+        PlayersLocationAIComponent oppositionLocationAIComponent = new PlayersLocationAIComponent();
 
         SeePlayerInfo seePlayerInfo = new SeePlayerInfo(SeePlayerInfo.PlayerTeam.OTHER,
                 0,
@@ -52,7 +52,7 @@ public class OppositionLocationAIComponentTest {
 
     @Test
     public void testPlayerCenterOpposing10Ahead10Right() throws Exception {
-        OppositionLocationAIComponent oppositionLocationAIComponent = new OppositionLocationAIComponent();
+        PlayersLocationAIComponent oppositionLocationAIComponent = new PlayersLocationAIComponent();
 
         SeePlayerInfo seePlayerInfo = new SeePlayerInfo(SeePlayerInfo.PlayerTeam.OTHER,
                 0,
@@ -74,7 +74,7 @@ public class OppositionLocationAIComponentTest {
 
     @Test
     public void testPlayer10BehindOpposing10Ahead20Right() throws Exception {
-        OppositionLocationAIComponent oppositionLocationAIComponent = new OppositionLocationAIComponent();
+        PlayersLocationAIComponent oppositionLocationAIComponent = new PlayersLocationAIComponent();
 
         SeePlayerInfo seePlayerInfo = new SeePlayerInfo(SeePlayerInfo.PlayerTeam.OTHER,
                 0,

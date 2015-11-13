@@ -21,6 +21,7 @@ public class EnvironmentModel {
     private Vector2D ballLocation;
     private Vector2D agentVelocityVector;
     private HashMap<Integer, Vector2D> opposingPlayerLocations;
+    private HashMap<Integer, Vector2D> friendlyPlayerLocations;
 
     public boolean hasAgentAbsAngle() {
         return hasAgentAbsAngle;
@@ -106,5 +107,13 @@ public class EnvironmentModel {
 
     public HashMap<Integer, Vector2D> getOpposingPlayerLocations() {
         return opposingPlayerLocations;
+    }
+
+    public void setFriendlyPlayerLocations(HashMap<Integer, Vector2D> friendlyPlayerLocations) {
+        this.friendlyPlayerLocations = friendlyPlayerLocations;
+    }
+
+    public HashMap<Integer, Vector2D> getFriendlyPlayerLocations() {
+        return friendlyPlayerLocations;
     }
 }

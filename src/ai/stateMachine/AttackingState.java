@@ -48,15 +48,15 @@ public class AttackingState implements State {
     }
 
     private boolean teamHasBall(EnvironmentModel model) {
-        HashMap<Integer, Vector2D> opposingPlayerLocations = model.getOpposingPlayerLocations();
+        HashMap<Integer, Vector2D> friendlyPlayerLocations = model.getFriendlyPlayerLocations();
         Vector2D ballPosition = model.getBallLocation();
 
 //        Hashmaps are literally Hitler
-        for (Integer key : opposingPlayerLocations.keySet() ) {
-            if( ballPosition.distance(opposingPlayerLocations.get(key)) < BehaviourConfiguration.BALL_POSSESSION_RANGE )
-                return false;
+        for (Integer key : friendlyPlayerLocations.keySet() ) {
+            if( ballPosition.distance(friendlyPlayerLocations.get(key)) < BehaviourConfiguration.BALL_POSSESSION_RANGE )
+                return true;
         }
 
-        return true;
+        return false;
     }
 }

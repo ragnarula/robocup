@@ -15,7 +15,7 @@ public class AgentAI extends AbstractAsyncAIComponent {
     private AgentAngleAIComponent agentAngle;
     private MovementAreaAIComponent movementAreaAIComponent;
     private BallLocationAIComponent ballLocationAIComponent;
-    private OppositionLocationAIComponent oppositionLocationAIComponent;
+    private PlayersLocationAIComponent oppositionLocationAIComponent;
     private AgentVelocityAIComponent agentVelocity;
 
     public AgentAI(CommandPlayer player) {
@@ -28,7 +28,7 @@ public class AgentAI extends AbstractAsyncAIComponent {
         agentAction = new AgentActionAIComponent(this.player);
         movementAreaAIComponent = new MovementAreaAIComponent();
         ballLocationAIComponent = new BallLocationAIComponent();
-        oppositionLocationAIComponent = new OppositionLocationAIComponent();
+        oppositionLocationAIComponent = new PlayersLocationAIComponent();
 
         //attach components together in correct order
         this.setNext(agentAngle);
