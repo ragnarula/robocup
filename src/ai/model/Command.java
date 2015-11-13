@@ -10,7 +10,8 @@ public class Command {
     public enum Type {
         DASH,
         TURN,
-        MOVE
+        MOVE,
+        KICK
     }
 
     private Type type;

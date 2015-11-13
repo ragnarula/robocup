@@ -145,7 +145,7 @@ public class Player implements ControllerPlayer {
 
     @Override
     public void infoSeePlayerOwn(int number, boolean goalie, double distance, double direction, double distChange, double dirChange, double bodyFacingDirection, double headFacingDirection) {
-        SeePlayerInfo p = new SeePlayerInfo(SeePlayerInfo.PlayerTeam.OTHER, number, goalie, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
+        SeePlayerInfo p = new SeePlayerInfo(SeePlayerInfo.PlayerTeam.OWN, number, goalie, distance, direction, distChange, dirChange, bodyFacingDirection, headFacingDirection);
         percept.addSeenPlayerInfo(p);
     }
 

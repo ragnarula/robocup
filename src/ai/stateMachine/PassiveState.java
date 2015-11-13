@@ -2,8 +2,12 @@ package ai.stateMachine;
 
 import ai.actions.FindBallAction;
 import ai.actions.ReturnHomeAction;
+import ai.model.BehaviourConfiguration;
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+
+import java.util.HashMap;
 
 /**
  * Created by raghavnarula on 05/11/2015.
@@ -25,27 +29,45 @@ public class PassiveState implements State {
 
     @Override
     public void processModel(CommandPlayer context, EnvironmentModel model) {
+//        if( cantSeeBall(model) )
+//            findBallAction.takeAction(context, model);
 
         if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0))
             returnHomeAction.takeAction(context, model);
-
-        if( cantSeeBall(model) )
-            findBallAction.takeAction(context, model);
     }
 
     private boolean cantSeeBall(EnvironmentModel model) {
-//        TODO: Implement logic
-        return false;
+        return model.getBallLocation() == null;
     }
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
+        if( ballInMovementRange(model) ) {
+            if ( !teamHasBall(model) )
+                stateMachine.changeState(new DefendingState(), model);
 
-        //  TODO: Account for team behavioural state
-        //  TODO: Change to tackle/block state
+            if ( agentHasBall(model) )
+                stateMachine.changeState(new AttackingState(), model);
+        }
+    }
 
-//        if(ballInMovementRange(model))
-//            stateMachine.changeState(new SupportingState(), model);
+    private boolean agentHasBall(EnvironmentModel model) {
+        Vector2D ballPosition = model.getBallLocation();
+        Vector2D agentPosition = model.getAgentLocation();
+        return ballPosition.distance(agentPosition) < BehaviourConfiguration.BALL_POSSESSION_RANGE;
+    }
+
+    private boolean teamHasBall(EnvironmentModel model) {
+        HashMap<Integer, Vector2D> opposingPlayerLocations = model.getOpposingPlayerLocations();
+        Vector2D ballPosition = model.getBallLocation();
+
+//        Hashmaps are literally Hitler
+        for (Integer key : opposingPlayerLocations.keySet() ) {
+            if( ballPosition.distance(opposingPlayerLocations.get(key)) < BehaviourConfiguration.BALL_POSSESSION_RANGE )
+                return false;
+        }
+
+        return true;
     }
 
     private boolean ballInMovementRange(EnvironmentModel model) {

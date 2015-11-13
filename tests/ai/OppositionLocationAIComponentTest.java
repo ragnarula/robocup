@@ -93,4 +93,5 @@ public class OppositionLocationAIComponentTest {
         assertThat("Model contains correct X location", opposingPlayerLocation.getX(), is(closeTo(10,0.1)));
         assertThat("Model contains correct Y location", opposingPlayerLocation.getY(), is(closeTo(10,0.1)));
     }
+
 }
