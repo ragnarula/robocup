@@ -11,7 +11,7 @@ import java.util.HashMap;
 /**
  * Created by James on 12/11/2015.
  */
-public class DefendingState extends DefendStateGroup implements State {
+public class DefendingState implements State {
 
     DefendAction defendAction = new DefendAction();
 
@@ -32,50 +32,22 @@ public class DefendingState extends DefendStateGroup implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-        if(!ballInMovementRange(model))
-            stateMachine.changeState(new PassiveState(), model);
-
-        if(teamHasBall(model))
-            stateMachine.changeState(new PassiveState(), model);
-
-        if(agentHasBall(model) && agentBehindBall(model))
-            stateMachine.changeState(new PassiveState(), model);
-    }
-
-    private boolean isValidDefendState(EnvironmentModel model) {
-        return ballInMovementRange(model) && !teamHasBall(model) && ( !agentHasBall(model) && !agentBehindBall(model) ) ;
-    }
-
-    private boolean agentBehindBall(EnvironmentModel model) {
-        if(model.getBallLocation() == null)
-            return false;
-
-        Vector2D ballLocation = model.getBallLocation();
-        Vector2D agentLocation = model.getAgentLocation();
-
-        return ballLocation.getY() > agentLocation.getY();
-    }
-
-    private boolean agentHasBall(EnvironmentModel model) {
-        if(model.getBallLocation() == null)
-            return false;
-
-        return model.getLastPercept().getLastSeenBalls().getDistance() < BehaviourConfiguration.BALL_POSSESSION_RANGE;
-    }
-
-    private boolean teamHasBall(EnvironmentModel model) {
-        if(model.getBallLocation() == null)
-            return false;
-
-        HashMap<Integer, Vector2D> friendlyPlayerLocations = model.getFriendlyPlayerLocations();
-        Vector2D ballPosition = model.getBallLocation();
-
-//        Hashmaps are literally Hitler
-        for (Integer key : friendlyPlayerLocations.keySet() ) {
-            if( ballPosition.distance(friendlyPlayerLocations.get(key)) < BehaviourConfiguration.BALL_POSSESSION_RANGE )
-                return true;
+        if(!model.ballInMovementRange()){
+            stateMachine.changeState(StateMachine.PASSIVE_STATE, model);
+            return;
         }
 
-        return false;
+
+        if(model.teamHasBall()){
+            stateMachine.changeState(StateMachine.PASSIVE_STATE, model);
+            return;
+        }
+
+
+        if(model.agentBehindBall() && model.agentHasBall()){
+            stateMachine.changeState(StateMachine.ATTACKING_STATE, model);
+            return;
+        }
+
     }
 }

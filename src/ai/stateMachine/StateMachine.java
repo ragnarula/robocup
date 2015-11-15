@@ -10,13 +10,15 @@ import ai.model.EnvironmentModel;
 
 public class StateMachine {
 
-    private final PassiveState passiveState = new PassiveState();
+    public static final PassiveState PASSIVE_STATE = new PassiveState();
+    public static final DefendingState DEFENDING_STATE = new DefendingState();
+    public static final AttackingState ATTACKING_STATE = new AttackingState();
     private CommandPlayer context;
     private State currentState;
 
     public StateMachine(CommandPlayer context) {
         this.context = context;
-        this.currentState = passiveState;
+        this.currentState = PASSIVE_STATE;
     }
 
     public void changeState(State nextState, EnvironmentModel model) {

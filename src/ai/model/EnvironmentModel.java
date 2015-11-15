@@ -116,4 +116,52 @@ public class EnvironmentModel {
     public HashMap<Integer, Vector2D> getFriendlyPlayerLocations() {
         return friendlyPlayerLocations;
     }
+
+    public boolean teamHasBall() {
+        if (getBallLocation() == null)
+            return false;
+
+        HashMap<Integer, Vector2D> friendlyPlayerLocations = getFriendlyPlayerLocations();
+        Vector2D ballPosition = getBallLocation();
+
+        for (Integer key : friendlyPlayerLocations.keySet()) {
+            if (ballPosition.distance(friendlyPlayerLocations.get(key)) < BehaviourConfiguration.BALL_POSSESSION_RANGE)
+                return true;
+        }
+        return false;
+    }
+
+    public boolean agentBehindBall() {
+        if(getBallLocation() == null)
+            return false;
+
+        Vector2D ballLocation = getBallLocation();
+        Vector2D agentLocation = getAgentLocation();
+
+        return ballLocation.getY() > agentLocation.getY();
+    }
+
+    public boolean agentHasBall() {
+        if(getBallLocation() == null)
+            return false;
+
+        return getLastPercept().getLastSeenBalls().getDistance() < BehaviourConfiguration.BALL_POSSESSION_RANGE;
+    }
+
+    public boolean ballInMovementRange() {
+        if(getBallLocation() != null) {
+            return getMovementArea().contains(getBallLocation());
+        }
+        return false;
+    }
+
+    public boolean ballInTackleRange() {
+        double ballDistFromHomeArea = getBallLocation().distance(getHomeArea().getMidpoint());
+        return ballDistFromHomeArea < BehaviourConfiguration.TACKLE_RANGE;
+    }
+
+    public boolean ballInInterceptRange() {
+        double ballDistFromHomeArea = getBallLocation().distance(getHomeArea().getMidpoint());
+        return ballDistFromHomeArea < BehaviourConfiguration.INTERCEPT_RANGE;
+    }
 }

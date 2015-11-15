@@ -16,42 +16,42 @@ public class DefendAction implements Action {
         Vector2D agentLocation = model.getAgentLocation();
         Vector2D agentToBall = ballLocation.subtract(agentLocation);
 
-        double unsignedAngleToBallRadians = Vector2D.angle(agentToBall, new Vector2D(0,1));
+        double unsignedAngleToBallRadians = Vector2D.angle(agentToBall, new Vector2D(0, 1));
         double angleToBallRadians = unsignedAngleToBallRadians;
-        if(ballLocation.getX() < agentLocation.getX()){
+
+        if (ballLocation.getX() < agentLocation.getX()) {
             angleToBallRadians = ((2 * FastMath.PI) - unsignedAngleToBallRadians);
         }
         double agentAngleRadians = model.getAgentAbsAngleRadians();
-
-        if(!almostFacing(agentAngleRadians, angleToBallRadians)){
-            turn(player, angleToBallRadians - agentAngleRadians);
+        if(!Action.almostFacing(angleToBallRadians, agentAngleRadians)){
+            player.turn(angleToBallRadians - agentAngleRadians);
         }
-        else {
-            player.dash(50);
-        }
-
+        player.dash(50);
     }
 
-    private boolean almostFacing(double angle1, double angle2) {
-        return FastMath.abs(angle1 - angle2) <= 0.5;
-    }
+//    @Override
+//    public void takeAction(CommandPlayer player, EnvironmentModel model) {
+//
+//        Vector2D ballLocation = model.getBallLocation();
+//        Vector2D agentLocation = model.getAgentLocation();
+//        Vector2D agentToBall = ballLocation.subtract(agentLocation);
+//
+//        double unsignedAngleToBallRadians = Vector2D.angle(agentToBall, new Vector2D(0, 1));
+//        double angleToBallRadians = unsignedAngleToBallRadians;
+//
+//        if (ballLocation.getX() < agentLocation.getX()) {
+//            angleToBallRadians = ((2 * FastMath.PI) - unsignedAngleToBallRadians);
+//        }
+//        double agentAngleRadians = model.getAgentAbsAngleRadians();
+//
+////        if (!Action.almostFacing(agentAngleRadians, angleToBallRadians)) {
+////            Action.turn(player, angleToBallRadians - agentAngleRadians);0
+//        if(!Action.onTarget(unsignedAngleToBallRadians, agentToBall.getNorm(), 1)){
+//            Action.turn(player, angleToBallRadians - agentAngleRadians);
+//        } else {
+//            player.dash(50);
+//        }
+//
+//    }
 
-    private void turn(CommandPlayer player, double angleToHomeRadians) {
-        double angleDegrees = FastMath.toDegrees(angleToHomeRadians);
-        if(angleDegrees > 180){
-            angleDegrees = angleDegrees - 360;
-        }
-        if(angleDegrees < 90 && angleDegrees > -90){
-            player.turn(angleDegrees);
-            return;
-        }
-        if(angleDegrees > 90){
-            player.turn(90);
-            return;
-        }
-        if(angleDegrees < -90){
-            player.turn(-90);
-            return;
-        }
-    }
 }

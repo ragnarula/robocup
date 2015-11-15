@@ -2,6 +2,7 @@ package ai.model;
 
 import com.github.robocup_atan.atan.model.ActionsPlayer;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import org.apache.commons.math3.util.FastMath;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,19 @@ public class CommandPlayer {
     }
 
     public synchronized void turn(double angle){
-        player.turn(angle);
+        double angleDegrees = FastMath.toDegrees(angle);
+        if(angleDegrees > 180){
+            angleDegrees = angleDegrees - 360;
+        }
+        if(angleDegrees < 90 && angleDegrees > -90){
+            player.turn(angleDegrees);
+        }
+        else if(angleDegrees > 90){
+            player.turn(90);
+        }
+        else if(angleDegrees < -90){
+            player.turn(-90);
+        }
         history.add(new Command(Command.Type.TURN, angle));
     }
 

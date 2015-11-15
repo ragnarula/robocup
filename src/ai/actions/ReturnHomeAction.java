@@ -27,41 +27,45 @@ public class ReturnHomeAction implements Action {
 
         double unsignedAngleToHomeRadians = Vector2D.angle(agentToHome, new Vector2D(0,1));
         double angleToHomeRadians = unsignedAngleToHomeRadians;
+
         if(homeCenter.getX() < agentLocation.getX()){
             angleToHomeRadians = ((2 * FastMath.PI) - unsignedAngleToHomeRadians);
         }
         double agentAngleRadians = model.getAgentAbsAngleRadians();
 
-        if(!almostFacing(agentAngleRadians, angleToHomeRadians)){
-            turn(player, angleToHomeRadians - agentAngleRadians);
+        if(!Action.almostFacing(angleToHomeRadians, agentAngleRadians)){
+            player.turn(angleToHomeRadians - agentAngleRadians);
         }
-        else {
-            player.dash(30);
-        }
+
+        player.dash(30);
 
     }
 
-    private void turn(CommandPlayer player, double angleToHomeRadians) {
-        double angleDegrees = FastMath.toDegrees(angleToHomeRadians);
-        if(angleDegrees > 180){
-            angleDegrees = angleDegrees - 360;
-        }
-        if(angleDegrees < 90 && angleDegrees > -90){
-            player.turn(angleDegrees);
-            return;
-        }
-        if(angleDegrees > 90){
-            player.turn(90);
-            return;
-        }
-        if(angleDegrees < -90){
-            player.turn(-90);
-            return;
-        }
-    }
-
-    private boolean almostFacing(double angle1, double angle2) {
-        return FastMath.abs(angle1 - angle2) <= 0.5;
-    }
-
+//    @Override
+//    public void takeAction(CommandPlayer player, EnvironmentModel model) {
+//        HomeArea homeArea = model.getHomeArea();
+//
+//
+//        Vector2D homeCenter = homeArea.getMidpoint();
+//        Vector2D agentLocation = model.getAgentLocation();
+//        Vector2D agentToHome = homeCenter.subtract(agentLocation);
+//
+//        double unsignedAngleToHomeRadians = Vector2D.angle(agentToHome, new Vector2D(0,1));
+//        double angleToHomeRadians = unsignedAngleToHomeRadians;
+//
+//        if(homeCenter.getX() < agentLocation.getX()){
+//            angleToHomeRadians = ((2 * FastMath.PI) - unsignedAngleToHomeRadians);
+//        }
+//        double agentAngleRadians = model.getAgentAbsAngleRadians();
+//
+////        if(!Action.almostFacing(agentAngleRadians, angleToHomeRadians)){
+////            turn(player, angleToHomeRadians - agentAngleRadians);
+////        }
+//        if(!Action.onTarget(unsignedAngleToHomeRadians, agentToHome.getNorm(), 1)){
+//            Action.turn(player, angleToHomeRadians - agentAngleRadians);
+//        }
+//        else {
+//            player.dash(30);
+//        }
+//    }
 }
