@@ -12,32 +12,32 @@ import java.util.List;
  */
 public class BallLocationAIComponent extends AbstractSimpleAIComponent {
 
+    private static volatile SeeBallInfo sharedBallInfo;
+
     @Override
     EnvironmentModel processModel(EnvironmentModel model) {
-
-//        TODO: Handle case when player can't see the ball
-
-        List<SeeBallInfo> ball = model.getLastPercept().getSeenBalls();
-
-        if(ball.size() > 0) {
-            model.setBallLocation(getLocation(model, ball.get(ball.size() - 1)));
+        SeeBallInfo ball;
+        List<SeeBallInfo> balls = model.getLastPercept().getSeenBalls();
+        if(balls.isEmpty()){
+            ball = sharedBallInfo;
+            balls.add(sharedBallInfo);
+        }
+        else {
+            ball = balls.get(balls.size() - 1);
+            sharedBallInfo = ball;
         }
 
+        if(ball == null){
+            return model;
+        }
+        double absAngle = model.getAgentAbsAngleRadians() + FastMath.toRadians(ball.getDirection());
+
+        Vector2D ballLocation = EnvironmentModel.getLocationFromRelativeInfo(model.getAgentLocation(),
+                absAngle,
+                ball.getDistance());
+
+        model.setBallLocation(ballLocation);
         return model;
     }
-
-    private Vector2D getLocation(EnvironmentModel model, SeeBallInfo ball) {
-        double agentAngle = model.getAgentAbsAngleRadians();
-        double ballAngle = FastMath.toRadians(ball.getDirection());
-
-        double x = (FastMath.sin(agentAngle + ballAngle) * ball.getDistance());
-        double y = (FastMath.cos(agentAngle + ballAngle) * ball.getDistance());
-
-        Vector2D agentToBall = new Vector2D(x,y);
-        Vector2D agentLocation = model.getAgentLocation();
-
-        return agentLocation.add(agentToBall);
-    }
-
 
 }

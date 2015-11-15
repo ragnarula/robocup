@@ -29,29 +29,4 @@ public class DefendAction implements Action {
         player.dash(50);
     }
 
-//    @Override
-//    public void takeAction(CommandPlayer player, EnvironmentModel model) {
-//
-//        Vector2D ballLocation = model.getBallLocation();
-//        Vector2D agentLocation = model.getAgentLocation();
-//        Vector2D agentToBall = ballLocation.subtract(agentLocation);
-//
-//        double unsignedAngleToBallRadians = Vector2D.angle(agentToBall, new Vector2D(0, 1));
-//        double angleToBallRadians = unsignedAngleToBallRadians;
-//
-//        if (ballLocation.getX() < agentLocation.getX()) {
-//            angleToBallRadians = ((2 * FastMath.PI) - unsignedAngleToBallRadians);
-//        }
-//        double agentAngleRadians = model.getAgentAbsAngleRadians();
-//
-////        if (!Action.almostFacing(agentAngleRadians, angleToBallRadians)) {
-////            Action.turn(player, angleToBallRadians - agentAngleRadians);0
-//        if(!Action.onTarget(unsignedAngleToBallRadians, agentToBall.getNorm(), 1)){
-//            Action.turn(player, angleToBallRadians - agentAngleRadians);
-//        } else {
-//            player.dash(50);
-//        }
-//
-//    }
-
 }

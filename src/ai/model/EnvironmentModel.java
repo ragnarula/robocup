@@ -2,6 +2,7 @@ package ai.model;
 
 import info.Percept;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import org.apache.commons.math3.util.FastMath;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,14 @@ import java.util.List;
  * Created by raghavnarula on 02/11/2015.
  */
 public class EnvironmentModel {
+
+    public static Vector2D getLocationFromRelativeInfo(Vector2D agentLocation, double absAngle, double distance){
+        double x = FastMath.sin(absAngle) * distance;
+        double y = FastMath.cos(absAngle) * distance;
+
+        Vector2D agentToInfo = new Vector2D(x,y);
+        return agentLocation.add(agentToInfo);
+    }
 
     private List<Percept> percepts;
     private List<Command> commands;
@@ -164,4 +173,6 @@ public class EnvironmentModel {
         double ballDistFromHomeArea = getBallLocation().distance(getHomeArea().getMidpoint());
         return ballDistFromHomeArea < BehaviourConfiguration.INTERCEPT_RANGE;
     }
+
+
 }

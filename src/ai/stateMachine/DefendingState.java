@@ -44,7 +44,7 @@ public class DefendingState implements State {
         }
 
 
-        if(model.agentBehindBall() && model.agentHasBall()){
+        if(model.agentHasBall() && model.agentBehindBall()){
             stateMachine.changeState(StateMachine.ATTACKING_STATE, model);
             return;
         }

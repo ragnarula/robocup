@@ -40,32 +40,4 @@ public class ReturnHomeAction implements Action {
         player.dash(30);
 
     }
-
-//    @Override
-//    public void takeAction(CommandPlayer player, EnvironmentModel model) {
-//        HomeArea homeArea = model.getHomeArea();
-//
-//
-//        Vector2D homeCenter = homeArea.getMidpoint();
-//        Vector2D agentLocation = model.getAgentLocation();
-//        Vector2D agentToHome = homeCenter.subtract(agentLocation);
-//
-//        double unsignedAngleToHomeRadians = Vector2D.angle(agentToHome, new Vector2D(0,1));
-//        double angleToHomeRadians = unsignedAngleToHomeRadians;
-//
-//        if(homeCenter.getX() < agentLocation.getX()){
-//            angleToHomeRadians = ((2 * FastMath.PI) - unsignedAngleToHomeRadians);
-//        }
-//        double agentAngleRadians = model.getAgentAbsAngleRadians();
-//
-////        if(!Action.almostFacing(agentAngleRadians, angleToHomeRadians)){
-////            turn(player, angleToHomeRadians - agentAngleRadians);
-////        }
-//        if(!Action.onTarget(unsignedAngleToHomeRadians, agentToHome.getNorm(), 1)){
-//            Action.turn(player, angleToHomeRadians - agentAngleRadians);
-//        }
-//        else {
-//            player.dash(30);
-//        }
-//    }
 }
