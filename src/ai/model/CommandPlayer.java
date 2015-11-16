@@ -38,7 +38,8 @@ public class CommandPlayer {
     }
 
     public synchronized void kick(int power, double angle) {
-        player.kick(power,angle);
+
+        player.kick(power,FastMath.toDegrees(angle));
         queue.add(new Command(Command.Type.KICK, power));
     }
 

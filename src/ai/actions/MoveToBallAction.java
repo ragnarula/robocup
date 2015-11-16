@@ -12,7 +12,7 @@ public class MoveToBallAction implements Action {
     @Override
     public void takeAction(CommandPlayer player, EnvironmentModel model) {
 
-        player.dash(50);
+        player.dash(100);
         player.turn(model.getBallAngle() - model.getAgentAbsAngleRadians());
     }
 }

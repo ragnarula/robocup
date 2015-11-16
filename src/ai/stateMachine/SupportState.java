@@ -26,7 +26,6 @@ public class SupportState implements State {
         } else {
             context.turn(agentAngle);
         }
-
         context.dash(50);
     }
 

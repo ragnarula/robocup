@@ -2,7 +2,6 @@ package ai.actions;
 
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 /**
  * Created by raghavnarula on 16/11/2015.

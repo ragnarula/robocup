@@ -35,7 +35,7 @@ public class DefendingState implements State {
 
 
         if(model.teamHasBall()){
-            stateMachine.changeState(StateMachine.PASSIVE_STATE, model);
+            stateMachine.changeState(StateMachine.SUPPORT_STATE, model);
             return;
         }
 
