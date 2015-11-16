@@ -1,7 +1,6 @@
 package ai.model;
 
 import info.Percept;
-import info.SeeBallInfo;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 
@@ -216,5 +215,9 @@ public class EnvironmentModel {
 
     public double getBallAngle() {
         return ballAngle;
+    }
+
+    public boolean agentInMovementArea() {
+        return movementArea.contains(getAgentLocation());
     }
 }

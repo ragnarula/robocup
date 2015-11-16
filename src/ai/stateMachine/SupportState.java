@@ -21,12 +21,18 @@ public class SupportState implements State {
     @Override
     public void processModel(CommandPlayer context, EnvironmentModel model) {
         double agentAngle = model.getAgentAbsAngleRadians();
+
         if(agentAngle > FastMath.PI){
             context.turn((FastMath.PI*2) - agentAngle);
         } else {
-            context.turn(agentAngle);
+            context.turn(-agentAngle);
         }
-        context.dash(50);
+
+        if(model.agentInMovementArea()){
+            context.dash(50);
+        }
+
+
     }
 
     @Override
@@ -43,5 +49,6 @@ public class SupportState implements State {
             stateMachine.changeState(StateMachine.DEFENDING_STATE,model);
             return;
         }
+
     }
 }

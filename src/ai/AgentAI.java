@@ -18,6 +18,7 @@ public class AgentAI extends AbstractSimpleAIComponent {
     private PlayersLocationAIComponent oppositionLocationAIComponent;
     private AgentVelocityAIComponent agentVelocity;
     private GoalLocationAIComponent goalLocation;
+    private GameRulesAIComponent gameRules;
 
     public AgentAI(CommandPlayer player) {
         this.player = player;
@@ -31,6 +32,7 @@ public class AgentAI extends AbstractSimpleAIComponent {
         ballLocationAIComponent = new BallLocationAIComponent();
         oppositionLocationAIComponent = new PlayersLocationAIComponent();
         goalLocation = new GoalLocationAIComponent();
+        gameRules = new GameRulesAIComponent(this.player);
 
         //attach components together in correct order
         this.setNext(agentAngle);
@@ -41,7 +43,8 @@ public class AgentAI extends AbstractSimpleAIComponent {
         movementAreaAIComponent.setNext(ballLocationAIComponent);
         ballLocationAIComponent.setNext(oppositionLocationAIComponent);
         oppositionLocationAIComponent.setNext(goalLocation);
-        goalLocation.setNext(agentAction);
+        goalLocation.setNext(gameRules);
+        gameRules.setNext(agentAction);
     }
 
     @Override
