@@ -145,16 +145,6 @@ public class EnvironmentModel {
         return false;
     }
 
-    public boolean agentBehindBall() {
-        if(getBallLocation() == null)
-            return false;
-
-        Vector2D ballLocation = getBallLocation();
-        Vector2D agentLocation = getAgentLocation();
-
-        return ballLocation.getY() > agentLocation.getY();
-    }
-
     public boolean agentHasBall() {
         if(!getLastPercept().getSeenBalls().isEmpty()){
             return getLastPercept().getLastSeenBall().getDistance() < BehaviourConfiguration.BALL_POSSESSION_RANGE;
@@ -173,17 +163,6 @@ public class EnvironmentModel {
         }
         return false;
     }
-
-    public boolean ballInTackleRange() {
-        double ballDistFromHomeArea = getBallLocation().distance(getHomeArea().getMidpoint());
-        return ballDistFromHomeArea < BehaviourConfiguration.TACKLE_RANGE;
-    }
-
-    public boolean ballInInterceptRange() {
-        double ballDistFromHomeArea = getBallLocation().distance(getHomeArea().getMidpoint());
-        return ballDistFromHomeArea < BehaviourConfiguration.INTERCEPT_RANGE;
-    }
-
 
     public void setGoalAngle(double goalAngle) {
         this.goalAngle = goalAngle;
