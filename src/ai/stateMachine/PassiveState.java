@@ -1,5 +1,6 @@
 package ai.stateMachine;
 
+import ai.actions.LookAtBallAction;
 import ai.actions.ReturnHomeAction;
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
@@ -9,6 +10,7 @@ import ai.model.EnvironmentModel;
 public class PassiveState implements State {
 
     private ReturnHomeAction returnHomeAction = new ReturnHomeAction();
+    private LookAtBallAction lookAtBallAction = new LookAtBallAction();
 
     @Override
     public void enterState(CommandPlayer context) {
@@ -25,16 +27,20 @@ public class PassiveState implements State {
 
         if(!model.getHomeArea().isNearCenter(model.getAgentLocation(), 1.0))
             returnHomeAction.takeAction(context, model);
+        else
+            lookAtBallAction.takeAction(context, model);
+
     }
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
         if( model.ballInMovementRange() ) {
-            if (!model.teamHasBall() && !model.agentHasBall())
-                stateMachine.changeState(StateMachine.DEFENDING_STATE, model);
-
             if (model.agentHasBall())
-                stateMachine.changeState(new AttackingState(), model);
+                stateMachine.changeState(StateMachine.ATTACKING_STATE, model);
+            else if (model.teamHasBall())
+                stateMachine.changeState(StateMachine.SUPPORT_STATE, model);
+            else
+                stateMachine.changeState(StateMachine.DEFENDING_STATE, model);
         }
     }
 }

@@ -1,15 +1,20 @@
 package ai.stateMachine;
 
-import ai.actions.MoveBallAction;
+import ai.actions.KickAtGoalAction;
+import ai.actions.PositionToShootAction;
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
+import info.SeeBallInfo;
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import org.apache.commons.math3.util.FastMath;
 
 /**
  * Created by James on 06/11/2015.
  */
 public class AttackingState implements State {
 
-    MoveBallAction moveBallAction = new MoveBallAction();
+    KickAtGoalAction kickAtGoalAction = new KickAtGoalAction();
+    PositionToShootAction positionToShootAction = new PositionToShootAction();
 
     @Override
     public void enterState(CommandPlayer context) {
@@ -23,14 +28,27 @@ public class AttackingState implements State {
 
     @Override
     public void processModel(CommandPlayer context, EnvironmentModel model) {
-        moveBallAction.takeAction(context, model);
+        SeeBallInfo ball = model.getLastPercept().getLastSeenBall();
+
+        double agentAbsAngle = model.getAgentAbsAngleRadians();
+
+        double ballAngle = FastMath.toRadians(ball.getDirection());
+        double totalBallAngle = ballAngle + agentAbsAngle;
+        double goalAngle = model.getGoalAngle();
+
+        double angleBetweenBallAndGoal = totalBallAngle - goalAngle;
+
+//        if(FastMath.abs(angleBetweenBallAndGoal) < FastMath.PI/2){
+            kickAtGoalAction.takeAction(context, model);
+//        } else {
+//            positionToShootAction.takeAction(context, model);
+//        }
+
     }
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
-//        if(model.teamHasBall()){
-//            stateMachine.changeState(StateMachine.SUPPORTING_STATE);
-//        }
+
         if( !model.agentHasBall() ) {
             stateMachine.changeState(StateMachine.PASSIVE_STATE, model);
         }

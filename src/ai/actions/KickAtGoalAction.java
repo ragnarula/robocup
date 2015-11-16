@@ -8,25 +8,22 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * Created by James on 06/11/2015.
  */
-public class MoveBallAction implements Action {
+public class KickAtGoalAction implements Action {
     @Override
     public void takeAction(CommandPlayer player, EnvironmentModel model) {
 
         Vector2D agentLocation = model.getAgentLocation();
+        Vector2D goalLocation = model.getGoalLocation();
         double agentAbsAngle = model.getAgentAbsAngleRadians();
-        double ballAngle = FastMath.toRadians(model.getLastPercept().getLastSeenBalls().getDirection());
+        double angleToGoal = model.getGoalAngle();
 
-        Vector2D goalLocation = new Vector2D(0, 52.5);
-
-        Vector2D toGoal = goalLocation.subtract(model.getAgentLocation());
-        double angleToGoal = Vector2D.angle(toGoal, new Vector2D(0,1));
 
         double kickAngle;
 
-        if(agentLocation.getX() > 0)
-            kickAngle = FastMath.toDegrees(agentAbsAngle + angleToGoal);
+        if(agentLocation.getX() > goalLocation.getX())
+            kickAngle = (FastMath.PI*2) - angleToGoal - agentAbsAngle;
         else
-            kickAngle = FastMath.toDegrees(agentAbsAngle - angleToGoal);
+            kickAngle = angleToGoal - agentAbsAngle;
 
         player.kick(50, kickAngle);
     }

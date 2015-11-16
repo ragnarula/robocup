@@ -6,7 +6,7 @@ import ai.model.EnvironmentModel;
 /**
  * Created by raghavnarula on 02/11/2015.
  */
-public class AgentAI extends AbstractAsyncAIComponent {
+public class AgentAI extends AbstractSimpleAIComponent {
 
     private CommandPlayer player;
     private AgentLocationAIComponent agentLocation;
@@ -17,6 +17,7 @@ public class AgentAI extends AbstractAsyncAIComponent {
     private BallLocationAIComponent ballLocationAIComponent;
     private PlayersLocationAIComponent oppositionLocationAIComponent;
     private AgentVelocityAIComponent agentVelocity;
+    private GoalLocationAIComponent goalLocation;
 
     public AgentAI(CommandPlayer player) {
         this.player = player;
@@ -29,6 +30,7 @@ public class AgentAI extends AbstractAsyncAIComponent {
         movementAreaAIComponent = new MovementAreaAIComponent();
         ballLocationAIComponent = new BallLocationAIComponent();
         oppositionLocationAIComponent = new PlayersLocationAIComponent();
+        goalLocation = new GoalLocationAIComponent();
 
         //attach components together in correct order
         this.setNext(agentAngle);
@@ -38,7 +40,8 @@ public class AgentAI extends AbstractAsyncAIComponent {
         agentHome.setNext(movementAreaAIComponent);
         movementAreaAIComponent.setNext(ballLocationAIComponent);
         ballLocationAIComponent.setNext(oppositionLocationAIComponent);
-        oppositionLocationAIComponent.setNext(agentAction);
+        oppositionLocationAIComponent.setNext(goalLocation);
+        goalLocation.setNext(agentAction);
     }
 
     @Override

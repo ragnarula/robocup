@@ -1,6 +1,7 @@
 package ai.model;
 
 import info.Percept;
+import info.SeeBallInfo;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 
@@ -11,6 +12,11 @@ import java.util.List;
  * Created by raghavnarula on 02/11/2015.
  */
 public class EnvironmentModel {
+
+    private double goalAngle;
+    private Vector2D goalLocation;
+    private Vector2D agentToGoal;
+    private double ballAngle;
 
     public static Vector2D getLocationFromRelativeInfo(Vector2D agentLocation, double absAngle, double distance){
         double x = FastMath.sin(absAngle) * distance;
@@ -151,10 +157,15 @@ public class EnvironmentModel {
     }
 
     public boolean agentHasBall() {
-        if(getBallLocation() == null)
-            return false;
+        if(!getLastPercept().getSeenBalls().isEmpty()){
+            return getLastPercept().getLastSeenBall().getDistance() < BehaviourConfiguration.BALL_POSSESSION_RANGE;
+        }
+        Vector2D loc = getBallLocation();
+        if(loc != null){
+            return FastMath.abs(getAgentLocation().subtract(loc).getNorm()) < BehaviourConfiguration.BALL_POSSESSION_RANGE;
+        }
 
-        return getLastPercept().getLastSeenBalls().getDistance() < BehaviourConfiguration.BALL_POSSESSION_RANGE;
+        return false;
     }
 
     public boolean ballInMovementRange() {
@@ -175,4 +186,35 @@ public class EnvironmentModel {
     }
 
 
+    public void setGoalAngle(double goalAngle) {
+        this.goalAngle = goalAngle;
+    }
+
+    public double getGoalAngle() {
+        return goalAngle;
+    }
+
+    public void setGoalLocation(Vector2D goalLocation) {
+        this.goalLocation = goalLocation;
+    }
+
+    public Vector2D getGoalLocation() {
+        return goalLocation;
+    }
+
+    public void setAgentToGoal(Vector2D agentToGoal) {
+        this.agentToGoal = agentToGoal;
+    }
+
+    public Vector2D getAgentToGoal() {
+        return agentToGoal;
+    }
+
+    public void setBallAngle(double ballAngle) {
+        this.ballAngle = ballAngle;
+    }
+
+    public double getBallAngle() {
+        return ballAngle;
+    }
 }

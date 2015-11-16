@@ -22,7 +22,7 @@ public class Player implements ControllerPlayer {
     private ActionsPlayer  player;
     private Percept        percept;
     private PerceptHistory perceptHistory = new PerceptHistory();
-    private AbstractAsyncAIComponent agentAI;
+    private AgentAI agentAI;
     private CommandPlayer commandPlayer;
 
     public Player(int playerNumber) {

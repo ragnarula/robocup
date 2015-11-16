@@ -2,7 +2,6 @@ package ai.actions;
 
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
-//import jdk.nashorn.internal.runtime.Logging;
 import ai.model.HomeArea;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
@@ -20,7 +19,6 @@ public class ReturnHomeAction implements Action {
     public void takeAction(CommandPlayer player, EnvironmentModel model) {
         HomeArea homeArea = model.getHomeArea();
 
-
         Vector2D homeCenter = homeArea.getMidpoint();
         Vector2D agentLocation = model.getAgentLocation();
         Vector2D agentToHome = homeCenter.subtract(agentLocation);
@@ -32,12 +30,8 @@ public class ReturnHomeAction implements Action {
             angleToHomeRadians = ((2 * FastMath.PI) - unsignedAngleToHomeRadians);
         }
         double agentAngleRadians = model.getAgentAbsAngleRadians();
-
-        if(!Action.almostFacing(angleToHomeRadians, agentAngleRadians)){
-            player.turn(angleToHomeRadians - agentAngleRadians);
-        }
-
         player.dash(30);
+        player.turn(angleToHomeRadians - agentAngleRadians);
 
     }
 }

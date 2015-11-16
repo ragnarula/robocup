@@ -118,7 +118,7 @@ public class Percept {
         return seenBalls;
     }
 
-    public SeeBallInfo getLastSeenBalls() {
+    public SeeBallInfo getLastSeenBall() {
         return seenBalls.get(seenBalls.size() - 1);
     }
 

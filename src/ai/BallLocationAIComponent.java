@@ -12,24 +12,23 @@ import java.util.List;
  */
 public class BallLocationAIComponent extends AbstractSimpleAIComponent {
 
-    private static volatile SeeBallInfo sharedBallInfo;
+    private static volatile Vector2D sharedBallInfo;
 
     @Override
     EnvironmentModel processModel(EnvironmentModel model) {
-        SeeBallInfo ball;
         List<SeeBallInfo> balls = model.getLastPercept().getSeenBalls();
         if(balls.isEmpty()){
-            ball = sharedBallInfo;
-            balls.add(sharedBallInfo);
-        }
-        else {
-            ball = balls.get(balls.size() - 1);
-            sharedBallInfo = ball;
-        }
-
-        if(ball == null){
+            Vector2D ball = sharedBallInfo;
+            model.setBallLocation(ball);
+            double angle = Vector2D.angle(ball, model.getAgentLocation());
+            if(model.getAgentLocation().getX() > ball.getX()){
+                angle = (FastMath.PI*2) - angle;
+            }
+            model.setBallAngle(angle);
             return model;
         }
+        SeeBallInfo ball = balls.get(balls.size() - 1);
+
         double absAngle = model.getAgentAbsAngleRadians() + FastMath.toRadians(ball.getDirection());
 
         Vector2D ballLocation = EnvironmentModel.getLocationFromRelativeInfo(model.getAgentLocation(),
@@ -37,6 +36,9 @@ public class BallLocationAIComponent extends AbstractSimpleAIComponent {
                 ball.getDistance());
 
         model.setBallLocation(ballLocation);
+        model.setBallAngle(absAngle);
+        sharedBallInfo = ballLocation;
+
         return model;
     }
 
