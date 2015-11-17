@@ -21,18 +21,7 @@ public class KickAtGoalAction implements Action {
 
         double angleBallToGoal = Vector2D.angle(ballToGoal, goalLocation);
 
-        double kickAngle;
-
-
-//        if(agentLocation.getX() > goalLocation.getX())
-//            kickAngle = (FastMath.PI*2) - angleToGoal - agentAbsAngle;
-//        else
-//            kickAngle = angleToGoal - agentAbsAngle;
-
-//        if(agentLocation.getX() > goalLocation.getX())
-//            kickAngle = (FastMath.PI*2) - angleToGoal - agentAbsAngle;
-//        else
-//            kickAngle = angleToGoal - agentAbsAngle;
+        double kickAngle; 
 
         if(ballLocation.getX() > goalLocation.getX())
             angleBallToGoal*= -1;

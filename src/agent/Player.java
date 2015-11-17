@@ -1,13 +1,12 @@
 package agent;
 
-import ai.AbstractAsyncAIComponent;
 import ai.AgentAI;
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
+import ai.model.PerceptHistory;
 import com.github.robocup_atan.atan.model.ActionsPlayer;
 import com.github.robocup_atan.atan.model.ControllerPlayer;
 import com.github.robocup_atan.atan.model.enums.*;
-import ai.model.PerceptHistory;
 import info.*;
 
 import java.util.HashMap;
@@ -166,37 +165,37 @@ public class Player implements ControllerPlayer {
             this.pause(1000);
             switch (this.getPlayer().getNumber()) {
                 case 1 :
-                    this.commandPlayer.move(-10, 0);
+                    this.commandPlayer.move(-40, 0);
                     break;
                 case 2 :
-                    this.commandPlayer.move(-10, 10);
+                    this.commandPlayer.move(-10, -20);
                     break;
                 case 3 :
-                    this.commandPlayer.move(-10, -10);
+                    this.commandPlayer.move(-12, -7);
                     break;
                 case 4 :
-                    this.commandPlayer.move(-20, 0);
+                    this.commandPlayer.move(-12, -2);
                     break;
                 case 5 :
-                    this.commandPlayer.move(-20, 10);
+                    this.commandPlayer.move(-12, 2);
                     break;
                 case 6 :
-                    this.commandPlayer.move(-20, -10);
+                    this.commandPlayer.move(-12, 7);
                     break;
                 case 7 :
-                    this.commandPlayer.move(-20, 20);
+                    this.commandPlayer.move(-30, -25);
                     break;
                 case 8 :
-                    this.commandPlayer.move(-20, -20);
+                    this.commandPlayer.move(-30, -10);
                     break;
                 case 9 :
-                    this.commandPlayer.move(-30, 0);
+                    this.commandPlayer.move(-30, 10);
                     break;
                 case 10 :
-                    this.commandPlayer.move(-40, 10);
+                    this.commandPlayer.move(-30, 25);
                     break;
                 case 11 :
-                    this.commandPlayer.move(-40, -10);
+                    this.commandPlayer.move(-10, 20);
                     break;
                 default :
                     throw new Error("number must be initialized before move");

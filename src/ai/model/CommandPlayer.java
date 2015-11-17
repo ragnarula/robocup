@@ -6,8 +6,6 @@ import org.apache.commons.math3.util.FastMath;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created by raghavnarula on 10/11/2015.
@@ -34,7 +32,8 @@ public class CommandPlayer {
 
     public synchronized void move(int x, int y){
         player.move(x,y);
-        queue.add(new Command(Command.Type.MOVE, new Vector2D(-y,x)));
+//        queue.add(new Command(Command.Type.MOVE, new Vector2D(-y,x)));
+        queue.add(new Command(Command.Type.MOVE, new Vector2D(x,y)));
     }
 
     public synchronized void kick(int power, double angle) {
