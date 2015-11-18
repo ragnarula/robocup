@@ -161,6 +161,9 @@ public class Player implements ControllerPlayer {
 
     @Override
     public void infoHearPlayMode(PlayMode playMode) {
+        percept.addPlayModeMessage(playMode);
+
+
         if (playMode == PlayMode.GOAL_OWN || playMode == PlayMode.GOAL_OTHER|| playMode == PlayMode.BEFORE_KICK_OFF  ) {
             this.pause(1000);
             switch (this.getPlayer().getNumber()) {
@@ -201,8 +204,6 @@ public class Player implements ControllerPlayer {
                     throw new Error("number must be initialized before move");
             }
         }
-
-        percept.addPlayModeMessage(playMode);
     }
 
     @Override

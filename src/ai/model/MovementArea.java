@@ -3,6 +3,9 @@ package ai.model;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 /**
+ * A Movement Area is an area on the pitch, where the agent can only actively play if
+ * the ball is within it.
+ *
  * Created by James on 10/11/2015.
  */
 public class MovementArea {

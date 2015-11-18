@@ -3,6 +3,10 @@ package ai.model;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 /**
+ * A Home Area is a area of the pitch the agent will return to when it is in passive state.
+ *
+ * A Home Area is within an agents movement area.
+ *
  * Created by raghavnarula on 06/11/2015.
  */
 public class HomeArea {

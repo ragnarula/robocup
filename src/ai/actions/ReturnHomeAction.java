@@ -9,6 +9,8 @@ import org.apache.commons.math3.util.FastMath;
 import org.apache.log4j.Logger;
 
 /**
+ * Moves an agent to its home area.
+ *
  * Created by raghavnarula on 05/11/2015.
  */
 public class ReturnHomeAction implements Action {

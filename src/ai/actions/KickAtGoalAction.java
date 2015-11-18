@@ -11,35 +11,30 @@ public class KickAtGoalAction implements Action {
     @Override
     public void takeAction(CommandPlayer player, EnvironmentModel model) {
 
-        Vector2D agentLocation = model.getAgentLocation();
         Vector2D goalLocation = model.getGoalLocation();
         double agentAbsAngle = model.getAgentAbsAngleRadians();
-        double angleToGoal = model.getGoalAngle();
 
         Vector2D ballLocation = model.getBallLocation();
         Vector2D ballToGoal = goalLocation.subtract(ballLocation);
 
         double angleBallToGoal = Vector2D.angle(ballToGoal, goalLocation);
 
-        double kickAngle;
-
         if(ballLocation.getX() > goalLocation.getX())
             angleBallToGoal*= -1;
 
         if(agentAbsAngle > Math.PI)
-            agentAbsAngle = ( (2*Math.PI) - agentAbsAngle)*-1;
+            agentAbsAngle = ((2*Math.PI) - agentAbsAngle)*-1;
 
-        kickAngle = angleBallToGoal - agentAbsAngle;
-
-        double kickPower;
+        double kickAngle = angleBallToGoal - agentAbsAngle;
 
         Vector2D ownGoalLocation = model.getOwnGoalLocation();
 
-        if(ballLocation.distance(ownGoalLocation) < 23.5 )
+        int kickPower;
+        if(ballLocation.distance(ownGoalLocation) < 23.5)
             kickPower = 100;
         else
             kickPower = 50;
 
-        player.kick(50, kickAngle);
+        player.kick(kickPower, kickAngle);
     }
 }

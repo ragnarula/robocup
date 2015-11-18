@@ -134,9 +134,7 @@ public class Percept {
         return playModeMessages;
     }
 
-    public PlayMode getLastPlayMode() {
-        return playModeMessages.get(playModeMessages.size() - 1);
-    }
+    public PlayMode getLastPlayMode() { return playModeMessages.get(playModeMessages.size() - 1); }
 
     public List<HearPlayerInfo> getHeardPlayers() {
         return heardPlayers;
