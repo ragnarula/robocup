@@ -12,6 +12,7 @@ public class GoalLocationAIComponent extends AbstractSimpleAIComponent{
     EnvironmentModel processModel(EnvironmentModel model) {
         Vector2D agentLocation = model.getAgentLocation();
         Vector2D goalLocation = new Vector2D(0,52.5);
+        Vector2D ownGoalLocation = new Vector2D(0, -52.5);
         Vector2D agentToGoal = goalLocation.subtract(agentLocation);
 
         double goalAngle = Vector2D.angle(agentToGoal, goalLocation);
@@ -22,6 +23,7 @@ public class GoalLocationAIComponent extends AbstractSimpleAIComponent{
 
         model.setGoalAngle(goalAngle);
         model.setGoalLocation(goalLocation);
+        model.setOwnGoalLocation(ownGoalLocation);
         model.setAgentToGoal(agentToGoal);
 
         return model;

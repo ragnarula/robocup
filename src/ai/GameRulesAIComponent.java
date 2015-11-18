@@ -16,9 +16,13 @@ public class GameRulesAIComponent extends AbstractSimpleAIComponent {
 
     @Override
     EnvironmentModel processModel(EnvironmentModel model) {
-        //if rules are ok
+
+//        PlayMode currentPlayMode = model.getLastPercept().getLastPlayMode();
         return model;
-        //if rules are not ok do some damage limitation and...
-        //return null;
+
+//        Game inactive - no action needed
+//        if( currentPlayMode == PlayMode.GOAL_L || currentPlayMode == PlayMode.GOAL_R )
+//            return null;
+
     }
 }

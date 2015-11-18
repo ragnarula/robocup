@@ -33,12 +33,10 @@ public class DefendingState implements State {
             return;
         }
 
-
         if(model.teamHasBall()){
             stateMachine.changeState(StateMachine.SUPPORT_STATE, model);
             return;
         }
-
 
         if(model.agentHasBall()){
             stateMachine.changeState(StateMachine.ATTACKING_STATE, model);

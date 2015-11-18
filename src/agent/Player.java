@@ -161,7 +161,7 @@ public class Player implements ControllerPlayer {
 
     @Override
     public void infoHearPlayMode(PlayMode playMode) {
-        if (playMode == PlayMode.BEFORE_KICK_OFF) {
+        if (playMode == PlayMode.GOAL_OWN || playMode == PlayMode.GOAL_OTHER|| playMode == PlayMode.BEFORE_KICK_OFF  ) {
             this.pause(1000);
             switch (this.getPlayer().getNumber()) {
                 case 1 :

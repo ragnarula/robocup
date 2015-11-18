@@ -21,7 +21,7 @@ public class KickAtGoalAction implements Action {
 
         double angleBallToGoal = Vector2D.angle(ballToGoal, goalLocation);
 
-        double kickAngle; 
+        double kickAngle;
 
         if(ballLocation.getX() > goalLocation.getX())
             angleBallToGoal*= -1;
@@ -30,6 +30,15 @@ public class KickAtGoalAction implements Action {
             agentAbsAngle = ( (2*Math.PI) - agentAbsAngle)*-1;
 
         kickAngle = angleBallToGoal - agentAbsAngle;
+
+        double kickPower;
+
+        Vector2D ownGoalLocation = model.getOwnGoalLocation();
+
+        if(ballLocation.distance(ownGoalLocation) < 23.5 )
+            kickPower = 100;
+        else
+            kickPower = 50;
 
         player.kick(50, kickAngle);
     }

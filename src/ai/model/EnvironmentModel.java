@@ -16,6 +16,7 @@ public class EnvironmentModel {
     private Vector2D goalLocation;
     private Vector2D agentToGoal;
     private double ballAngle;
+    private Vector2D ownGoalLocation;
 
     public static Vector2D getLocationFromRelativeInfo(Vector2D agentLocation, double absAngle, double distance){
         double x = FastMath.sin(absAngle) * distance;
@@ -198,5 +199,13 @@ public class EnvironmentModel {
 
     public boolean agentInMovementArea() {
         return movementArea.contains(getAgentLocation());
+    }
+
+    public void setOwnGoalLocation(Vector2D ownGoalLocation) {
+        this.ownGoalLocation = ownGoalLocation;
+    }
+
+    public Vector2D getOwnGoalLocation() {
+        return ownGoalLocation;
     }
 }

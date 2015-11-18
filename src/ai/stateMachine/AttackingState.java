@@ -5,7 +5,6 @@ import ai.actions.PositionToShootAction;
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
 import info.SeeBallInfo;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 
 /**
@@ -49,8 +48,18 @@ public class AttackingState implements State {
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
 
-        if( !model.agentHasBall() ) {
+        if(!model.ballInMovementRange()){
             stateMachine.changeState(StateMachine.PASSIVE_STATE, model);
+            return;
+        }
+
+        if(!model.teamHasBall() && !model.agentHasBall()){
+            stateMachine.changeState(StateMachine.DEFENDING_STATE, model);
+            return;
+        }
+//
+        if( !model.agentHasBall() && model.teamHasBall()) {
+            stateMachine.changeState(StateMachine.SUPPORT_STATE, model);
         }
     }
 }

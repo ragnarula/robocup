@@ -126,8 +126,16 @@ public class Percept {
         return refereeMessages;
     }
 
+    public RefereeMessage getLastRefereeMessage() {
+        return refereeMessages.get(refereeMessages.size() - 1);
+    }
+
     public List<PlayMode> getPlayModeMessages() {
         return playModeMessages;
+    }
+
+    public PlayMode getLastPlayMode() {
+        return playModeMessages.get(playModeMessages.size() - 1);
     }
 
     public List<HearPlayerInfo> getHeardPlayers() {

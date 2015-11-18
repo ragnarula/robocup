@@ -5,14 +5,7 @@ package ai.model;
  */
 public abstract class BehaviourConfiguration {
 
-//    TODO: Set values
-    public static final double SUPPORT_RANGE = 0.0;
-    public static final double INTERCEPT_RANGE = 0.0;
-    public static final double TACKLE_RANGE = 0.0;
-
-    public static final double MIN_CHANCE_PASS_SUCCESS = 0.0;
-    public static final double MIN_SHOOT_PASS_SUCCESS = 0.0;
-
+    public static final double TEAM_POSSESSION_RANGE = 1.5;
     public static final double BALL_POSSESSION_RANGE = 0.5;
     public static final double PLAYER_SPEED_DECAY = 0.4;
 
