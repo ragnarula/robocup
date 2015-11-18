@@ -10,7 +10,7 @@ public class AgentVelocityAIComponent extends AbstractSimpleAIComponent {
 
     private EnvironmentModel prevModel;
     @Override
-    EnvironmentModel processModel(EnvironmentModel model) {
+    protected EnvironmentModel processModel(EnvironmentModel model) {
         if(prevModel == null){
             model.setAgentVelocityVector(new Vector2D(0,0));
             prevModel = model;

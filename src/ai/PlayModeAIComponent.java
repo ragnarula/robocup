@@ -1,4 +1,4 @@
-package ai.actions;
+package ai;
 
 import ai.AbstractSimpleAIComponent;
 import ai.model.EnvironmentModel;
@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 public class PlayModeAIComponent extends AbstractSimpleAIComponent {
 
     private PlayMode playMode;
+    private Logger log = Logger.getLogger(PlayModeAIComponent.class);
 
 
     @Override
@@ -19,6 +20,7 @@ public class PlayModeAIComponent extends AbstractSimpleAIComponent {
         Percept p = model.getLastPercept();
         if(!p.getPlayModeMessages().isEmpty()){
             playMode = p.getPlayModeMessages().get(p.getPlayModeMessages().size() - 1);
+            log.info("Playmode " + playMode);
         }
 
         model.setPlayMode(playMode);

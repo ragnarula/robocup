@@ -11,9 +11,16 @@ import org.apache.log4j.Logger;
  */
 public class GameRulesAIComponent extends AbstractSimpleAIComponent {
 
+    private enum GameState {
+        RUNNING,
+        STOPPED
+    }
+
     private CommandPlayer player;
     private LookAtBallAction lookAtBallAction = new LookAtBallAction();
     private Logger log = Logger.getLogger(GameRulesAIComponent.class);
+
+    private GameState gameState = GameState.STOPPED;
 
     public GameRulesAIComponent(CommandPlayer player) {
         this.player = player;
@@ -21,11 +28,35 @@ public class GameRulesAIComponent extends AbstractSimpleAIComponent {
 
     @Override
     protected EnvironmentModel processModel(EnvironmentModel model) {
-        if(model.getPlayMode() == PlayMode.BEFORE_KICK_OFF){
-            lookAtBallAction.takeAction(player,model);
-            log.debug("Staying put, looking at ball");
-
-            return null;
+        switch (gameState){
+            case RUNNING:
+                if(model.getPlayMode().toString().endsWith("OTHER")){
+                    lookAtBallAction.takeAction(player,model);
+                    gameState = GameState.STOPPED;
+                    return null;
+                }
+                if(model.getPlayMode() == PlayMode.BEFORE_KICK_OFF){
+                    lookAtBallAction.takeAction(player,model);
+                    gameState = GameState.STOPPED;
+                    return null;
+                }
+            case STOPPED:
+                if(model.getPlayMode() == PlayMode.BEFORE_KICK_OFF){
+                    lookAtBallAction.takeAction(player,model);
+                    return null;
+                }
+                if(model.getPlayMode().toString().endsWith("OWN")){
+                    lookAtBallAction.takeAction(player, model);
+                    return model;
+                }
+                if(model.getPlayMode().toString().endsWith("OTHER")){
+                    lookAtBallAction.takeAction(player,model);
+                    return null;
+                }
+                if(model.getPlayMode() == PlayMode.PLAY_ON){
+                    gameState = GameState.RUNNING;
+                    return model;
+                }
         }
         return model;
     }

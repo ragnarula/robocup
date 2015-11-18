@@ -2,6 +2,7 @@ package ai.stateMachine;
 
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 
 /**
@@ -20,18 +21,22 @@ public class SupportState implements State {
 
     @Override
     public void processModel(CommandPlayer context, EnvironmentModel model) {
-        double agentAngle = model.getAgentAbsAngleRadians();
+        Vector2D agentLocation = model.getAgentLocation();
+        Vector2D ballLocation = model.getBallLocation();
 
-        if(agentAngle > FastMath.PI){
-            context.turn((FastMath.PI*2) - agentAngle);
-        } else {
-            context.turn(-agentAngle);
+        if(ballLocation.getY() + 5 < agentLocation.getY()){
+            double agentAngle = model.getAgentAbsAngleRadians();
+
+            if(agentAngle > FastMath.PI){
+                context.turn((FastMath.PI*2) - agentAngle);
+            } else {
+                context.turn(-agentAngle);
+            }
+
+            if(model.agentInMovementArea()){
+                context.dash(50);
+            }
         }
-
-        if(model.agentInMovementArea()){
-            context.dash(50);
-        }
-
 
     }
 

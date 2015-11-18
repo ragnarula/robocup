@@ -18,7 +18,7 @@ public class AgentActionAIComponent extends AbstractSimpleAIComponent{
     }
 
     @Override
-    EnvironmentModel processModel(EnvironmentModel model) {
+    protected EnvironmentModel processModel(EnvironmentModel model) {
         stateMachine.processModel(model);
         return null;
     }

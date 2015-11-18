@@ -16,7 +16,7 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
     private EnvironmentModel prevModel;
 
     @Override
-    EnvironmentModel processModel(EnvironmentModel model) {
+    protected EnvironmentModel processModel(EnvironmentModel model) {
 
         //if agent has been moved, update location to move command
         if(agentHasBeenMoved(model)){

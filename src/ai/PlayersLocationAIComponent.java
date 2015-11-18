@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class PlayersLocationAIComponent extends AbstractSimpleAIComponent {
     @Override
-    EnvironmentModel processModel(EnvironmentModel model) {
+    protected EnvironmentModel processModel(EnvironmentModel model) {
         List<SeePlayerInfo> seePlayerInfoArrayList = model.getLastPercept().getSeenPlayers();
 
         HashMap<Integer, SeePlayerInfo> opposingPlayers = getPlayersOfTeam(seePlayerInfoArrayList, SeePlayerInfo.PlayerTeam.OTHER);

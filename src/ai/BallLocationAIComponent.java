@@ -15,7 +15,7 @@ public class BallLocationAIComponent extends AbstractSimpleAIComponent {
     private static volatile Vector2D sharedBallInfo;
 
     @Override
-    EnvironmentModel processModel(EnvironmentModel model) {
+    protected EnvironmentModel processModel(EnvironmentModel model) {
         List<SeeBallInfo> balls = model.getLastPercept().getSeenBalls();
         if(balls.isEmpty()){
             Vector2D ball = sharedBallInfo;

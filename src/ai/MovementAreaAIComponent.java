@@ -29,7 +29,7 @@ public class MovementAreaAIComponent extends AbstractSimpleAIComponent {
     }
 
     @Override
-    EnvironmentModel processModel(EnvironmentModel model) {
+    protected EnvironmentModel processModel(EnvironmentModel model) {
         int id = model.getPercepts().get(0).getPlayerId();
 
         model.setMovementArea(MOVEMENT_AREAS.get(id));
