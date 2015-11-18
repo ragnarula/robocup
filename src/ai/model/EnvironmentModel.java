@@ -1,5 +1,6 @@
 package ai.model;
 
+import com.github.robocup_atan.atan.model.enums.PlayMode;
 import info.Percept;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
@@ -16,6 +17,7 @@ public class EnvironmentModel {
     private Vector2D goalLocation;
     private Vector2D agentToGoal;
     private double ballAngle;
+    private PlayMode playMode;
 
     public static Vector2D getLocationFromRelativeInfo(Vector2D agentLocation, double absAngle, double distance){
         double x = FastMath.sin(absAngle) * distance;
@@ -219,5 +221,13 @@ public class EnvironmentModel {
 
     public boolean agentInMovementArea() {
         return movementArea.contains(getAgentLocation());
+    }
+
+    public void setPlayMode(PlayMode playMode) {
+        this.playMode = playMode;
+    }
+
+    public PlayMode getPlayMode() {
+        return playMode;
     }
 }

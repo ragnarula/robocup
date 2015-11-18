@@ -42,5 +42,5 @@ public abstract class AbstractSimpleAIComponent implements IChainable{
         return next != null;
     }
 
-    abstract EnvironmentModel processModel(EnvironmentModel model);
+    protected abstract EnvironmentModel processModel(EnvironmentModel model);
 }
