@@ -14,5 +14,6 @@ public abstract class BehaviourConfiguration {
     public static final double MIN_SHOOT_PASS_SUCCESS = 0.0;
 
     public static final double BALL_POSSESSION_RANGE = 0.5;
+    public static final double PLAYER_SPEED_DECAY = 0.4;
 
 }

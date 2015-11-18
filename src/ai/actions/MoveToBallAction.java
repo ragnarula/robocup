@@ -2,17 +2,20 @@ package ai.actions;
 
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
-import org.apache.commons.math3.util.FastMath;
 
 /**
  * Created by James on 12/11/2015.
  */
 public class MoveToBallAction implements Action {
     @Override
-    public void takeAction(CommandPlayer player, EnvironmentModel model) {
+        public void takeAction(CommandPlayer player, EnvironmentModel model) {
 
-        player.dash(100);
-        player.turn(model.getBallAngle() - model.getAgentAbsAngleRadians());
-    }
+//            if(model.getLastPercept().getLastSeenBall().getDistance() < 5 && model.getLastPercept().getLastSensedBody().getSpeedAmount() > 5 )
+//                player.dash(60);
+//            else
+                player.dash(80);
+
+            player.turn(model.getBallAngle() - model.getAgentAbsAngleRadians());
+
+        }
 }

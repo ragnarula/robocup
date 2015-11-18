@@ -165,4 +165,8 @@ public class Percept {
     public List<HashMap<ServerParams, Object>> getServerParams() {
         return serverParams;
     }
+
+    public SenseBodyInfo getLastSensedBody() {
+        return sensedBodies.get(sensedBodies.size() - 1);
+    }
 }
