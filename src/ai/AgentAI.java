@@ -18,7 +18,9 @@ public class AgentAI extends AbstractSimpleAIComponent {
     private PlayersLocationAIComponent oppositionLocationAIComponent;
     private AgentVelocityAIComponent agentVelocity;
     private GoalLocationAIComponent goalLocation;
+    private PlayModeAIComponent playMode;
     private GameRulesAIComponent gameRules;
+    private BoundryCheckAIComponent boundryCheck;
 
     public AgentAI(CommandPlayer player) {
         this.player = player;
@@ -33,6 +35,8 @@ public class AgentAI extends AbstractSimpleAIComponent {
         oppositionLocationAIComponent = new PlayersLocationAIComponent();
         goalLocation = new GoalLocationAIComponent();
         gameRules = new GameRulesAIComponent(this.player);
+        playMode = new PlayModeAIComponent();
+        boundryCheck = new BoundryCheckAIComponent(this.player);
 
         //attach components together in correct order
         this.setNext(agentAngle);
@@ -43,12 +47,14 @@ public class AgentAI extends AbstractSimpleAIComponent {
         movementAreaAIComponent.setNext(ballLocationAIComponent);
         ballLocationAIComponent.setNext(oppositionLocationAIComponent);
         oppositionLocationAIComponent.setNext(goalLocation);
-        goalLocation.setNext(gameRules);
+        goalLocation.setNext(boundryCheck);
+        boundryCheck.setNext(playMode);
+        playMode.setNext(gameRules);
         gameRules.setNext(agentAction);
     }
 
     @Override
-    EnvironmentModel processModel(EnvironmentModel model) {
+    protected EnvironmentModel processModel(EnvironmentModel model) {
         //feed model into first component
         return model;
     }

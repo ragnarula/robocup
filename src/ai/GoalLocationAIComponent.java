@@ -9,7 +9,7 @@ import org.apache.commons.math3.util.FastMath;
  */
 public class GoalLocationAIComponent extends AbstractSimpleAIComponent{
     @Override
-    EnvironmentModel processModel(EnvironmentModel model) {
+    protected EnvironmentModel processModel(EnvironmentModel model) {
         Vector2D agentLocation = model.getAgentLocation();
         Vector2D goalLocation = new Vector2D(0,52.5);
         Vector2D ownGoalLocation = new Vector2D(0, -52.5);

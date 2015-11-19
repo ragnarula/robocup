@@ -40,7 +40,7 @@ public class Coach implements ControllerCoach {
     /** {@inheritDoc} */
     @Override
     public void infoHearPlayMode(PlayMode playMode) {
-        log.info(playMode);
+        log.info("Playmode " + playMode);
     }
 
     /** {@inheritDoc} */
@@ -52,7 +52,7 @@ public class Coach implements ControllerCoach {
     /** {@inheritDoc} */
     @Override
     public void infoHearReferee(RefereeMessage refereeMessage) {
-        log.info(refereeMessage);
+        log.info("Refmsg " + refereeMessage);
     }
 
     /** {@inheritDoc} */

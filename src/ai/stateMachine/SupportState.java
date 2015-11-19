@@ -21,21 +21,22 @@ public class SupportState implements State {
 
     @Override
     public void processModel(CommandPlayer context, EnvironmentModel model) {
-        double agentAngle = model.getAgentAbsAngleRadians();
-
         Vector2D agentLocation = model.getAgentLocation();
         Vector2D ballLocation = model.getBallLocation();
 
-        if(agentAngle > FastMath.PI){
-            context.turn((FastMath.PI*2) - agentAngle);
-        } else {
-            context.turn(-agentAngle);
-        }
+        if(ballLocation.getY() + 5 < agentLocation.getY()){
+            double agentAngle = model.getAgentAbsAngleRadians();
 
-        if(model.agentInMovementArea() && agentLocation.getY() < ballLocation.getY() ){
-            context.dash(50);
-        }
+            if(agentAngle > FastMath.PI){
+                context.turn((FastMath.PI*2) - agentAngle);
+            } else {
+                context.turn(-agentAngle);
+            }
 
+            if(model.agentInMovementArea()){
+                context.dash(50);
+            }
+        }
 
     }
 
@@ -45,12 +46,10 @@ public class SupportState implements State {
             stateMachine.changeState(StateMachine.PASSIVE_STATE, model);
             return;
         }
-
         if(model.agentHasBall()){
             stateMachine.changeState(StateMachine.ATTACKING_STATE, model);
             return;
         }
-
         if(!model.teamHasBall()){
             stateMachine.changeState(StateMachine.DEFENDING_STATE,model);
             return;

@@ -30,7 +30,7 @@ public class HomeAreaAIComponent extends AbstractSimpleAIComponent {
     }
 
     @Override
-    EnvironmentModel processModel(EnvironmentModel model) {
+    protected EnvironmentModel processModel(EnvironmentModel model) {
         int id = model.getPercepts().get(0).getPlayerId();
 
         model.setHomeArea(HOME_AREAS.get(id));

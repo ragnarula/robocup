@@ -24,7 +24,7 @@ public class AgentAngleAIComponent extends AbstractSimpleAIComponent {
     }
 
     @Override
-    EnvironmentModel processModel(EnvironmentModel model) {
+    protected EnvironmentModel processModel(EnvironmentModel model) {
         List<SeeFlagInfo> seenFlags = model.getLastPercept().getSeenFlags();
 
         //get only boundary flags
