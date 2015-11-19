@@ -2,6 +2,7 @@ package ai.actions;
 
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
+import com.github.robocup_atan.atan.model.enums.PlayMode;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 /**
@@ -30,7 +31,8 @@ public class KickAtGoalAction implements Action {
         Vector2D ownGoalLocation = model.getOwnGoalLocation();
 
         int kickPower;
-        if(ballLocation.distance(ownGoalLocation) < 23.5)
+        PlayMode playMode = model.getPlayMode();
+        if(ballLocation.distance(ownGoalLocation) < 23.5 || (playMode != PlayMode.PLAY_ON && playMode != PlayMode.KICK_OFF_OWN ) )
             kickPower = 100;
         else
             kickPower = 50;

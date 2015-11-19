@@ -30,6 +30,11 @@ public class GameRulesAIComponent extends AbstractSimpleAIComponent {
     protected EnvironmentModel processModel(EnvironmentModel model) {
         switch (gameState){
             case RUNNING:
+                if(model.getPlayMode() == PlayMode.GOAL_OWN){
+                    lookAtBallAction.takeAction(player,model);
+                    gameState = GameState.STOPPED;
+                    return null;
+                }
                 if(model.getPlayMode().toString().endsWith("OTHER")){
                     lookAtBallAction.takeAction(player,model);
                     gameState = GameState.STOPPED;
@@ -45,8 +50,15 @@ public class GameRulesAIComponent extends AbstractSimpleAIComponent {
                     lookAtBallAction.takeAction(player,model);
                     return null;
                 }
+
+                if(model.getPlayMode() == PlayMode.KICK_OFF_OWN) {
+                    gameState = GameState.RUNNING;
+                    return model;
+                }
+
                 if(model.getPlayMode().toString().endsWith("OWN")){
                     lookAtBallAction.takeAction(player, model);
+                    gameState = GameState.RUNNING;
                     return model;
                 }
                 if(model.getPlayMode().toString().endsWith("OTHER")){

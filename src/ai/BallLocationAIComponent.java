@@ -17,8 +17,12 @@ public class BallLocationAIComponent extends AbstractSimpleAIComponent {
     @Override
     protected EnvironmentModel processModel(EnvironmentModel model) {
         List<SeeBallInfo> balls = model.getLastPercept().getSeenBalls();
+
         if(balls.isEmpty()){
             Vector2D ball = sharedBallInfo;
+            if(ball == null){
+                return model;
+            }
             model.setBallLocation(ball);
             double angle = Vector2D.angle(ball, model.getAgentLocation());
             if(model.getAgentLocation().getX() > ball.getX()){
@@ -27,6 +31,7 @@ public class BallLocationAIComponent extends AbstractSimpleAIComponent {
             model.setBallAngle(angle);
             return model;
         }
+
         SeeBallInfo ball = balls.get(balls.size() - 1);
 
         double absAngle = model.getAgentAbsAngleRadians() + FastMath.toRadians(ball.getDirection());
