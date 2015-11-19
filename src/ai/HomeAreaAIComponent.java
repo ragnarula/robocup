@@ -15,7 +15,7 @@ public class HomeAreaAIComponent extends AbstractSimpleAIComponent {
 
     public HomeAreaAIComponent() {
 
-        HOME_AREAS.put(0, new HomeArea(-10.0, -30.0, 10.0, -50));
+        HOME_AREAS.put(0, new HomeArea(-10.0, -40.0, 10.0, -50));
         HOME_AREAS.put(1, new HomeArea(-20.0, 40.0, 0.0, 20.0));
         HOME_AREAS.put(2, new HomeArea(-20.0, 20.0, 0.0, 0.0));
         HOME_AREAS.put(3, new HomeArea(0.0, 20.0, 20.0, 0.0));
@@ -25,7 +25,6 @@ public class HomeAreaAIComponent extends AbstractSimpleAIComponent {
         HOME_AREAS.put(7, new HomeArea(-20.0, -20.0, 0.0, -40.0));
         HOME_AREAS.put(8, new HomeArea(0.0, -20.0, 20.0, -40.0));
         HOME_AREAS.put(9, new HomeArea(20.0, -20.0, 34.0, -40.0));
-//        tmp: doubling up
         HOME_AREAS.put(10,new HomeArea(0.0, 40.0, 20.0, 20.0));
     }
 

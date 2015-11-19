@@ -11,15 +11,17 @@ public class MoveToBallAction implements Action {
     @Override
         public void takeAction(CommandPlayer player, EnvironmentModel model) {
 
-            Vector2D ballLocation = model.getBallLocation();
-            Vector2D goalLocation = model.getGoalLocation();
-            Vector2D ownGoalLocation = model.getOwnGoalLocation();
+        Vector2D ballLocation = model.getBallLocation();
+        Vector2D goalLocation = model.getGoalLocation();
+        Vector2D ownGoalLocation = model.getOwnGoalLocation();
 
-            if(ballLocation.distance(ownGoalLocation) < 23.5 || ballLocation.distance(goalLocation) < 23.5)
-                player.dash(120);
-            else
-                player.dash(80);
-
-            player.turn(model.getBallAngle() - model.getAgentAbsAngleRadians());
+        if(ballLocation.distance(ownGoalLocation) < 23.5 || ballLocation.distance(goalLocation) < 23.5) {
+            player.dash(120);
         }
+        else {
+            player.dash(80);
+        }
+
+        player.turn(model.getBallAngle() - model.getAgentAbsAngleRadians());
+    }
 }
