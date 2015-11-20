@@ -37,7 +37,7 @@ public class PassiveState implements State {
         if( model.ballInMovementRange() ) {
             if (model.agentHasBall())
                 stateMachine.changeState(StateMachine.ATTACKING_STATE, model);
-            else if (model.teamHasBall() && model.agentInMovementArea())
+            else if (model.teamHasBall() && model.agentInMovementArea() && !model.isPlayerGoalKeeper())
                 stateMachine.changeState(StateMachine.SUPPORT_STATE, model);
             else
                 stateMachine.changeState(StateMachine.DEFENDING_STATE, model);

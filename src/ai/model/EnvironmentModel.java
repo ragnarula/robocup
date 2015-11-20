@@ -218,4 +218,9 @@ public class EnvironmentModel {
     public PlayMode getPlayMode() {
         return playMode;
     }
+
+    public boolean isPlayerGoalKeeper() {
+        return getLastPercept().getPlayerId() == 0;
+    }
+
 }

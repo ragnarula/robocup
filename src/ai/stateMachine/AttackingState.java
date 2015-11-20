@@ -57,8 +57,8 @@ public class AttackingState implements State {
             stateMachine.changeState(StateMachine.DEFENDING_STATE, model);
             return;
         }
-//
-        if( !model.agentHasBall() && model.teamHasBall()) {
+
+        if( !model.agentHasBall() && model.teamHasBall() && !model.isPlayerGoalKeeper()) {
             stateMachine.changeState(StateMachine.SUPPORT_STATE, model);
         }
     }
