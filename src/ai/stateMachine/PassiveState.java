@@ -34,10 +34,11 @@ public class PassiveState implements State {
 
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
+        if (model.agentHasBall())
+            stateMachine.changeState(StateMachine.ATTACKING_STATE, model);
+
         if( model.ballInMovementRange() ) {
-            if (model.agentHasBall())
-                stateMachine.changeState(StateMachine.ATTACKING_STATE, model);
-            else if (model.teamHasBall() && model.agentInMovementArea() && !model.isPlayerGoalKeeper())
+            if (model.teamHasBall() && model.agentInMovementArea() && !model.isPlayerGoalKeeper())
                 stateMachine.changeState(StateMachine.SUPPORT_STATE, model);
             else
                 stateMachine.changeState(StateMachine.DEFENDING_STATE, model);

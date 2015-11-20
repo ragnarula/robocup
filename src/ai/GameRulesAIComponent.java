@@ -57,7 +57,7 @@ public class GameRulesAIComponent extends AbstractSimpleAIComponent {
                 }
 
                 if(model.getPlayMode().toString().endsWith("OWN")){
-                    lookAtBallAction.takeAction(player, model);
+//                    lookAtBallAction.takeAction(player, model);
                     gameState = GameState.RUNNING;
                     return model;
                 }

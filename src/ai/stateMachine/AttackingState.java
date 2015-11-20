@@ -48,7 +48,7 @@ public class AttackingState implements State {
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
 
-        if(!model.ballInMovementRange()){
+        if(!model.ballInMovementRange() && !model.agentHasBall()){
             stateMachine.changeState(StateMachine.PASSIVE_STATE, model);
             return;
         }
