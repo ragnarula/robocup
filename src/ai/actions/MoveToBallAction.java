@@ -19,23 +19,23 @@ public class MoveToBallAction implements Action {
 
         if (!model.getLastPercept().getSeenBalls().isEmpty()) {
             SeeBallInfo seeBallInfo = model.getLastPercept().getLastSeenBall();
-            double dirChange = seeBallInfo.getDirChange();
             double distanceToBall = seeBallInfo.getDistance();
+            double dirChange = seeBallInfo.getDirChange();
+
 
             if (distanceToBall > 5) {
-
                 angleToTurn += dirChange;
-                
-                if (Math.abs(angleToTurn) > (Math.PI / 3)) {
+
+                if (Math.abs(angleToTurn) > (Math.PI / 4)) {
                     if (angleToTurn > 0)
-                        angleToTurn = (Math.PI / 3);
+                        angleToTurn = (Math.PI / 4);
                     else
-                        angleToTurn = -(Math.PI / 3);
+                        angleToTurn = -(Math.PI / 4);
                 }
             }
         }
 
-        if (Math.abs(angleToTurn) <= (Math.PI / 3)) {
+        if (Math.abs(angleToTurn) <= (Math.PI / 4) || (!model.getLastPercept().getSeenBalls().isEmpty() && model.getLastPercept().getLastSeenBall().getDistance() > 10) ) {
             if (ballLocation.distance(ownGoalLocation) < 23.5 || ballLocation.distance(goalLocation) < 23.5) {
                 player.dash(120);
             } else {
