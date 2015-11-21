@@ -6,8 +6,6 @@ import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by raghavnarula on 06/11/2015.
  */

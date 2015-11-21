@@ -2,7 +2,6 @@ package ai;
 
 import ai.model.EnvironmentModel;
 import info.SeePlayerInfo;
-import org.apache.commons.math3.geometry.Vector;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 

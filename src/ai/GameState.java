@@ -25,7 +25,7 @@ public class GameState extends AbstractSimpleAIComponent {
 
     private CommandPlayer player;
     private LookAtBallAction lookAtBallAction = new LookAtBallAction();
-    private Logger log = Logger.getLogger(ai.GameState.class);
+    private Logger log = Logger.getLogger(GameState.class);
 
     private State state = State.STOPPED;
 

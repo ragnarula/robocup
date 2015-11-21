@@ -1,4 +1,4 @@
-
+package provided;
 //~--- non-JDK imports --------------------------------------------------------
 
 import agent.Coach;

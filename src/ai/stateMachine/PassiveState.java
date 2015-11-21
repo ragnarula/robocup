@@ -9,14 +9,27 @@ import ai.model.EnvironmentModel;
  * should be in before the game has started, or when the ball is ourside
  * of the agent's movement area.
  *
- * The possible actions in this state are:
- *      look at ball
- *      return to home area
+ * <p>
+ * This state has two possible action:
+ *      <ul><li>Return Home.</li>
+ *      <li>
+ *          Look at ball
+ *      </li>
+ *      </ul>
  *
- * This state could lead to:
- *      Attacking State
- *      Supporting State
- *      Defending State
+ * <p>
+ * This state can lead to:
+ *      <ul>
+ *          <li>
+ *              Passive State
+ *          </li>
+ *          <li>
+ *              Support State
+ *          </li>
+ *          <li>
+ *              Attacking State
+ *          </li>
+ *      </ul>
  *
  * Created by raghavnarula on 05/11/2015.
  */
@@ -39,7 +52,7 @@ public class PassiveState implements State {
      * If the ball is not within the movement range, got to home area and face
      * the ball's location
      *
-     * @param context
+     * @param context The angent to which this state applies
      * @param model Model containing the current game state.
      */
     @Override

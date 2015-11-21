@@ -7,15 +7,26 @@ import info.SeeBallInfo;
 import org.apache.commons.math3.util.FastMath;
 
 /**
- * In this state the agent is near enough to the ball to kick it.
  *
- * It has one possible actions:
- *      Kick at goal
+ *      In this state the agent is near enough to the ball to kick it.
  *
- * It can lead to:
- *      Passive State
- *      Support State
- *      Defending State
+ * <p>
+ * This state has only one possible action:
+ *      <ul><li>Kick at goal</li></ul>
+ *
+ * <p>
+ * This state can lead to:
+ *      <ul>
+ *          <li>
+ *              Passive State
+ *          </li>
+ *          <li>
+ *              Support State
+ *          </li>
+ *          <li>
+ *              Attacking State
+ *          </li>
+ *      </ul>
  *
  * Created by James on 06/11/2015.
  */
@@ -51,10 +62,18 @@ public class AttackingState implements State {
     }
 
     /**
-     * Go to passive state if the ball is outside of movement range
-     * Go to Defending state if the team doesnt have the ball and the agent doesnt have the ball
-     * Go to Support state if the agent doesn't have the ball but the team does have the ball
-     *
+     * <ul>
+     *     <li>
+     *         Go to passive state if the ball is outside of movement range
+     *     </li>
+     *      <li>
+     *          Go to Defending state if the team doesnt have the ball and the agent doesnt have the ball
+     *     </li>
+     *      <li>
+     *          Go to Support state if the agent doesn't have the ball but the team does have the ball
+     *     </li>
+     * </ul>
+
      * @param stateMachine State Machine to update.
      * @param model Model containing the current game state.
      */

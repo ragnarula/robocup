@@ -1,4 +1,4 @@
-
+package provided;
 //~--- non-JDK imports --------------------------------------------------------
 
 import com.github.robocup_atan.atan.model.ActionsPlayer;

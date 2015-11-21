@@ -8,11 +8,19 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * This state is used when the agent doesnt have the ball but a team member does.
  * It's only action causes the agent to move towards the goal.
- *
- * It can lead to:
- *      Passive State
- *      Attacking State
- *      Defending State
+ * <p>
+ * This state can lead to:
+ *      <ul>
+ *          <li>
+ *              Passive State
+ *          </li>
+ *          <li>
+ *              Support State
+ *          </li>
+ *          <li>
+ *              Attacking State
+ *          </li>
+ *      </ul>
  *
  * Created by raghavnarula on 16/11/2015.
  */
@@ -30,7 +38,7 @@ public class SupportState implements State {
     /**
      * Dash towards go goal, unless the agent is more than 5m ahead of the ball
      *
-     * @param context
+     * @param context The context to which this state applies
      * @param model Model containing the current game state.
      */
     @Override
@@ -55,10 +63,17 @@ public class SupportState implements State {
     }
 
     /**
-     * Go to Passive State if the ball is outside of the agent's movement range
-     * Go to Attacking state if the agent gets the ball
-     * Go to Defending state if the team doesnt have the ball.
-     *
+     * <ul>
+     *     <li>
+     *          Go to Passive State if the ball is outside of the agent's movement range
+     *     </li>
+     *     <li>
+     *          Go to Attacking state if the agent gets the ball
+     *     </li>
+     *     <li>
+     *          Go to Defending state if the team doesnt have the ball.
+     *     </li>
+     * </ul>
      * @param stateMachine State Machine to update.
      * @param model Model containing the current game state.
      */

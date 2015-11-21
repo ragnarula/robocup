@@ -27,7 +27,7 @@ public class Player implements ControllerPlayer {
     private int timestep = 0;
     private int playerNumber;
     private ActionsPlayer  player;
-    private Percept        percept;
+    private info.Percept percept;
     private PerceptHistory perceptHistory = new PerceptHistory();
     private AgentAI agentAI;
     private CommandPlayer commandPlayer;
