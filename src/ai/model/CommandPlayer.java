@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by raghavnarula on 10/11/2015.
+ * This object forms a proxy to the ATAN ActoinsPLayer .
+ * It is used to store and retrieve the commands sent to the server during each simulation step.
+ * The commands since the previous step are then added in to the model to be used to estimate
+ * agent position in case enough flags are not visible.
  */
 public class CommandPlayer {
     private ActionsPlayer player;
@@ -42,12 +45,23 @@ public class CommandPlayer {
         queue.add(new Command(Command.Type.KICK, power));
     }
 
+
+    /**
+     * Returns a copy of the commands sent to the server since the previous call to this method.
+     * Calling this method will return the current history and initialise a new list of commands.
+     * @return List of Commands.
+     */
     public synchronized List<Command> getAndClearHistory(){
         List<Command> copy = queue;
         queue = new ArrayList<Command>();
         return copy;
     }
 
+    /**
+     * Converts radians to degrees as well as normalising angles to be between -90 and +90 degrees
+     * @param radians The angle in radians that the agent should turn to.
+     * @return the normalised angle in degrees.
+     */
     private double getTurnAngle(double radians){
         double angleDegrees = FastMath.toDegrees(radians);
         if(angleDegrees > 180){

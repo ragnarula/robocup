@@ -3,6 +3,8 @@ package ai;
 import ai.model.EnvironmentModel;
 
 /**
+ * This abstract class is used to build AI Components which process EnvironmentModels synchronously.
+ * It provides one abstract method which accepts an EnvironmentModel needs to return an EnvironmentModel.
  * Created by raghavnarula on 03/11/2015.
  */
 public abstract class AbstractSimpleAIComponent implements IChainable{
@@ -15,6 +17,14 @@ public abstract class AbstractSimpleAIComponent implements IChainable{
         this.next = next;
     }
 
+    /**
+     * This method takes the model it is given and passes it to processModel, which in turn returns a model.
+     * If this instance of IChainable has a next set, then the model is passed on the the next component in the
+     * chain.
+     * Note, this method is synchronous and will not return until all synchronous components in the chain have
+     * processed the model.
+     * @param model The model to be processed.
+     */
     @Override
     public void put(EnvironmentModel model) {
         EnvironmentModel nextModel = processModel(model);

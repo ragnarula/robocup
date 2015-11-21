@@ -9,7 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by raghavnarula on 02/11/2015.
+ * This is the main model object. It must be initialised with list of percepts as well as a list of commands executed.
+ * The lists can be empty, but must be provided.
+ *
+ * This model is passed to AIComponents one by one, which use the information in the percepts to add more information
+ * back in to the model.
+ * Most of the methods are simple setters and getters, and thus are not commented.
+ * Some methods contain some simple logic, the purpose of which is given in comments below.
  */
 public class EnvironmentModel {
 
@@ -20,12 +26,72 @@ public class EnvironmentModel {
     private Vector2D ownGoalLocation;
     private PlayMode playMode;
 
-    public static Vector2D getLocationFromRelativeInfo(Vector2D agentLocation, double absAngle, double distance){
+    /**
+     * Static method used to build a 2D location vector from direction and angle relative to some specified point
+     * @param relativeOrigin The point which the distance and angle are relative to
+     * @param absAngle The direction in radians to the other object
+     * @param distance The distance to the other object
+     * @return Vector2D representing the location of the other object relative to the same origin as the vector given.
+     */
+    public static Vector2D getLocationFromRelativeInfo(Vector2D relativeOrigin, double absAngle, double distance){
         double x = FastMath.sin(absAngle) * distance;
         double y = FastMath.cos(absAngle) * distance;
 
         Vector2D agentToInfo = new Vector2D(x,y);
-        return agentLocation.add(agentToInfo);
+        return relativeOrigin.add(agentToInfo);
+    }
+
+    /**
+     * Figure out whether this agent's team is currently in possession of the ball.
+     * Currently based on the ball's distance to friendly players, would ideally be based on
+     * last touch.
+     * @return True of False
+     */
+    public boolean teamHasBall() {
+        // return false if the ball's location is unknown.
+        if (getBallLocation() == null)
+            return false;
+
+        HashMap<Integer, Vector2D> friendlyPlayerLocations = getFriendlyPlayerLocations();
+        Vector2D ballPosition = getBallLocation();
+
+        //if ball is within range of any friendly player return true
+        for (Integer key : friendlyPlayerLocations.keySet()) {
+            if (ballPosition.distance(friendlyPlayerLocations.get(key)) < BehaviourConfiguration.BALL_POSSESSION_RANGE)
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Figure out if this agent currently has possession of the ball
+     * Currently based on distance to the ball, ideally should change to last touch.
+     * @return True or False
+     */
+    public boolean agentHasBall() {
+        // if a percept containing ball info is available, test its distance.
+        if(!getLastPercept().getSeenBalls().isEmpty()){
+            return getLastPercept().getLastSeenBall().getDistance() < BehaviourConfiguration.BALL_POSSESSION_RANGE;
+        }
+        // otherwise use ball location vector set by BallLocationAIComponent.
+        // Using this second as it may contain rounding error.
+        Vector2D loc = getBallLocation();
+        if(loc != null){
+            return FastMath.abs(getAgentLocation().subtract(loc).getNorm()) < BehaviourConfiguration.BALL_POSSESSION_RANGE;
+        }
+
+        return false;
+    }
+
+    /**
+     * Test whether the ball is within the agent's movement range.
+     * @return True or False
+     */
+    public boolean ballInMovementRange() {
+        if(getBallLocation() != null) {
+            return getMovementArea().contains(getBallLocation());
+        }
+        return false;
     }
 
     private List<Percept> percepts;
@@ -134,38 +200,7 @@ public class EnvironmentModel {
         return friendlyPlayerLocations;
     }
 
-    public boolean teamHasBall() {
-        if (getBallLocation() == null)
-            return false;
 
-        HashMap<Integer, Vector2D> friendlyPlayerLocations = getFriendlyPlayerLocations();
-        Vector2D ballPosition = getBallLocation();
-
-        for (Integer key : friendlyPlayerLocations.keySet()) {
-            if (ballPosition.distance(friendlyPlayerLocations.get(key)) < BehaviourConfiguration.BALL_POSSESSION_RANGE)
-                return true;
-        }
-        return false;
-    }
-
-    public boolean agentHasBall() {
-        if(!getLastPercept().getSeenBalls().isEmpty()){
-            return getLastPercept().getLastSeenBall().getDistance() < BehaviourConfiguration.BALL_POSSESSION_RANGE;
-        }
-        Vector2D loc = getBallLocation();
-        if(loc != null){
-            return FastMath.abs(getAgentLocation().subtract(loc).getNorm()) < BehaviourConfiguration.BALL_POSSESSION_RANGE;
-        }
-
-        return false;
-    }
-
-    public boolean ballInMovementRange() {
-        if(getBallLocation() != null) {
-            return getMovementArea().contains(getBallLocation());
-        }
-        return false;
-    }
 
     public void setGoalAngle(double goalAngle) {
         this.goalAngle = goalAngle;

@@ -4,6 +4,7 @@ import ai.model.EnvironmentModel;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 /**
+ * This components gets the agents velocity by looking at how far the agent has moved since the last step.
  * Created by raghavnarula on 11/11/2015.
  */
 public class AgentVelocityAIComponent extends AbstractSimpleAIComponent {

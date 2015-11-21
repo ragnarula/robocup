@@ -5,6 +5,19 @@ import ai.actions.ReturnHomeAction;
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
 /**
+ * This is the agent's starting state. This is the state that agents
+ * should be in before the game has started, or when the ball is ourside
+ * of the agent's movement area.
+ *
+ * The possible actions in this state are:
+ *      look at ball
+ *      return to home area
+ *
+ * This state could lead to:
+ *      Attacking State
+ *      Supporting State
+ *      Defending State
+ *
  * Created by raghavnarula on 05/11/2015.
  */
 public class PassiveState implements State {
@@ -22,6 +35,13 @@ public class PassiveState implements State {
 
     }
 
+    /**
+     * If the ball is not within the movement range, got to home area and face
+     * the ball's location
+     *
+     * @param context
+     * @param model Model containing the current game state.
+     */
     @Override
     public void processModel(CommandPlayer context, EnvironmentModel model) {
 
@@ -32,6 +52,13 @@ public class PassiveState implements State {
 
     }
 
+    /**
+     * If the model is within the movement range, update the state before
+     * processing the model.
+     *
+     * @param stateMachine State Machine to update.
+     * @param model Model containing the current game state.
+     */
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
         if (model.agentHasBall())

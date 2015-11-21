@@ -13,6 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * This AIComponent is used to work out which way the agent is facing and the angle to the model.
+ * The model will always have some angle information set before being passed to the next component in the chain.
+ *
+ * See inline comments in methods.
+ */
 public class AgentAngleAIComponent extends AbstractSimpleAIComponent {
 
     private EnvironmentModel prevModel = AgentAngleAIComponent.getInitialModel();
@@ -23,6 +29,12 @@ public class AgentAngleAIComponent extends AbstractSimpleAIComponent {
         return model;
     }
 
+    /**
+     * The agent angle is either calculated from flags, or if enough flags are not available, then estimated from
+     * the previous known angle and turn commands executed since the last simulation step.
+     * @param model The environment model passed in to component via put.
+     * @return The same model as passed in, but with angle information added.
+     */
     @Override
     protected EnvironmentModel processModel(EnvironmentModel model) {
         List<SeeFlagInfo> seenFlags = model.getLastPercept().getSeenFlags();
@@ -60,21 +72,26 @@ public class AgentAngleAIComponent extends AbstractSimpleAIComponent {
         return model;
     }
 
+    //Estimate an angle from previous info
     private double getEstimatedAngle(EnvironmentModel model) {
         List<Command> commands = model.getCommands();
         if(commands.isEmpty()){
+            //use previous angle if no commands have been issued (angle should not have changed)
             return prevModel.getAgentAbsAngleRadians();
         }
 
         double totalTurnDegrees = 0;
         totalTurnDegrees += commands.stream()
+                //filter for turn commands
                 .filter(c -> c.getType() == Command.Type.TURN)
                 .map(Command::getDoubleValue)
+                //fold right, summing.
                 .reduce(0.0, (a, b) -> a + b);
 
         return prevModel.getAgentAbsAngleRadians() + FastMath.toRadians(totalTurnDegrees);
     }
 
+    // get an acurate angle from looking at at least two flags on the same line.
     private double getAgentAngleFromFlags(List<SeeFlagInfo> nearestFlags) {
         //sort to use nearest flags
         List<SeeFlagInfo> flagsSorted = sortFlagsByDistance(nearestFlags);
