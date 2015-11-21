@@ -4,6 +4,9 @@ import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
 
 /**
+ * This is the first AIComponent in the chain.
+ * It's only purpose is to provide a home for all the other components and connect them together in the correct order.
+ *
  * Created by raghavnarula on 02/11/2015.
  */
 public class AgentAI extends AbstractSimpleAIComponent {

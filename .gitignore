@@ -108,9 +108,10 @@ hs_err_pid*
 ## Plugin-specific files:
 
 # IntelliJ
-/out/production
-/out/test
+out/production
+out/test
 src/META-INF/MANIFEST.MF
+src/META-INF
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/

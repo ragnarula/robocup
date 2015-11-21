@@ -6,6 +6,7 @@ import ai.model.EnvironmentModel;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 /**
+ * This component ensures that the agent is within the boundries of the pitch.
  * Created by raghavnarula on 18/11/2015.
  */
 public class BoundryCheckAIComponent extends AbstractSimpleAIComponent {

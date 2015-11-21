@@ -1,7 +1,11 @@
 package ai.model;
 
 /**
- * Created by James on 08/11/2015.
+ * Defines the constant values that are used to configure the behaviour of the agents.
+ *
+ * @see BehaviourConfiguration#BALL_POSSESSION_RANGE is the range at which a player is said to posess the ball.
+ * @see BehaviourConfiguration#PLAYER_SPEED_DECAY the decay rate of an agent as it approaches a ball.
+ * @see BehaviourConfiguration#TEAM_POSSESSION_RANGE the range at which the team is said to posess the ball.
  */
 public abstract class BehaviourConfiguration {
 

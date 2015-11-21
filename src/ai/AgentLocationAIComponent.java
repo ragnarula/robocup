@@ -9,6 +9,10 @@ import org.apache.commons.math3.util.FastMath;
 import java.util.List;
 
 /**
+ * This component calculates the Agents location as accurately as possible.
+ * Either the location is form flags and the calculated angle in the AngleComponent, or it is
+ * estimated from commands.
+ *
  * Created by raghavnarula on 03/11/2015.
  */
 public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
@@ -29,6 +33,7 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
         //try to get location from flags
         if(modelContainsBoundryFlags(model)){
             List<SeeFlagInfo> seenFlags = model.getLastPercept().getSeenFlags();
+            //sort by distance
             SeeFlagInfo flag = seenFlags.stream()
                     .filter(SeeFlagInfo::isBoundryFlag)
                     .min((l, r) -> {
@@ -48,10 +53,12 @@ public class AgentLocationAIComponent extends AbstractSimpleAIComponent{
         //final resort, estimate position from previous model and movement commands
         Vector2D prevLocation = prevModel.getAgentLocation();
         Vector2D prevVelocity = prevModel.getAgentVelocityVector();
+        //get total dash poser
         int dashPower = model.getCommands().stream()
                 .filter(Command::isDashCommand)
                 .map(Command::getIntValue)
                 .reduce(0, (a,b)-> a+b);
+
         double angle = model.getAgentAbsAngleRadians();
         double powerRate = 0.006;
         double x = FastMath.cos(angle) * dashPower * powerRate;

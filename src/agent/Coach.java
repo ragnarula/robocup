@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 /**
  * <p>Coach class.</p>
- *
+ * The original coach provided by ATAN.
  * @author Atan
  */
 public class Coach implements ControllerCoach {

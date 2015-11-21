@@ -3,7 +3,12 @@ package ai.model;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 /**
- * Created by raghavnarula on 10/11/2015.
+ * This class is a value type to represent commands which have been send to the server.
+ * The comand paramenets are stored as type Object with an enum to indicate the actual type stored.
+ * This is so that these commands can be stored in a homogeneous list.
+ *
+ * Getters are provided which cast the Object to the correct type. It is the user's responsibility
+ * to check the various 'is*' methods to figure out which is the appropriate getter to use.
  */
 public class Command {
 

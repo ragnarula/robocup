@@ -3,8 +3,9 @@ package agent;
 import com.github.robocup_atan.atan.model.AbstractTeam;
 import com.github.robocup_atan.atan.model.ControllerCoach;
 import com.github.robocup_atan.atan.model.ControllerPlayer;
+
 /**
- * Created by raghavnarula on 03/11/2015.
+ * This class is copied from SimpleSillyTeam with minor modifications.
  */
 public class Team extends AbstractTeam {
     public Team(String teamName, int port, String hostname, boolean hasCoach) {
