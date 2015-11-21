@@ -8,6 +8,17 @@ import info.SeeBallInfo;
 import org.apache.commons.math3.util.FastMath;
 
 /**
+ * In this state the agent is near enough to the ball to kick it.
+ *
+ * It has two possible actions:
+ *      Kick at goal
+ *      Position to shoot
+ *
+ * It can lead to:
+ *      Passive State
+ *      Support State
+ *      Defending State
+ *
  * Created by James on 06/11/2015.
  */
 public class AttackingState implements State {
