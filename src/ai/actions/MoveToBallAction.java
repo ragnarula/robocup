@@ -6,6 +6,7 @@ import info.SeeBallInfo;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 /**
+ * Causes the agent to dash towards the ball
  * Created by James on 12/11/2015.
  */
 public class MoveToBallAction implements Action {

@@ -25,12 +25,15 @@ public class ReturnHomeAction implements Action {
         Vector2D agentLocation = model.getAgentLocation();
         Vector2D agentToHome = homeCenter.subtract(agentLocation);
 
+        //get angle to home area from current location
         double unsignedAngleToHomeRadians = Vector2D.angle(agentToHome, new Vector2D(0,1));
         double angleToHomeRadians = unsignedAngleToHomeRadians;
 
+        //adjust angle based on agent's x location relative to home area's x location
         if(homeCenter.getX() < agentLocation.getX()){
             angleToHomeRadians = ((2 * FastMath.PI) - unsignedAngleToHomeRadians);
         }
+
         double agentAngleRadians = model.getAgentAbsAngleRadians();
         player.dash(30);
         player.turn(angleToHomeRadians - agentAngleRadians);

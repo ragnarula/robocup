@@ -6,6 +6,14 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 
 /**
+ * This state is used when the agent doesnt have the ball but a team member does.
+ * It's only action causes the agent to move towards the goal.
+ *
+ * It can lead to:
+ *      Passive State
+ *      Attacking State
+ *      Defending State
+ *
  * Created by raghavnarula on 16/11/2015.
  */
 public class SupportState implements State {
@@ -19,6 +27,12 @@ public class SupportState implements State {
 
     }
 
+    /**
+     * Dash towards go goal, unless the agent is more than 5m ahead of the ball
+     *
+     * @param context
+     * @param model Model containing the current game state.
+     */
     @Override
     public void processModel(CommandPlayer context, EnvironmentModel model) {
         Vector2D agentLocation = model.getAgentLocation();
@@ -40,6 +54,14 @@ public class SupportState implements State {
 
     }
 
+    /**
+     * Go to Passive State if the ball is outside of the agent's movement range
+     * Go to Attacking state if the agent gets the ball
+     * Go to Defending state if the team doesnt have the ball.
+     *
+     * @param stateMachine State Machine to update.
+     * @param model Model containing the current game state.
+     */
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
         if(!model.ballInMovementRange()){

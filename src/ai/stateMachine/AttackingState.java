@@ -1,7 +1,6 @@
 package ai.stateMachine;
 
 import ai.actions.KickAtGoalAction;
-import ai.actions.PositionToShootAction;
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
 import info.SeeBallInfo;
@@ -10,9 +9,8 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * In this state the agent is near enough to the ball to kick it.
  *
- * It has two possible actions:
+ * It has one possible actions:
  *      Kick at goal
- *      Position to shoot
  *
  * It can lead to:
  *      Passive State
@@ -24,7 +22,6 @@ import org.apache.commons.math3.util.FastMath;
 public class AttackingState implements State {
 
     KickAtGoalAction kickAtGoalAction = new KickAtGoalAction();
-    PositionToShootAction positionToShootAction = new PositionToShootAction();
 
     @Override
     public void enterState(CommandPlayer context) {
@@ -53,6 +50,14 @@ public class AttackingState implements State {
 
     }
 
+    /**
+     * Go to passive state if the ball is outside of movement range
+     * Go to Defending state if the team doesnt have the ball and the agent doesnt have the ball
+     * Go to Support state if the agent doesn't have the ball but the team does have the ball
+     *
+     * @param stateMachine State Machine to update.
+     * @param model Model containing the current game state.
+     */
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
 
