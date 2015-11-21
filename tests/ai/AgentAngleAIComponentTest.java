@@ -15,7 +15,7 @@ import static org.hamcrest.number.IsCloseTo.closeTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by raghavnarula on 06/11/2015.
+ * AgentAngleAIComponent Tests
  */
 public class AgentAngleAIComponentTest {
 

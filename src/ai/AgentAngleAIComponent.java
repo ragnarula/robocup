@@ -2,7 +2,6 @@ package ai;
 
 import ai.model.Command;
 import ai.model.EnvironmentModel;
-import info.Percept;
 import info.SeeFlagInfo;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;

@@ -3,12 +3,11 @@ import com.github.robocup_atan.atan.model.AbstractTeam;
 import org.apache.log4j.BasicConfigurator;
 
 /**
- * Main entry point in to the Intelligently Artificial Robocup Simulation League Team.
+ * This class is the main entry point in to the Intelligently Artificial Robocup Simulation League Team.
  * This class is a copy from Simple1Run.java included in the original files.zip made available on Moodle.
  * There are minor changes which are noted as a comment in the main method.
- *
- * For answers to additional coursework questions (PEAS etc) please see package-info.java in the root package.
- *
+ * <p>
+ * See docs/index.html for answers to coursework questions and system docs.
  */
 public class Run {
     public static void main(String[] args) {
@@ -16,7 +15,7 @@ public class Run {
         AbstractTeam team = null;
         if (args.length == 0) {
             //using our agent.Team
-            team = new Team("IAFC", 6000, "localhost", true);
+            team = new Team("IAFC2", 6000, "localhost", true);
         } else {
             Integer val      = new Integer(args[0]);
             int     port     = val.intValue();

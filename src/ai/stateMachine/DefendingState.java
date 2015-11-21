@@ -5,19 +5,29 @@ import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
 
 /**
+ * <p>
  * This is the state an agent should be in whenever the ball is within
  * the agent's movement range and neither the team nor the agent
  * has possession of the ball.
  *
+ * <p>
  * This state has only one possible action:
- *      Move To The ball.
+ *      <ul><li>Move To The ball.</li></ul>
  *
+ * <p>
  * This state can lead to:
- *      Passive State
- *      Support State
- *      Attacking State
+ *      <ul>
+ *          <li>
+ *              Passive State
+ *          </li>
+ *          <li>
+ *              Support State
+ *          </li>
+ *          <li>
+ *              Attacking State
+ *          </li>
+ *      </ul>
  *
- * Created by James on 12/11/2015.
  */
 public class DefendingState implements State {
 
@@ -39,9 +49,17 @@ public class DefendingState implements State {
     }
 
     /**
-     * Go to passive state if the ball moves outside of movement area
-     * Go to support state if another team mate gets the ball
-     * Go to Attack state if this agent wins possession of the ball
+     * <ul>
+     *     <li>
+     *          Go to passive state if the ball moves outside of movement area
+     *     </li>
+     *     <li>
+     *          Go to support state if another team mate gets the ball
+     *     </li>
+     *     <li>
+     *          Go to Attack state if this agent wins possession of the ball
+     *     </li>
+     * </ul>
      *
      * @param stateMachine State Machine to update.
      * @param model Model containing the current game state.

@@ -3,23 +3,24 @@ package ai.stateMachine;
 
 import ai.model.CommandPlayer;
 import ai.model.EnvironmentModel;
-import org.apache.log4j.Logger;
 
 
 /**
+ * <p>
  * This is the agent's main behavioural state machine and implements
  * the state design pattern.
  *
+ * <p>
  * It contains the states the agent may be in.
  *
+ * <p>
  * One state is assigned as the current state. Only the current state's
  * implementation of processModel() is ever called by clients.
  *
+ * <p>
  * The state may be changed to a new state by calling changeState with a
  * next state to change to.
  *
- *
- * Created by raghavnarula on 05/11/2015.
  */
 
 public class StateMachine {

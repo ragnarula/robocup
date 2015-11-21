@@ -1,6 +1,5 @@
 package ai;
 
-import ai.AbstractSimpleAIComponent;
 import ai.model.EnvironmentModel;
 import com.github.robocup_atan.atan.model.enums.PlayMode;
 import info.Percept;

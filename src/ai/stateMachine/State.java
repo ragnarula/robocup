@@ -16,21 +16,21 @@ public interface State {
     /**
      * Called when a state is entered.
      *
-     * @param context
+     * @param context The agent to which this state applies
      */
     void enterState(CommandPlayer context);
 
     /**
      * Called when a state is exited.
      *
-     * @param context
+     * @param context The agent to which this state applies
      */
     void exitState(CommandPlayer context);
 
     /**
      * Using the current game state, decide what action to take.
      *
-     * @param context
+     * @param context The agent to which this state applies
      * @param model Model containing the current game state.
      */
     void processModel(CommandPlayer context, EnvironmentModel model);
