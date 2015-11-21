@@ -14,9 +14,8 @@ public class Run {
         BasicConfigurator.configure();
         AbstractTeam team = null;
         if (args.length == 0) {
-            team = new Team("IAFC", 6000, "localhost", true);
             //using our agent.Team
-            team = new Team("IAFC", 6000, "localhost", true);
+            team = new Team("IAF2", 6000, "localhost", true);
         } else {
             Integer val      = new Integer(args[0]);
             int     port     = val.intValue();
