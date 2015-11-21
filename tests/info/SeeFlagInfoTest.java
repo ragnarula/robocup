@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by raghavnarula on 06/11/2015.
+ * SeeFlagInfo tests
  */
 public class SeeFlagInfoTest {
 

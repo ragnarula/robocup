@@ -7,7 +7,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by James on 10/11/2015.
+ * Movement Area Tests
  */
 public class MovementAreaTest {
     @Test

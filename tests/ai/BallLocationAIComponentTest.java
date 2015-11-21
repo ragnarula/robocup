@@ -14,7 +14,7 @@ import static org.hamcrest.number.IsCloseTo.closeTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by James on 10/11/2015.
+ * BallLocationAIComponent tests
  */
 public class BallLocationAIComponentTest {
 

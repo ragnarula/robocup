@@ -21,8 +21,8 @@ IN3044 Coursework - Created by James Frost and Raghav Narula
 Our solution for this coursework is a model-reflex agent designed around the concept of a one-way data flow.
 Our model is re-created at every simulation step. The process begins with the server sending our ControllerPlayer
 information via the info* methods. Once all the information is gathered into A Percept, a new model object is created.
-This model object is passed sequentially through a chain of "AI Components" that implement the IChainable Interface via
-the AbstractSimpleAIComponent abstract class.
+This model object is passed sequentially through a chain of "AI Components" (in package ai) that implement the
+IChainable Interface via the ai.AbstractSimpleAIComponent abstract class.
 <p>
 Each component is responsible for adding more information in to the model by using information contained in the percept.
 This could be simple information such as the current play mode, or involved more complex calculations such as to determine
