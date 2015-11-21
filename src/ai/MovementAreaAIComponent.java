@@ -20,9 +20,9 @@ public class MovementAreaAIComponent extends AbstractSimpleAIComponent {
 
     public MovementAreaAIComponent() {
 
-        MOVEMENT_AREAS.put(0, new MovementArea(-20.0, -20.0, 20.0, -53.5));
-        MOVEMENT_AREAS.put(1, new MovementArea(-35.0, 53.5, 20.0, 0.0));
-        MOVEMENT_AREAS.put(2, new MovementArea(-35.0, 53.5, 20.0, 0));
+        MOVEMENT_AREAS.put(0, new MovementArea(-20.0, -30.0, 20.0, -53.5));
+        MOVEMENT_AREAS.put(1, new MovementArea(-35.0, 53.5, 20.0, 0));
+        MOVEMENT_AREAS.put(2, new MovementArea(-35.0, 53.5, 20.0, -5));
         MOVEMENT_AREAS.put(3, new MovementArea(-20.0, 53.5, 35.0, -5));
         MOVEMENT_AREAS.put(4, new MovementArea(-35, 5, 20.0, -53.5));
         MOVEMENT_AREAS.put(5, new MovementArea(-20, 0, 20.0, -53.5));
@@ -30,7 +30,6 @@ public class MovementAreaAIComponent extends AbstractSimpleAIComponent {
         MOVEMENT_AREAS.put(7, new MovementArea(-35, 0, 20.0, -53.5));
         MOVEMENT_AREAS.put(8, new MovementArea(-20, 0, 20.0, -53.5));
         MOVEMENT_AREAS.put(9, new MovementArea(-20.0, 0, 34.0, -53.5));
-//        tmp: doubling up
         MOVEMENT_AREAS.put(10, new MovementArea(-20.0, 53.5, 35.0, 0.0));
     }
 

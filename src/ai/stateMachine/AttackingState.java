@@ -45,11 +45,8 @@ public class AttackingState implements State {
 
         double angleBetweenBallAndGoal = totalBallAngle - goalAngle;
 
-//        if(FastMath.abs(angleBetweenBallAndGoal) < FastMath.PI/2){
-            kickAtGoalAction.takeAction(context, model);
-//        } else {
-//            positionToShootAction.takeAction(context, model);
-//        }
+
+        kickAtGoalAction.takeAction(context, model);
 
     }
 
@@ -64,7 +61,7 @@ public class AttackingState implements State {
     @Override
     public void updateState(StateMachine stateMachine, EnvironmentModel model) {
 
-        if(!model.ballInMovementRange()){
+        if(!model.ballInMovementRange() && !model.agentHasBall()){
             stateMachine.changeState(StateMachine.PASSIVE_STATE, model);
             return;
         }
@@ -73,8 +70,8 @@ public class AttackingState implements State {
             stateMachine.changeState(StateMachine.DEFENDING_STATE, model);
             return;
         }
-//
-        if( !model.agentHasBall() && model.teamHasBall()) {
+
+        if( !model.agentHasBall() && model.teamHasBall() && !model.isPlayerGoalKeeper()) {
             stateMachine.changeState(StateMachine.SUPPORT_STATE, model);
         }
     }

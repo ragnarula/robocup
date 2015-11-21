@@ -53,7 +53,7 @@ public class DefendingState implements State {
             return;
         }
 
-        if(model.teamHasBall()){
+        if(model.teamHasBall() && !model.isPlayerGoalKeeper()){
             stateMachine.changeState(StateMachine.SUPPORT_STATE, model);
             return;
         }
