@@ -7,6 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * This component assigns a home area to each agent based on their
+ * player number.
+ *
+ * Areas are represented as a pair of vectors denoting the top left and
+ * bottom right of a bounding box.
+ *
  * Created by raghavnarula on 05/11/2015.
  */
 public class HomeAreaAIComponent extends AbstractSimpleAIComponent {

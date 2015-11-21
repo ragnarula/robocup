@@ -7,6 +7,9 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 /**
  * This component ensures that the agent is within the boundries of the pitch.
+ * If the agent has moved off the pitch, a return home action is executed, causing the agent
+ * to face it's home area and dash towards it.
+ *
  * Created by raghavnarula on 18/11/2015.
  */
 public class BoundryCheckAIComponent extends AbstractSimpleAIComponent {

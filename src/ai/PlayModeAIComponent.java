@@ -7,6 +7,10 @@ import info.Percept;
 import org.apache.log4j.Logger;
 
 /**
+ * This component adds the current play mode to the model.
+ * If the last percept does not contain a play mode message
+ * the previous play mode is assumed.
+ *
  * Created by raghavnarula on 18/11/2015.
  */
 public class PlayModeAIComponent extends AbstractSimpleAIComponent {

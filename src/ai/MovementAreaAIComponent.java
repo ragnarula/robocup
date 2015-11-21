@@ -7,6 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * This component assigns the agent a movement area, which is the area that the agent
+ * is permitted to move to when not in PassiveState.
+ *
+ * Areas are stored as pairs of vectors, representing the top left and bottom right corners
+ * of a bounding box.
+ *
  * Created by James on 10/11/2015.
  */
 public class MovementAreaAIComponent extends AbstractSimpleAIComponent {

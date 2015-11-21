@@ -22,7 +22,7 @@ public class AgentAI extends AbstractSimpleAIComponent {
     private AgentVelocityAIComponent agentVelocity;
     private GoalLocationAIComponent goalLocation;
     private PlayModeAIComponent playMode;
-    private GameRulesAIComponent gameRules;
+    private GameState gameRules;
     private BoundryCheckAIComponent boundryCheck;
 
     public AgentAI(CommandPlayer player) {
@@ -37,7 +37,7 @@ public class AgentAI extends AbstractSimpleAIComponent {
         ballLocationAIComponent = new BallLocationAIComponent();
         oppositionLocationAIComponent = new PlayersLocationAIComponent();
         goalLocation = new GoalLocationAIComponent();
-        gameRules = new GameRulesAIComponent(this.player);
+        gameRules = new GameState(this.player);
         playMode = new PlayModeAIComponent();
         boundryCheck = new BoundryCheckAIComponent(this.player);
 
