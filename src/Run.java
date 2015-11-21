@@ -6,7 +6,8 @@ import org.apache.log4j.BasicConfigurator;
  * This class is the main entry point in to the Intelligently Artificial Robocup Simulation League Team.
  * This class is a copy from Simple1Run.java included in the original files.zip made available on Moodle.
  * There are minor changes which are noted as a comment in the main method.
- *
+ * <p>
+ * See docs/index.html for answers to coursework questions and system docs.
  */
 public class Run {
     public static void main(String[] args) {
