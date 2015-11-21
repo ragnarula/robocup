@@ -37,11 +37,8 @@ public class AttackingState implements State {
 
         double angleBetweenBallAndGoal = totalBallAngle - goalAngle;
 
-//        if(FastMath.abs(angleBetweenBallAndGoal) < FastMath.PI/2){
-            kickAtGoalAction.takeAction(context, model);
-//        } else {
-//            positionToShootAction.takeAction(context, model);
-//        }
+
+        kickAtGoalAction.takeAction(context, model);
 
     }
 

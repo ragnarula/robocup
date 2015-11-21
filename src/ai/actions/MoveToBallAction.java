@@ -22,7 +22,7 @@ public class MoveToBallAction implements Action {
             double distanceToBall = seeBallInfo.getDistance();
             double dirChange = seeBallInfo.getDirChange();
 
-
+//            Only run to where the ball is going to be if you are more than five meters away
             if (distanceToBall > 5) {
                 angleToTurn += dirChange;
 
@@ -35,6 +35,7 @@ public class MoveToBallAction implements Action {
             }
         }
 
+//        If the angle to turn is greater than +/- 45 degrees, don't dash - turn on the spot
         if (Math.abs(angleToTurn) <= (Math.PI / 4) || (!model.getLastPercept().getSeenBalls().isEmpty() && model.getLastPercept().getLastSeenBall().getDistance() > 10) ) {
             if (ballLocation.distance(ownGoalLocation) < 23.5 || ballLocation.distance(goalLocation) < 23.5) {
                 player.dash(120);
