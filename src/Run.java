@@ -8,6 +8,9 @@ import org.apache.log4j.BasicConfigurator;
  * There are minor changes which are noted as a comment in the main method.
  * <p>
  * See docs/index.html for answers to coursework questions and system docs.
+ * <br>
+ * If you have re-generated the javadoc, be sure to include overview.html by using the "-overview overview.html" option.
+ * It is this file that contains the specific comments for coursework requirements (PEAS, Environment Properties etc).
  */
 public class Run {
     public static void main(String[] args) {
