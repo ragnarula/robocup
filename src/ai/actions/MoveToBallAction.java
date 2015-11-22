@@ -16,6 +16,8 @@ public class MoveToBallAction implements Action {
         Vector2D ballLocation = model.getBallLocation();
         Vector2D goalLocation = model.getGoalLocation();
         Vector2D ownGoalLocation = model.getOwnGoalLocation();
+
+//        Angle the agent needs to turn through to look at the balls current position
         double angleToTurn = model.getBallAngle() - model.getAgentAbsAngleRadians();
 
         if (!model.getLastPercept().getSeenBalls().isEmpty()) {
@@ -27,6 +29,7 @@ public class MoveToBallAction implements Action {
             if (distanceToBall > 5) {
                 angleToTurn += dirChange;
 
+//                Make sure the angle is within +/- 45 degrees
                 if (Math.abs(angleToTurn) > (Math.PI / 4)) {
                     if (angleToTurn > 0)
                         angleToTurn = (Math.PI / 4);
@@ -36,7 +39,7 @@ public class MoveToBallAction implements Action {
             }
         }
 
-//        If the angle to turn is greater than +/- 45 degrees, don't dash - turn on the spot
+//        If the angle to turn is greater than +/- 45 degrees and the ball is less than 10 meters away, don't dash - turn on the spot
         if (Math.abs(angleToTurn) <= (Math.PI / 4) || (!model.getLastPercept().getSeenBalls().isEmpty() && model.getLastPercept().getLastSeenBall().getDistance() > 10) ) {
             if (ballLocation.distance(ownGoalLocation) < 23.5 || ballLocation.distance(goalLocation) < 23.5) {
                 player.dash(120);
