@@ -9,6 +9,8 @@ Each component is responsible for adding more information in to the model by usi
 
 By the time the model has passed through all the components the model should contain enough information to determine what set of actions need to be executed. Actions are executed in the final component, the ```AgentActionAIComponent```. Here the state design pattern is used to organise the agent's behaviour.
 
+This architecture was implemented to allow us to use asynchronous components with message passing rather than shared state.
+
 The concept is illustrated in the diagram below
 
 ![AI Model Diagram](/docs/doc-files/arch_functional.jpg)
