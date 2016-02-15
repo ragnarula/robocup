@@ -14,3 +14,7 @@ This architecture was implemented to allow us to use asynchronous components wit
 The concept is illustrated in the diagram below
 
 ![AI Model Diagram](/docs/doc-files/arch_functional.jpg)
+
+## Documentation
+
+Javadoc is available [here](http://ragnarula.github.io/robocup)
