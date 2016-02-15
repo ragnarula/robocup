@@ -1,4 +1,0 @@
-/**
- * Agent types.
- */
-package agent;
