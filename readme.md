@@ -11,4 +11,4 @@ By the time the model has passed through all the components the model should con
 
 The concept is illustrated in the diagram below
 
-[AI Model Diagram](/docs/doc-files/arch_functional.jpg)
+![AI Model Diagram](/docs/doc-files/arch_functional.jpg)
